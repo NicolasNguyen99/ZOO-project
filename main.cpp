@@ -12,7 +12,7 @@ public:
 		m_cenaZaDen = cenaZaDen;
 		m_vydelalo = vydelalo;
 	}
-}
+};
 
 int main(){
 	Auto* ford = new Auto(10000, 500, 0);
