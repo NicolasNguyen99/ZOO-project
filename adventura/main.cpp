@@ -2,11 +2,14 @@
 #include "Map.h"
 
 int main() {
-    Map* map = new Map(S);
-    map->printMap(S);
-    std::cout << map->getCurrentCoor().at(0) << std::endl;
+    Map* map = new Map(XS);
+    map->printMap(XS);
+    std::cout << map->getCurrentCoor().at(0) << " ";
     std::cout << map->getCurrentCoor().at(1) << std::endl;
     map->printMovementOptions();
+    map->moveTeam(N);
+    std::cout << map->getCurrentCoor().at(0) << " ";
+    std::cout << map->getCurrentCoor().at(1) << std::endl;
 
     return 0;
 }

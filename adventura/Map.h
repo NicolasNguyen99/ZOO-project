@@ -10,7 +10,8 @@
 #include "Room.h"
 #include "Team.h"
 
-enum mapSizes{S=3,M=4,L=5};
+enum mapSizes{XS=3,M=4,L=5};
+enum movementDirection{N,E,S,W};
 
 class Map {
     std::vector<std::vector<Room*>> m_rooms;
@@ -28,6 +29,7 @@ public:
     void printMap(int size);
     Room* getCurrentRoom();
     void printMovementOptions();
+    void moveTeam(movementDirection direction);
 };
 
 

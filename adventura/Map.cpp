@@ -113,7 +113,7 @@ void Map::renderLargeMap(int size){
 }
 
 void Map::renderMap(int size) {
-    if(size == S){
+    if(size == XS){
         renderSmallMap(size);
     } else {
         if(size == M){
@@ -153,5 +153,29 @@ void Map::printMovementOptions(){
     }
     if(m_currentCoor[1]-1 < m_size and m_currentCoor[1]-1 >= 0 and !m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]-1)->getIsAccessible()){
         std::cout << "You can go left" << std::endl;
+    }
+}
+
+void Map::moveTeam(movementDirection direction){
+//   N x-- y=y
+//   E x=x y++
+//   S x++ y=y
+//   W x=x y--
+    if(direction == N){
+        m_currentCoor[0] = getCurrentCoor().at(0)-1;
+        m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
+    } else {
+        if(direction == E){
+            m_currentCoor[1] = getCurrentCoor().at(0)+1;
+            m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
+        } else {
+            if(direction == S){
+                m_currentCoor[0] = getCurrentCoor().at(0)+1;
+                m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
+            } else {
+                m_currentCoor[1] = getCurrentCoor().at(0)-1;
+                m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
+            }
+        }
     }
 }

@@ -7,16 +7,3 @@
 Hero::Hero(){
 
 }
-
-bool Hero::checkMovement(char direction){
-    if(direction == 'S'){
-
-    }
-    return true;
-}
-
-void Hero::movement(char direction){
-    if(checkMovement(direction)){
-
-    }
-}
