@@ -3,4 +3,4 @@ project(adventura)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(adventura main.cpp)
+add_executable(adventura main.cpp Map.cpp Map.h Room.cpp Room.h)
