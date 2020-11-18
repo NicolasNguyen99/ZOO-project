@@ -3,7 +3,7 @@
 //
 
 #include "Map.h"
-
+//predelat int size na getSize, nepredavat argumentem
 void Map::printMap(int size){
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -122,9 +122,36 @@ void Map::renderMap(int size) {
             renderLargeMap(size);
         }
     }
+    m_currentRoom = m_rooms.at(size-1).at(0);
+    m_currentCoor[0] = size-1;
+    m_currentCoor[1] = 0;
 }
 
 Map::Map(mapSizes size){
     m_size = size;
     renderMap(size);
+    m_team = new Team();
+}
+
+Room* Map::getCurrentRoom(){
+    return m_currentRoom;
+}
+
+std::array<int, 2> Map::getCurrentCoor(){
+    return m_currentCoor;
+}
+
+void Map::printMovementOptions(){
+    if(m_currentCoor[0]+1 < m_size and !m_rooms.at(m_currentCoor[0]+1).at(m_currentCoor[1])->getIsAccessible()){
+        std::cout << "You can go down" << std::endl;
+    }
+    if(m_currentCoor[0]-1 < m_size and m_currentCoor[0]-1 >= 0 and !m_rooms.at(m_currentCoor[0]-1).at(m_currentCoor[1])->getIsAccessible()){
+        std::cout << "You can go up" << std::endl;
+    }
+    if(m_currentCoor[1]+1 < m_size and !m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]+1)->getIsAccessible()){
+        std::cout << "You can go right" << std::endl;
+    }
+    if(m_currentCoor[1]-1 < m_size and m_currentCoor[1]-1 >= 0 and !m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]-1)->getIsAccessible()){
+        std::cout << "You can go left" << std::endl;
+    }
 }

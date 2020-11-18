@@ -7,6 +7,7 @@
 Room::Room(bool isAccessible){
     m_isAccessible = isAccessible;
     m_isExplored = false;
+    m_enemy = nullptr;
 }
 
 bool Room::getIsAccessible(){
