@@ -3,13 +3,12 @@
 
 int main() {
     Map* map = new Map(XS);
-    map->printMap(XS);
-    std::cout << map->getCurrentCoor().at(0) << " ";
-    std::cout << map->getCurrentCoor().at(1) << std::endl;
-    map->printMovementOptions();
-    map->moveTeam(N);
-    std::cout << map->getCurrentCoor().at(0) << " ";
-    std::cout << map->getCurrentCoor().at(1) << std::endl;
-
+    map->printMap();
+//    std::cout << map->getCurrentCoor().at(0) << " ";
+//    std::cout << map->getCurrentCoor().at(1) << std::endl;
+//    map->printMovementOptions();
+//    map->moveTeam(N);
+//    std::cout << map->getCurrentCoor().at(0) << " ";
+//    std::cout << map->getCurrentCoor().at(1) << std::endl;
     return 0;
 }

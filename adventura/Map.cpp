@@ -3,64 +3,55 @@
 //
 
 #include "Map.h"
-//predelat int size na getSize, nepredavat argumentem
-void Map::printMap(int size){
+//dodelat mapa print
+void Map::printMap(){
+    int size = getSize();
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            std::cout << m_rooms.at(i).at(j)->getIsAccessible();
-            std::cout << m_rooms.at(i).at(j)->getIsExplored() << " ";
+//            std::cout << m_rooms.at(i).at(j)->getIsAccessible();
+//            std::cout << m_rooms.at(i).at(j)->getIsExplored() << " ";
+            if(m_rooms.at(i).at(j)->getIsAccessible()){
+                std::cout << char(176);
+                std::cout << char(176);
+            } else {
+                std::cout << char(219);
+                std::cout << char(219);
+            }
+            std::cout << " ";
         }
         std::cout << std::endl;
     }
 }
 
-void Map::renderSmallMap(int size){
-    std::vector<Room*> row1;
-    std::vector<Room*> row2;
-    std::vector<Room*> row3;
-
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
-
-    row2.push_back(new Room(0));
-    row2.push_back(new Room(0));
-    row2.push_back(new Room(1));
-
-    row3.push_back(new Room(0));
-    row3.push_back(new Room(1));
-    row3.push_back(new Room(1));
-
-    m_rooms.push_back(row1);
-    m_rooms.push_back(row2);
-    m_rooms.push_back(row3);
+int Map::getSize(){
+    return m_size;
 }
 
-void Map::renderMediumMap(int size){
+void Map::renderSmallMap(){
     std::vector<Room*> row1;
     std::vector<Room*> row2;
     std::vector<Room*> row3;
     std::vector<Room*> row4;
 
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
+    row1.push_back(new Room(true));
+    row1.push_back(new Room(true));
+    row1.push_back(new Room(true));
+    row1.push_back(new Room(true));
 
-    row2.push_back(new Room(0));
-    row2.push_back(new Room(0));
-    row2.push_back(new Room(1));
-    row2.push_back(new Room(1));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
 
-    row3.push_back(new Room(0));
-    row3.push_back(new Room(1));
-    row3.push_back(new Room(1));
-    row3.push_back(new Room(1));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
 
-    row4.push_back(new Room(0));
-    row4.push_back(new Room(1));
-    row4.push_back(new Room(1));
-    row4.push_back(new Room(1));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
 
     m_rooms.push_back(row1);
     m_rooms.push_back(row2);
@@ -68,42 +59,42 @@ void Map::renderMediumMap(int size){
     m_rooms.push_back(row4);
 }
 
-void Map::renderLargeMap(int size){
+void Map::renderMediumMap(){
     std::vector<Room*> row1;
     std::vector<Room*> row2;
     std::vector<Room*> row3;
     std::vector<Room*> row4;
     std::vector<Room*> row5;
 
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
-    row1.push_back(new Room(1));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
 
-    row2.push_back(new Room(0));
-    row2.push_back(new Room(0));
-    row2.push_back(new Room(1));
-    row2.push_back(new Room(1));
-    row2.push_back(new Room(1));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
 
-    row3.push_back(new Room(0));
-    row3.push_back(new Room(1));
-    row3.push_back(new Room(1));
-    row3.push_back(new Room(1));
-    row3.push_back(new Room(1));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
 
-    row4.push_back(new Room(0));
-    row4.push_back(new Room(1));
-    row4.push_back(new Room(1));
-    row4.push_back(new Room(1));
-    row4.push_back(new Room(1));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
 
-    row5.push_back(new Room(1));
-    row5.push_back(new Room(1));
-    row5.push_back(new Room(1));
-    row5.push_back(new Room(1));
-    row5.push_back(new Room(1));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
 
     m_rooms.push_back(row1);
     m_rooms.push_back(row2);
@@ -112,24 +103,88 @@ void Map::renderLargeMap(int size){
     m_rooms.push_back(row5);
 }
 
-void Map::renderMap(int size) {
+void Map::renderLargeMap(){
+    std::vector<Room*> row1;
+    std::vector<Room*> row2;
+    std::vector<Room*> row3;
+    std::vector<Room*> row4;
+    std::vector<Room*> row5;
+    std::vector<Room*> row6;
+
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+    row1.push_back(new Room(false));
+
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+    row2.push_back(new Room(false));
+
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+    row3.push_back(new Room(false));
+
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+    row4.push_back(new Room(false));
+
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+    row5.push_back(new Room(false));
+
+    row6.push_back(new Room(false));
+    row6.push_back(new Room(false));
+    row6.push_back(new Room(false));
+    row6.push_back(new Room(false));
+    row6.push_back(new Room(false));
+    row6.push_back(new Room(false));
+
+    m_rooms.push_back(row1);
+    m_rooms.push_back(row2);
+    m_rooms.push_back(row3);
+    m_rooms.push_back(row4);
+    m_rooms.push_back(row5);
+    m_rooms.push_back(row6);
+}
+
+void Map::renderMap() {
+    int size = getSize();
     if(size == XS){
-        renderSmallMap(size);
+        renderSmallMap();
     } else {
         if(size == M){
-            renderMediumMap(size);
+            renderMediumMap();
         } else {
-            renderLargeMap(size);
+            if(size == L){
+                renderLargeMap();
+            }
         }
     }
+    //vyber pocatecni mistnosti v levem spodnim rohu matice
     m_currentRoom = m_rooms.at(size-1).at(0);
+    //ulozeni souradnic pocatecni mistnosti
     m_currentCoor[0] = size-1;
     m_currentCoor[1] = 0;
 }
 
+//pridelit hotovy team
 Map::Map(mapSizes size){
     m_size = size;
-    renderMap(size);
+    renderMap();
     m_team = new Team();
 }
 
@@ -141,6 +196,7 @@ std::array<int, 2> Map::getCurrentCoor(){
     return m_currentCoor;
 }
 
+//rozdelit do vice metod
 void Map::printMovementOptions(){
     if(m_currentCoor[0]+1 < m_size and !m_rooms.at(m_currentCoor[0]+1).at(m_currentCoor[1])->getIsAccessible()){
         std::cout << "You can go down" << std::endl;
@@ -173,8 +229,10 @@ void Map::moveTeam(movementDirection direction){
                 m_currentCoor[0] = getCurrentCoor().at(0)+1;
                 m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
             } else {
-                m_currentCoor[1] = getCurrentCoor().at(0)-1;
-                m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
+                if(direction == W) {
+                    m_currentCoor[1] = getCurrentCoor().at(0) - 1;
+                    m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
+                }
             }
         }
     }
