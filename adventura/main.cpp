@@ -1,14 +1,23 @@
 #include <iostream>
-#include "Map.h"
+#include "Game.h"
 
 int main() {
-    Map* map = new Map(XS);
-    map->printMap();
-//    std::cout << map->getCurrentCoor().at(0) << " ";
-//    std::cout << map->getCurrentCoor().at(1) << std::endl;
-//    map->printMovementOptions();
-//    map->moveTeam(N);
-//    std::cout << map->getCurrentCoor().at(0) << " ";
-//    std::cout << map->getCurrentCoor().at(1) << std::endl;
+    Game* game = new Game();
+    game->printMap();
+    game->printMovementOptions();
+    std::cout << game->getCurrentCoor().at(0);
+    std::cout << game->getCurrentCoor().at(1) << std::endl;
+    game->moveTeam(N);
+    std::cout << game->getCurrentCoor().at(0);
+    std::cout << game->getCurrentCoor().at(1) << std::endl;
+    game->printMovementOptions();
+    game->moveTeam(E);
+    std::cout << game->getCurrentCoor().at(0);
+    std::cout << game->getCurrentCoor().at(1) << std::endl;
+    game->printMovementOptions();
+    game->moveTeam(W);
+    std::cout << game->getCurrentCoor().at(0);
+    std::cout << game->getCurrentCoor().at(1) << std::endl;
+    game->printMovementOptions();
     return 0;
 }

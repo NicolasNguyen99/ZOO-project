@@ -3,13 +3,17 @@
 //
 
 #include "Map.h"
+
+Map::Map(mapSizes size){
+    m_size = size;
+    renderMap();
+}
+
 //dodelat mapa print
 void Map::printMap(){
     int size = getSize();
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-//            std::cout << m_rooms.at(i).at(j)->getIsAccessible();
-//            std::cout << m_rooms.at(i).at(j)->getIsExplored() << " ";
             if(m_rooms.at(i).at(j)->getIsAccessible()){
                 std::cout << char(176);
                 std::cout << char(176);
@@ -43,15 +47,15 @@ void Map::renderSmallMap(){
     row2.push_back(new Room(false));
     row2.push_back(new Room(false));
 
-    row3.push_back(new Room(false));
-    row3.push_back(new Room(false));
+    row3.push_back(new Room(true));
+    row3.push_back(new Room(true));
     row3.push_back(new Room(false));
     row3.push_back(new Room(false));
 
+    row4.push_back(new Room(true));
     row4.push_back(new Room(false));
     row4.push_back(new Room(false));
-    row4.push_back(new Room(false));
-    row4.push_back(new Room(false));
+    row4.push_back(new Room(true));
 
     m_rooms.push_back(row1);
     m_rooms.push_back(row2);
@@ -181,13 +185,6 @@ void Map::renderMap() {
     m_currentCoor[1] = 0;
 }
 
-//pridelit hotovy team
-Map::Map(mapSizes size){
-    m_size = size;
-    renderMap();
-    m_team = new Team();
-}
-
 Room* Map::getCurrentRoom(){
     return m_currentRoom;
 }
@@ -196,44 +193,30 @@ std::array<int, 2> Map::getCurrentCoor(){
     return m_currentCoor;
 }
 
-//rozdelit do vice metod
+std::vector<std::vector<Room*>> Map::getRooms(){
+    return m_rooms;
+};
+
 void Map::printMovementOptions(){
-    if(m_currentCoor[0]+1 < m_size and !m_rooms.at(m_currentCoor[0]+1).at(m_currentCoor[1])->getIsAccessible()){
+    if(m_currentCoor[0]+1 < m_size and m_rooms.at(m_currentCoor[0]+1).at(m_currentCoor[1])->getIsAccessible()){
         std::cout << "You can go down" << std::endl;
     }
-    if(m_currentCoor[0]-1 < m_size and m_currentCoor[0]-1 >= 0 and !m_rooms.at(m_currentCoor[0]-1).at(m_currentCoor[1])->getIsAccessible()){
+    if(m_currentCoor[0]-1 < m_size and m_currentCoor[0]-1 >= 0 and m_rooms.at(m_currentCoor[0]-1).at(m_currentCoor[1])->getIsAccessible()){
         std::cout << "You can go up" << std::endl;
     }
-    if(m_currentCoor[1]+1 < m_size and !m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]+1)->getIsAccessible()){
+    if(m_currentCoor[1]+1 < m_size and m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]+1)->getIsAccessible()){
         std::cout << "You can go right" << std::endl;
     }
-    if(m_currentCoor[1]-1 < m_size and m_currentCoor[1]-1 >= 0 and !m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]-1)->getIsAccessible()){
+    if(m_currentCoor[1]-1 < m_size and m_currentCoor[1]-1 >= 0 and m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]-1)->getIsAccessible()){
         std::cout << "You can go left" << std::endl;
     }
 }
 
-void Map::moveTeam(movementDirection direction){
-//   N x-- y=y
-//   E x=x y++
-//   S x++ y=y
-//   W x=x y--
-    if(direction == N){
-        m_currentCoor[0] = getCurrentCoor().at(0)-1;
-        m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
-    } else {
-        if(direction == E){
-            m_currentCoor[1] = getCurrentCoor().at(0)+1;
-            m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
-        } else {
-            if(direction == S){
-                m_currentCoor[0] = getCurrentCoor().at(0)+1;
-                m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
-            } else {
-                if(direction == W) {
-                    m_currentCoor[1] = getCurrentCoor().at(0) - 1;
-                    m_currentRoom = m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]);
-                }
-            }
-        }
-    }
+void Map::setCurrentCoor(int x, int y){
+    m_currentCoor.at(0) = x;
+    m_currentCoor.at(1) = y;
+}
+
+void Map::setCurrentRoom(Room* currentRoom){
+    m_currentRoom = currentRoom;
 }

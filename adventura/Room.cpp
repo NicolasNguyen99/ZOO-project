@@ -5,6 +5,7 @@
 #include "Room.h"
 
 Room::Room(bool isAccessible, Enemy* enemy){
+    m_isAccessible = isAccessible;
     m_isExplored = false;
 }
 

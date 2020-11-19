@@ -6,15 +6,13 @@
 #define ADVENTURA_MAP_H
 #include <iostream>
 #include <vector>
+#include <array>
 #include "Room.h"
-#include "Team.h"
 
 enum mapSizes{XS=4,M=5,L=6};
-enum movementDirection{N,E,S,W};
 
 class Map {
     std::vector<std::vector<Room*>> m_rooms;
-    Team* m_team;
     Room* m_currentRoom;
     std::array<int,2> m_currentCoor;
     mapSizes m_size;
@@ -22,15 +20,17 @@ class Map {
     void renderSmallMap();
     void renderMediumMap();
     void renderLargeMap();
-    
+
 public:
-    std::array<int, 2> getCurrentCoor();
     Map(mapSizes size);
+    std::array<int, 2> getCurrentCoor();
     void printMap();
     Room* getCurrentRoom();
     int getSize();
     void printMovementOptions();
-    void moveTeam(movementDirection direction);
+    std::vector<std::vector<Room*>> getRooms();
+    void setCurrentCoor(int x, int y);
+    void setCurrentRoom(Room* currentRoom);
 };
 
 
