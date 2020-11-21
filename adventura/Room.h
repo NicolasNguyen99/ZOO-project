@@ -17,6 +17,7 @@ public:
     Room(Enemy* enemy);
     bool getIsAccessible();
     bool getIsExplored();
+    ~Room();
 };
 
 

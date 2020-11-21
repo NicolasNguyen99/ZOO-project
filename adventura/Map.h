@@ -24,13 +24,13 @@ class Map {
 public:
     Map(mapSizes size);
     std::array<int, 2> getCurrentCoor();
-    void printMap();
     Room* getCurrentRoom();
     int getSize();
-    void printMovementOptions();
     std::vector<std::vector<Room*>> getRooms();
     void setCurrentCoor(int x, int y);
     void setCurrentRoom(Room* currentRoom);
+    void printMap();
+    void printMovementOptions();
 };
 
 

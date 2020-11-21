@@ -5,18 +5,32 @@
 #ifndef ADVENTURA_HERO_H
 #define ADVENTURA_HERO_H
 #include <iostream>
-#include "Item.h"
+#include <vector>
+#include "Spell.h"
 
+enum heroType{warrior, mage};
 
 class Hero {
+    heroType m_type;
     std::string m_name;
-    int health;
-    int strength;
+    int m_health;
+    int m_strength;
+    int m_abilityPower;
+    std::vector<Spell*> m_spells;
     Item* m_weapon;
     Item* m_armor;
 
 public:
-    Hero();
+    Hero(heroType type,std::string name);
+    heroType getType();
+    std::string getName();
+    int getHealth();
+    int getStrength();
+    int getAbilityPower();
+    std::string getItemName(Item item);
+    std::vector<Spell*> getSpells();
+    int getWeaponStrength();
+    int getArmor();
 };
 
 

@@ -179,10 +179,9 @@ void Map::renderMap() {
         }
     }
     //vyber pocatecni mistnosti v levem spodnim rohu matice
-    m_currentRoom = m_rooms.at(size-1).at(0);
-    //ulozeni souradnic pocatecni mistnosti
-    m_currentCoor[0] = size-1;
-    m_currentCoor[1] = 0;
+    setCurrentRoom(m_rooms.at(size-1).at(0));
+    //ulozeni souradnice pocatecni mistnosti
+    setCurrentCoor(size-1, 0);
 }
 
 Room* Map::getCurrentRoom(){
