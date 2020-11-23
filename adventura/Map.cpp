@@ -181,14 +181,14 @@ void Map::renderMap() {
     //vyber pocatecni mistnosti v levem spodnim rohu matice
     setCurrentRoom(m_rooms.at(size-1).at(0));
     //ulozeni souradnice pocatecni mistnosti
-    setCurrentCoor(size-1, 0);
+    setCurrentCoor(positionCoor{size-1, 0});
 }
 
 Room* Map::getCurrentRoom(){
     return m_currentRoom;
 }
 
-std::array<int, 2> Map::getCurrentCoor(){
+positionCoor Map::getCurrentCoor(){
     return m_currentCoor;
 }
 
@@ -197,23 +197,23 @@ std::vector<std::vector<Room*>> Map::getRooms(){
 };
 
 void Map::printMovementOptions(){
-    if(m_currentCoor[0]+1 < m_size and m_rooms.at(m_currentCoor[0]+1).at(m_currentCoor[1])->getIsAccessible()){
+    if(m_currentCoor.x+1 < m_size and m_rooms.at(m_currentCoor.x+1).at(m_currentCoor.y)->getIsAccessible()){
         std::cout << "You can go down" << std::endl;
     }
-    if(m_currentCoor[0]-1 < m_size and m_currentCoor[0]-1 >= 0 and m_rooms.at(m_currentCoor[0]-1).at(m_currentCoor[1])->getIsAccessible()){
+    if(m_currentCoor.x-1 < m_size and m_currentCoor.x-1 >= 0 and m_rooms.at(m_currentCoor.x-1).at(m_currentCoor.y)->getIsAccessible()){
         std::cout << "You can go up" << std::endl;
     }
-    if(m_currentCoor[1]+1 < m_size and m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]+1)->getIsAccessible()){
+    if(m_currentCoor.y+1 < m_size and m_rooms.at(m_currentCoor.x).at(m_currentCoor.y+1)->getIsAccessible()){
         std::cout << "You can go right" << std::endl;
     }
-    if(m_currentCoor[1]-1 < m_size and m_currentCoor[1]-1 >= 0 and m_rooms.at(m_currentCoor[0]).at(m_currentCoor[1]-1)->getIsAccessible()){
+    if(m_currentCoor.y-1 < m_size and m_currentCoor.y-1 >= 0 and m_rooms.at(m_currentCoor.x).at(m_currentCoor.y-1)->getIsAccessible()){
         std::cout << "You can go left" << std::endl;
     }
 }
 
-void Map::setCurrentCoor(int x, int y){
-    m_currentCoor.at(0) = x;
-    m_currentCoor.at(1) = y;
+void Map::setCurrentCoor(positionCoor currentCoor){
+    m_currentCoor.x = currentCoor.x;
+    m_currentCoor.y = currentCoor.y;
 }
 
 void Map::setCurrentRoom(Room* currentRoom){

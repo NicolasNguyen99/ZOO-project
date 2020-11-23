@@ -16,7 +16,7 @@ class Hero {
     int m_health;
     int m_strength;
     int m_abilityPower;
-    std::vector<Spell*> m_spells;
+//    std::vector<Spell*> m_spells;
     Item* m_weapon;
     Item* m_armor;
 
@@ -28,7 +28,7 @@ public:
     int getStrength();
     int getAbilityPower();
     std::string getItemName(Item item);
-    std::vector<Spell*> getSpells();
+//    std::vector<Spell*> getSpells();
     int getWeaponStrength();
     int getArmor();
 };

@@ -16,7 +16,7 @@ public:
     void printMovementOptions();
     void moveTeam(movementDirection direction);
     void printMap();
-    std::array<int, 2> getCurrentCoor();
+    positionCoor getCurrentCoor();
 };
 
 

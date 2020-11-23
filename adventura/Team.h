@@ -8,18 +8,18 @@
 #include <vector>
 #include "Room.h"
 #include "Inventory.h"
+#include "Map.h"
 
 enum movementDirection{N,E,S,W};
 
 class Team {
     std::array<Hero*, 2> m_team;
     bool m_haveKey;
-    int m_gold;
-    Inventory* m_inventory;
+    std::array<Item*,5> m_inventory;
 
 public:
     Team();
-    void moveTeam(std::vector<std::vector<Room*>> &rooms, Room* &currentRoom, std::array<int, 2> &currentCoor, movementDirection direction);
+    void moveTeam(std::vector<std::vector<Room*>> &rooms, Room* &currentRoom, positionCoor &currentCoor, movementDirection direction);
 };
 
 
