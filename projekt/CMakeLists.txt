@@ -3,4 +3,4 @@ project(projekt)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(projekt main.cpp Tile.cpp Tile.h Map.cpp Map.h)
+add_executable(projekt main.cpp Map.cpp Map.h)
