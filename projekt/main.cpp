@@ -1,9 +1,8 @@
-
 #include <iostream>
-using namespace std;
+#include "Swamp.h"
+#include "Tile.h"
 
-int main()
-{
-    cout<<"😉 .....";
+int main() {
+    Tile* tile = new Swamp(tileType::Swamp, false);
     return 0;
 }
