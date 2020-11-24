@@ -10,6 +10,8 @@ Tile::Tile(tileType type, bool isLocked){
     m_isExplored = false;
 }
 
+Tile::Tile(tileType type):Tile(type, false){}
+
 tileType Tile::getType(){
     return m_type;
 }

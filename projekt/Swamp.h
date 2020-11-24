@@ -9,7 +9,8 @@
 class Swamp:public Tile{
 public:
     Swamp(tileType type, bool isLocked);
-    void printPattern();
+    Swamp(tileType type);
+    void printPattern(int rowNum);
 };
 
 

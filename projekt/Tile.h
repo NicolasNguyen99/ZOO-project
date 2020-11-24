@@ -5,6 +5,9 @@
 #ifndef PROJEKT_TILE_H
 #define PROJEKT_TILE_H
 #include <iostream>
+#include <stdlib.h>
+#include <iomanip>
+#include <array>
 
 enum class tileType{
     Forrest,
@@ -22,11 +25,12 @@ protected:
 
 public:
     Tile(tileType type, bool isLocked);
+    Tile(tileType type);
     tileType getType();
     bool getIsExplored();
     bool getIsLocked();
     //Enemy* getEnemy();
-    virtual void printPattern() = 0;
+    virtual void printPattern(int rowNum) = 0;
     virtual ~Tile();
 };
 
