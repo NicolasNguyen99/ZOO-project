@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Map.h"
+#include "Game.h"
 
 int main() {
 
@@ -9,7 +9,10 @@ int main() {
 //    tile1->printPattern();
 //    Tile* tile2 = new Mountain(tileType::Mountain, false);
 //    tile2->printPattern();
-    Map* map = new Map(mapSize::Small);
-    map->printMap();
+    Game* game = new Game();
+    game->printMap();
+    game->printMovementOptions();
+    game->moveHero(movementDirection::N);
+    game->printMovementOptions();
     return 0;
 }

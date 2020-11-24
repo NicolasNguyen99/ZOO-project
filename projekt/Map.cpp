@@ -59,6 +59,8 @@ void Map::createMap(){
     } else {
         std::cout << "Neznama velikost mapy" << std::endl;
     }
+    setCurrentCoor(positionCoor{int(m_size)-1, 0});
+    setCurrentTile(m_tiles.at(m_currentCoor.x).at(m_currentCoor.y));
 }
 
 positionCoor Map::getCurrentCoor(){
@@ -68,6 +70,29 @@ positionCoor Map::getCurrentCoor(){
 //matrixOfTiles Map::getTiles(){
 //
 //}
+
+void Map::moveHero(movementDirection direction){
+//   N x-- y=y E x=x y++ S x++ y=y W x=x y--
+    if(direction == movementDirection::N){
+        m_currentCoor.x--;
+        m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
+    } else {
+        if(direction == movementDirection::E){
+            m_currentCoor.y++;
+            m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
+        } else {
+            if(direction == movementDirection::S){
+                m_currentCoor.x++;
+                m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
+            } else {
+                if(direction == movementDirection::W) {
+                    m_currentCoor.y--;
+                    m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
+                }
+            }
+        }
+    }
+}
 
 mapSize Map::getSize(){
     return m_size;
@@ -95,5 +120,20 @@ void Map::printMap(){
             std::cout << std::endl;
         }
         std::cout << std::endl;
+    }
+}
+
+void Map::printMovementOptions(){
+    if(m_currentCoor.x+1 < int(m_size) and !m_tiles.at(m_currentCoor.x+1).at(m_currentCoor.y)->getIsLocked()){
+        std::cout << "You can go down" << std::endl;
+    }
+    if(m_currentCoor.x-1 < int(m_size) and m_currentCoor.x-1 >= 0 and !m_tiles.at(m_currentCoor.x-1).at(m_currentCoor.y)->getIsLocked()){
+        std::cout << "You can go up" << std::endl;
+    }
+    if(m_currentCoor.y+1 < int(m_size) and !m_tiles.at(m_currentCoor.x).at(m_currentCoor.y+1)->getIsLocked()){
+        std::cout << "You can go right" << std::endl;
+    }
+    if(m_currentCoor.y-1 < int(m_size) and m_currentCoor.y-1 >= 0 and !m_tiles.at(m_currentCoor.x).at(m_currentCoor.y-1)->getIsLocked()){
+        std::cout << "You can go left" << std::endl;
     }
 }

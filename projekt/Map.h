@@ -12,6 +12,7 @@
 typedef std::vector<std::vector<Tile*>> matrixOfTiles;
 
 enum class mapSize{Small=4,Medium=5,Large=6};
+enum class movementDirection{N,E,S,W};
 
 struct positionCoor{
     int x;
@@ -35,8 +36,10 @@ public:
     mapSize getSize();
     Tile* getCurrentTile();
     void setCurrentCoor(positionCoor currentCoor);
+    void printMovementOptions();
     void setCurrentTile(Tile* currentTile);
     void printMap();
+    void moveHero(movementDirection direction);
 };
 
 
