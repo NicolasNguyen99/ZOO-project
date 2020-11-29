@@ -16,6 +16,8 @@ class Game {
     int getInput();
     void printHelp();
     void setGame();
+    void setHero();
+    void setMap();
 
 public:
     Game();

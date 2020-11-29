@@ -15,6 +15,36 @@ void Game::printChooseDialog(){
 }
 
 void Game::setGame(){
+    setMap();
+    setHero();
+}
+
+void Game::setHero(){
+    std::cout << "Choose class of your hero" << std::endl;
+    std::cout << "  1.  Warrior" << std::endl;
+    std::cout << "  2.  Ranger" << std::endl;
+    std::cout << "  3.  Mage" << std::endl;
+    Hero* hero = nullptr;
+    infoToCreateHero info;
+    switch(getInput()){
+        case 1:
+            info.m_type = heroType::Warrior;
+            break;
+        case 2:
+            info.m_type = heroType::Ranger;
+            break;
+        case 3:
+            info.m_type = heroType::Mage;
+        default:
+            break;
+    }
+    std::cout << "Choose name of your hero" << std::endl;
+    std::cin >> info.m_name;
+    m_hero = hero->createHero(info);
+}
+
+
+void Game::setMap(){
     std::cout << "Choose size of your map" << std::endl;
     std::cout << "  1.  Small" << std::endl;
     std::cout << "  2.  Medium" << std::endl;
@@ -28,7 +58,6 @@ void Game::setGame(){
     } else if(size == 3){
         m_map = new Map(mapSize::Large);
     }
-    m_hero = nullptr;
 }
 
 void Game::printMainMenu(){
