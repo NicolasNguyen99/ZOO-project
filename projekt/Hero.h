@@ -1,33 +1,18 @@
 //
-// Created by Nicolas Nguyen on 24/11/2020.
+// Created by Nicolas Nguyen on 02/12/2020.
 //
 
 #ifndef PROJEKT_HERO_H
 #define PROJEKT_HERO_H
-#include <iostream>
-#include "Item.h"
+#include "Character.h"
 
-enum class heroType{Warrior, Ranger, Mage};
-
-struct infoToCreateHero{
-    std::string m_name;
-    heroType m_type;
-};
-
-class Hero {
-    std::string m_name;
-    heroType m_type;
-    int m_health;
-    int m_strenght;
+class Hero:public Character{
     int m_abilityPower;
-    bool m_hasKey;
-    Item* m_weapon;
-    Item* m_armor;
-    Hero();
+    bool m_haveKey;
 
 public:
-    Hero* createHero(infoToCreateHero info);
-    int getHealth();
+    Hero(std::string name, int health, int strength);
+    int getAbilityPower();
 };
 
 

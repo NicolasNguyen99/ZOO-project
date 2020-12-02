@@ -1,121 +1,46 @@
 //
-// Created by Kristina Nazarjanová on 23/11/2020.
+// Created by Nicolas Nguyen on 01/12/2020.
 //
 
 #include "Map.h"
-Map::Map(mapSize size){
-    m_size = size;
-    createMap();
+
+Map::Map(){
+
 }
 
 void Map::renderSmallMap(){
-    std::vector<Tile*> row1;
-    std::vector<Tile*> row2;
-    std::vector<Tile*> row3;
-    std::vector<Tile*> row4;
+    std::vector<Location*> row1;
+    std::vector<Location*> row2;
+    std::vector<Location*> row3;
 
-    row1.push_back(new Forrest(tileType::Forrest));row1.push_back(new Swamp(tileType::Swamp));row1.push_back(new Mountain(tileType::Mountain));row1.push_back(new Mountain(tileType::Mountain));
-    row2.push_back(new Forrest(tileType::Forrest));row2.push_back(new Swamp(tileType::Swamp));row2.push_back(new Mountain(tileType::Mountain));row2.push_back(new Mountain(tileType::Mountain));
-    row3.push_back(new Forrest(tileType::Forrest));row3.push_back(new Swamp(tileType::Swamp));row3.push_back(new Mountain(tileType::Mountain));row3.push_back(new Mountain(tileType::Mountain));
-    row4.push_back(new Forrest(tileType::Forrest));row4.push_back(new Swamp(tileType::Swamp));row4.push_back(new Mountain(tileType::Mountain));row4.push_back(new Mountain(tileType::Mountain));
+    row1.push_back(new Forest());row1.push_back(new Forest());row1.push_back(new Forest());
+    row2.push_back(new Forest());row2.push_back(new Forest());row2.push_back(new Forest());
+    row3.push_back(new Mountain());row3.push_back(new Mountain());row3.push_back(new Mountain());
 
-    m_tiles.push_back(row1);
-    m_tiles.push_back(row2);
-    m_tiles.push_back(row3);
-    m_tiles.push_back(row4);
+    m_locations.push_back(row1);
+    m_locations.push_back(row2);
+    m_locations.push_back(row3);
+    m_currentLocation = m_locations.at(2).at(0);
+    m_currentCoorLocation = {2,0};
+    m_size = sizeOfMap::Small;
 }
 
-void Map::renderMediumMap(){
-    std::vector<Tile*> row1;
-    std::vector<Tile*> row2;
-    std::vector<Tile*> row3;
-    std::vector<Tile*> row4;
-    std::vector<Tile*> row5;
-
-    row1.push_back(new Forrest(tileType::Forrest));row1.push_back(new Swamp(tileType::Swamp));row1.push_back(new Mountain(tileType::Mountain));row1.push_back(new Mountain(tileType::Mountain));row1.push_back(new Mountain(tileType::Mountain));
-    row2.push_back(new Forrest(tileType::Forrest));row2.push_back(new Swamp(tileType::Swamp));row2.push_back(new Mountain(tileType::Mountain));row2.push_back(new Mountain(tileType::Mountain));row2.push_back(new Mountain(tileType::Mountain));
-    row3.push_back(new Forrest(tileType::Forrest));row3.push_back(new Swamp(tileType::Swamp));row3.push_back(new Mountain(tileType::Mountain));row3.push_back(new Mountain(tileType::Mountain));row3.push_back(new Mountain(tileType::Mountain));
-    row4.push_back(new Forrest(tileType::Forrest));row4.push_back(new Swamp(tileType::Swamp));row4.push_back(new Mountain(tileType::Mountain));row4.push_back(new Mountain(tileType::Mountain));row4.push_back(new Mountain(tileType::Mountain));
-    row5.push_back(new Forrest(tileType::Forrest));row5.push_back(new Swamp(tileType::Swamp));row5.push_back(new Mountain(tileType::Mountain));row5.push_back(new Mountain(tileType::Mountain));row5.push_back(new Mountain(tileType::Mountain));
-
-    m_tiles.push_back(row1);
-    m_tiles.push_back(row2);
-    m_tiles.push_back(row3);
-    m_tiles.push_back(row4);
-    m_tiles.push_back(row5);
-}
-
-void Map::renderLargeMap(){
-
-}
-
-void Map::createMap(){
-    if(m_size == mapSize::Small){
-        renderSmallMap();
-    } else if(m_size == mapSize::Medium){
-        renderMediumMap();
-    } else if(m_size == mapSize::Large){
-        renderLargeMap();
-    } else {
-        std::cout << "Neznama velikost mapy" << std::endl;
-    }
-    setCurrentCoor(positionCoor{int(m_size)-1, 0});
-    setCurrentTile(m_tiles.at(m_currentCoor.x).at(m_currentCoor.y));
-}
-
-positionCoor Map::getCurrentCoor(){
-    return m_currentCoor;
-}
-
-//matrixOfTiles Map::getTiles(){
-//
-//}
-
-void Map::moveHero(movementDirection direction){
-//   N x-- y=y E x=x y++ S x++ y=y W x=x y--
-    if(direction == movementDirection::N){
-        m_currentCoor.x--;
-        m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
-    } else {
-        if(direction == movementDirection::E){
-            m_currentCoor.y++;
-            m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
-        } else {
-            if(direction == movementDirection::S){
-                m_currentCoor.x++;
-                m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
-            } else {
-                if(direction == movementDirection::W) {
-                    m_currentCoor.y--;
-                    m_currentTile = m_tiles.at(m_currentCoor.x).at(m_currentCoor.y);
-                }
-            }
+void Map::renderLocation(){
+    for(auto row:m_locations){
+        for(auto location:row){
+            location->renderLocation();
         }
     }
+    m_currentTile = m_locations.at(2).at(0)->getTiles().at(2).at(0);
+    m_currentCoorTile = {2,0};
 }
 
-mapSize Map::getSize(){
-    return m_size;
-}
-
-Tile* Map::getCurrentTile(){
-    return m_currentTile;
-}
-
-void Map::setCurrentCoor(positionCoor currentCoor){
-    m_currentCoor.x = currentCoor.x;
-    m_currentCoor.y = currentCoor.y;
-}
-
-void Map::setCurrentTile(Tile* currentTile){
-    m_currentTile = currentTile;
-}
-
-void Map::printMap(){
-    for(auto row:m_tiles){
+void Map::printLocationMap(){
+    std::cout << "Map of locations: ";
+    for(auto row:m_locations){
         for(int i = 0; i < 5; i++){
-            for(auto tile:row){
-                tile->printPattern(i);
+            for(auto location:row) {
+                location->printLocation(i);
             }
             std::cout << std::endl;
         }
@@ -124,16 +49,81 @@ void Map::printMap(){
 }
 
 void Map::printMovementOptions(){
-    if(m_currentCoor.x+1 < int(m_size) and !m_tiles.at(m_currentCoor.x+1).at(m_currentCoor.y)->getIsLocked()){
-        std::cout << "You can go down" << std::endl;
+    if(m_currentCoorTile.x-1 >= 0){
+        std::cout << "UP in the same location" << std::endl;
+    } else if(m_currentCoorLocation.x-1 >= 0){
+        std::cout << "UP into different location" << std::endl;
     }
-    if(m_currentCoor.x-1 < int(m_size) and m_currentCoor.x-1 >= 0 and !m_tiles.at(m_currentCoor.x-1).at(m_currentCoor.y)->getIsLocked()){
-        std::cout << "You can go up" << std::endl;
+
+    if(m_currentCoorTile.y+1 < 3){
+        std::cout << "RIGHT in the same location" << std::endl;
+    } else if(m_currentCoorLocation.y+1 < int(m_size)){
+        std::cout << "RIGHT into different location" << std::endl;
     }
-    if(m_currentCoor.y+1 < int(m_size) and !m_tiles.at(m_currentCoor.x).at(m_currentCoor.y+1)->getIsLocked()){
-        std::cout << "You can go right" << std::endl;
+
+    if(m_currentCoorTile.x+1 < 3){
+        std::cout << "DOWN in the same location" << std::endl;
+    } else if(m_currentCoorLocation.x+1 < int(m_size)){
+        std::cout << "DOWN into different location" << std::endl;
     }
-    if(m_currentCoor.y-1 < int(m_size) and m_currentCoor.y-1 >= 0 and !m_tiles.at(m_currentCoor.x).at(m_currentCoor.y-1)->getIsLocked()){
-        std::cout << "You can go left" << std::endl;
+
+    if(m_currentCoorTile.y-1 >= 0){
+        std::cout << "LEFT in the same location" << std::endl;
+    } else if(m_currentCoorLocation.y-1 >= 0){
+        std::cout << "LEFT into different location" << std::endl;
     }
+}
+
+void Map::printTileMap(){
+    std::cout << "Tile map: " << std::endl;
+    m_currentLocation->printTileMap(m_currentCoorTile);
+}
+
+void Map::moveHero(movementDirection direction){
+    if(direction == movementDirection::N){
+        if(m_currentCoorTile.x-1 >= 0){
+            m_currentCoorTile.x--;
+        } else if(m_currentCoorLocation.x-1 >= 0){
+            std::cout << "Posun do jine lokace" << std::endl;
+            m_currentCoorTile.x = 2;
+            m_currentCoorLocation.x--;
+            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
+        } else {
+            std::cout << "ERROR: Posun mimo matici UP" << std::endl;
+        }
+    } else if(direction == movementDirection::E){
+        if(m_currentCoorTile.y+1 < 3){
+            m_currentCoorTile.y++;
+        } else if(m_currentCoorLocation.y+1 < 2){
+            std::cout << "Posun do jine lokace RIGHT" << std::endl;
+            m_currentCoorTile.y = 0;
+            m_currentCoorLocation.y++;
+            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
+        } else {
+            std::cout << "ERROR: Posun mimo matici" << std::endl;
+        }
+    } else if(direction == movementDirection::S){
+        if(m_currentCoorTile.x+1 < 3){
+            m_currentCoorTile.x++;
+        } else if(m_currentCoorLocation.x+1 < 2){
+            std::cout << "Posun do jine lokace DOWN" << std::endl;
+            m_currentCoorTile.x = 0;
+            m_currentCoorLocation.x++;
+            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
+        } else {
+            std::cout << "ERROR: Posun mimo matici DOWN" << std::endl;
+        }
+    } else if(direction == movementDirection::W){
+        if(m_currentCoorTile.y-1 >= 0){
+            m_currentCoorTile.y--;
+        } else if(m_currentCoorLocation.y-1 >= 0){
+            std::cout << "Posun do jine lokace LEFT" << std::endl;
+            m_currentCoorTile.y = 2;
+            m_currentCoorLocation.y--;
+            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
+        } else {
+            std::cout << "ERROR: Posun mimo matici LEFT" << std::endl;
+        }
+    }
+    m_currentTile = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y)->getTiles().at(m_currentCoorTile.x).at(m_currentCoorTile.y);
 }

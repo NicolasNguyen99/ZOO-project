@@ -1,13 +1,12 @@
 //
-// Created by Nicolas Nguyen on 23/11/2020.
+// Created by Nicolas Nguyen on 02/12/2020.
 //
 
-#include "Forrest.h"
+#include "Forest.h"
 
-Forrest::Forrest(tileType type, bool isLocked):Tile(type, isLocked){}
-Forrest::Forrest(tileType type):Tile(type, false){};
+Forest::Forest():Location(){}
 
-void Forrest::printPattern(int rowNum){
+void Forest::printLocation(int rowNum){
     std::array<std::string,5> rowPattern;
     rowPattern.at(0) ="                   ";
     rowPattern.at(1) ="   /\\              ";

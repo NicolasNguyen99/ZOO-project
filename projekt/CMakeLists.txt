@@ -3,4 +3,4 @@ project(projekt)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(projekt main.cpp Tile.cpp Tile.h Map.cpp Map.h Forrest.cpp Forrest.h Mountain.cpp Mountain.h Swamp.cpp Swamp.h Hero.cpp Hero.h Game.cpp Game.h Item.cpp Item.h)
+add_executable(projekt main.cpp Tile.cpp Tile.h Map.cpp Map.h Location.cpp Location.h Enemy.cpp Enemy.h Forest.cpp Forest.h Mountain.cpp Mountain.h Hell.cpp Hell.h Character.cpp Character.h Hero.cpp Hero.h Game.cpp Game.h)

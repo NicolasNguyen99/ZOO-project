@@ -1,5 +1,5 @@
 //
-// Created by Nicolas Nguyen on 24/11/2020.
+// Created by Nicolas Nguyen on 02/12/2020.
 //
 
 #ifndef PROJEKT_GAME_H
@@ -10,21 +10,16 @@
 class Game {
     Map* m_map;
     Hero* m_hero;
-    void communication();
-    void printMainMenu();
-    void printChooseDialog();
-    int getInput();
-    void printHelp();
-    void setGame();
-    void setHero();
-    void setMap();
+    void createHero();
+    void createMap();
 
 public:
     Game();
+    void printLocationMap();
+    void printTileMap();
     void printMovementOptions();
     void moveHero(movementDirection direction);
-    void printMap();
-//    positionCoor getCurrentCoor();
+
 };
 
 

@@ -1,44 +1,33 @@
 //
-// Created by Nicolas Nguyen on 23/11/2020.
+// Created by Nicolas Nguyen on 01/12/2020.
 //
 
 #ifndef PROJEKT_MAP_H
 #define PROJEKT_MAP_H
-#include <vector>
-#include "Swamp.h"
-#include "Forrest.h"
+#include "Forest.h"
 #include "Mountain.h"
 
-typedef std::vector<std::vector<Tile*>> matrixOfTiles;
-
-enum class mapSize{Small=4,Medium=5,Large=6};
 enum class movementDirection{N,E,S,W};
-
-struct positionCoor{
-    int x;
-    int y;
-};
+typedef  std::vector<std::vector<Location*>> matrixOfLocation;
+enum class sizeOfMap{Small=3,Medium=4,Large=5};
 
 class Map {
-    matrixOfTiles m_tiles;
-    positionCoor m_currentCoor;
+    matrixOfLocation m_locations;
+//    positionCoor m_currentCoorLocation;
+    Location* m_currentLocation;
+    sizeOfMap m_size;
+//    positionCoor m_currentCoorTile;
     Tile* m_currentTile;
-    mapSize m_size;
-    void renderSmallMap();
-    void renderMediumMap();
-    void renderLargeMap();
 
 public:
-    Map(mapSize size);
-    void createMap();
-    positionCoor getCurrentCoor();
-    matrixOfTiles getTiles();
-    mapSize getSize();
-    Tile* getCurrentTile();
-    void setCurrentCoor(positionCoor currentCoor);
+    Map();
+    void renderSmallMap();
+    void renderLocation();
+    void printLocationMap();
+    void printTileMap();
     void printMovementOptions();
-    void setCurrentTile(Tile* currentTile);
-    void printMap();
+    positionCoor m_currentCoorLocation;
+    positionCoor m_currentCoorTile;
     void moveHero(movementDirection direction);
 };
 

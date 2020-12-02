@@ -1,16 +1,15 @@
 //
-// Created by Nicolas Nguyen on 23/11/2020.
+// Created by Nicolas Nguyen on 02/12/2020.
 //
 
 #ifndef PROJEKT_MOUNTAIN_H
 #define PROJEKT_MOUNTAIN_H
-#include "Tile.h"
+#include "Location.h"
 
-class Mountain:public Tile{
+class Mountain:public Location{
 public:
-    Mountain(tileType type, bool isLocked);
-    Mountain(tileType type);
-    void printPattern(int rowNum);
+    Mountain();
+    void printLocation(int rowNum);
 };
 
 

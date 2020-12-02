@@ -1,31 +1,18 @@
 //
-// Created by Nicolas Nguyen on 23/11/2020.
+// Created by Nicolas Nguyen on 01/12/2020.
 //
 
 #include "Tile.h"
 
-Tile::Tile(tileType type, bool isLocked){
-    m_type = type;
-    m_isLocked = isLocked;
-    m_isExplored = false;
+Tile::Tile(){
+    m_enemy = nullptr;
 }
 
-Tile::Tile(tileType type):Tile(type, false){}
-
-tileType Tile::getType(){
-    return m_type;
-}
-
-bool Tile::getIsExplored(){
-    return m_isExplored;
-}
-
-bool Tile::getIsLocked(){
-    return m_isLocked;
-}
-
-//Enemy* getEnemy();
-
-Tile::~Tile(){
-
+void Tile::printTile(bool isHeroStanding){
+    std::cout << "  /\\";
+//    if(m_enemy != nullptr){
+//        std::cout << " /\\ " + m_enemy->getName() + " /\\ ";
+//    }
+    std::cout << (isHeroStanding ? " X " : "/\\");
+    std::cout << "/\\  ";
 }
