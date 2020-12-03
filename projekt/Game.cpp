@@ -5,10 +5,7 @@
 #include "Game.h"
 
 Game::Game(){
-    m_map = nullptr;
-    m_hero = nullptr;
-    createHero();
-    createMap();
+    setUpGame();
 }
 
 void Game::printLocationMap(){
@@ -19,8 +16,13 @@ void Game::printTileMap(){
     m_map->printTileMap();
 }
 
+void Game::setUpGame(){
+    createMap();
+    createHero();
+}
+
 void Game::createHero(){
-    m_hero = new Hero("Nicolas", 110, 10);
+    m_map->createHero();
 }
 
 void Game::createMap(){
@@ -30,6 +32,7 @@ void Game::createMap(){
     printLocationMap();
     std::cout << std::endl;
 
+    std::cout << "Tile map: " << std::endl;
     printTileMap();
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
@@ -38,6 +41,7 @@ void Game::createMap(){
     std::cout << std::endl;
     moveHero(movementDirection::N);
 
+    std::cout << "Tile map: " << std::endl;
     printTileMap();
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
@@ -46,6 +50,7 @@ void Game::createMap(){
     std::cout << std::endl;
     moveHero(movementDirection::N);
 
+    std::cout << "Tile map: " << std::endl;
     printTileMap();
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
@@ -54,6 +59,7 @@ void Game::createMap(){
     std::cout << std::endl;
     moveHero(movementDirection::N);
 
+    std::cout << "Tile map: " << std::endl;
     printTileMap();
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;

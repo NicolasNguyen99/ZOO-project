@@ -5,11 +5,9 @@
 #ifndef PROJEKT_GAME_H
 #define PROJEKT_GAME_H
 #include "Map.h"
-#include "Hero.h"
 
 class Game {
     Map* m_map;
-    Hero* m_hero;
     void createHero();
     void createMap();
 
@@ -19,7 +17,7 @@ public:
     void printTileMap();
     void printMovementOptions();
     void moveHero(movementDirection direction);
-
+    void setUpGame();
 };
 
 

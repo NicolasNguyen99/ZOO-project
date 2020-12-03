@@ -4,13 +4,9 @@
 
 #ifndef PROJEKT_HELL_H
 #define PROJEKT_HELL_H
-#include "Location.h"
 
 
-class Hell: public Location {
-public:
-    Hell();
-    void printLocation(int rowNum);
+class Hell {
 
 };
 

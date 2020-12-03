@@ -11,7 +11,7 @@ class Swamp: public Location {
 public:
     Swamp();
     void printLocation(int rowNum);
-};
+    };
 
 
 

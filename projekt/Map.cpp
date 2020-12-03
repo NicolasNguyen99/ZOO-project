@@ -13,14 +13,18 @@ void Map::createMap(){
     renderLocation();
 }
 
+void Map::createHero(){
+    m_hero = new Hero("Nicolas", 110, 10);
+}
+
 void Map::renderSmallMap(){
     std::vector<Location*> row1;
     std::vector<Location*> row2;
     std::vector<Location*> row3;
 
-    row1.push_back(new Desert());row1.push_back(new Desert());row1.push_back(new Desert());
+    row1.push_back(new Forest());row1.push_back(new Forest());row1.push_back(new Forest());
     row2.push_back(new Forest());row2.push_back(new Forest());row2.push_back(new Forest());
-    row3.push_back(new Swamp());row3.push_back(new Swamp());row3.push_back(new Swamp());
+    row3.push_back(new Mountain());row3.push_back(new Mountain());row3.push_back(new Mountain());
 
     m_locations.push_back(row1);
     m_locations.push_back(row2);
@@ -41,9 +45,12 @@ void Map::renderLocation(){
     m_currentCoorTile = {2,0};
 }
 
+void Map::printTileMap(){
+    m_currentLocation->printTileMap(m_currentCoorTile);
+}
+
 void Map::printLocationMap(){
     std::cout << "Map of locations: ";
-    std::cout << std::endl;
     for(auto row:m_locations){
         for(int i = 0; i < 5; i++){
             for(auto location:row) {
@@ -55,35 +62,75 @@ void Map::printLocationMap(){
     }
 }
 
+//void Map::printMovementOptions(){
+//    if(m_currentCoorTile.x-1 >= 0){
+//        std::cout << "UP in the same location" << std::endl;
+//    } else if(m_currentCoorLocation.x-1 >= 0){
+//        std::cout << "UP into different location" << std::endl;
+//    }
+//
+//    if(m_currentCoorTile.y+1 < 3){
+//        std::cout << "RIGHT in the same location" << std::endl;
+//    } else if(m_currentCoorLocation.y+1 < int(m_size)){
+//        std::cout << "RIGHT into different location" << std::endl;
+//    }
+//
+//    if(m_currentCoorTile.x+1 < 3){
+//        std::cout << "DOWN in the same location" << std::endl;
+//    } else if(m_currentCoorLocation.x+1 < int(m_size)){
+//        std::cout << "DOWN into different location" << std::endl;
+//    }
+//
+//    if(m_currentCoorTile.y-1 >= 0){
+//        std::cout << "LEFT in the same location" << std::endl;
+//    } else if(m_currentCoorLocation.y-1 >= 0){
+//        std::cout << "LEFT into different location" << std::endl;
+//    }
+//}
+
 void Map::printMovementOptions(){
+    availableMovement availableLocationMovement;
+    availableLocationMovement = checkLocationMovement();
     if(m_currentCoorTile.x-1 >= 0){
         std::cout << "UP in the same location" << std::endl;
-    } else if(m_currentCoorLocation.x-1 >= 0){
+    } else if(availableLocationMovement.N){
         std::cout << "UP into different location" << std::endl;
     }
 
     if(m_currentCoorTile.y+1 < 3){
         std::cout << "RIGHT in the same location" << std::endl;
-    } else if(m_currentCoorLocation.y+1 < int(m_size)){
+    } else if(availableLocationMovement.E){
         std::cout << "RIGHT into different location" << std::endl;
     }
 
     if(m_currentCoorTile.x+1 < 3){
         std::cout << "DOWN in the same location" << std::endl;
-    } else if(m_currentCoorLocation.x+1 < int(m_size)){
+    } else if(availableLocationMovement.S){
         std::cout << "DOWN into different location" << std::endl;
     }
 
     if(m_currentCoorTile.y-1 >= 0){
         std::cout << "LEFT in the same location" << std::endl;
-    } else if(m_currentCoorLocation.y-1 >= 0){
+    } else if(availableLocationMovement.W){
         std::cout << "LEFT into different location" << std::endl;
     }
 }
 
-void Map::printTileMap(){
-    std::cout << "Tile map: " << std::endl;
-    m_currentLocation->printTileMap(m_currentCoorTile);
+availableMovement Map::checkLocationMovement(){
+    availableMovement movement;
+    if(m_currentCoorLocation.x-1 >= 0){
+        movement.N = true;
+    }
+    if(m_currentCoorLocation.y+1 < int(m_size)){
+        movement.E = true;
+    }
+    if(m_currentCoorLocation.x+1 < int(m_size)){
+        movement.S = true;
+    }
+    if(m_currentCoorLocation.y-1 >= 0){
+        movement.W = true;
+    }
+    return movement;
 }
 
 void Map::moveHero(movementDirection direction){
