@@ -13,9 +13,9 @@ void Map::renderSmallMap(){
     std::vector<Location*> row2;
     std::vector<Location*> row3;
 
-    row1.push_back(new Forest());row1.push_back(new Forest());row1.push_back(new Forest());
+    row1.push_back(new Desert());row1.push_back(new Desert());row1.push_back(new Desert());
     row2.push_back(new Forest());row2.push_back(new Forest());row2.push_back(new Forest());
-    row3.push_back(new Mountain());row3.push_back(new Mountain());row3.push_back(new Mountain());
+    row3.push_back(new Swamp());row3.push_back(new Swamp());row3.push_back(new Swamp());
 
     m_locations.push_back(row1);
     m_locations.push_back(row2);
@@ -37,6 +37,7 @@ void Map::renderLocation(){
 
 void Map::printLocationMap(){
     std::cout << "Map of locations: ";
+    std::cout << std::endl;
     for(auto row:m_locations){
         for(int i = 0; i < 5; i++){
             for(auto location:row) {

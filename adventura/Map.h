@@ -22,6 +22,7 @@ class Map {
     positionCoor m_currentCoor;
     mapSizes m_size;
     void renderMap();
+
     void renderSmallMap();
     void renderMediumMap();
     void renderLargeMap();

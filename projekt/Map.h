@@ -6,6 +6,9 @@
 #define PROJEKT_MAP_H
 #include "Forest.h"
 #include "Mountain.h"
+#include "Hell.h"
+#include "Swamp.h"
+#include "Desert.h"
 
 enum class movementDirection{N,E,S,W};
 typedef  std::vector<std::vector<Location*>> matrixOfLocation;
