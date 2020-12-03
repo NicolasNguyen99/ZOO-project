@@ -5,6 +5,8 @@
 #include "Game.h"
 
 Game::Game(){
+    m_map = nullptr;
+    m_hero = nullptr;
     createHero();
     createMap();
 }
@@ -23,8 +25,7 @@ void Game::createHero(){
 
 void Game::createMap(){
     m_map = new Map();
-    m_map->renderSmallMap();
-    m_map->renderLocation();
+    m_map->createMap();
 
     printLocationMap();
     std::cout << std::endl;
@@ -33,31 +34,31 @@ void Game::createMap(){
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
     std::cout << std::endl;
-    m_map->printMovementOptions();
+    printMovementOptions();
     std::cout << std::endl;
-    m_map->moveHero(movementDirection::N);
+    moveHero(movementDirection::N);
 
     printTileMap();
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
     std::cout << std::endl;
-    m_map->printMovementOptions();
+    printMovementOptions();
     std::cout << std::endl;
-    m_map->moveHero(movementDirection::N);
+    moveHero(movementDirection::N);
 
     printTileMap();
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
     std::cout << std::endl;
-    m_map->printMovementOptions();
+    printMovementOptions();
     std::cout << std::endl;
-    m_map->moveHero(movementDirection::N);
+    moveHero(movementDirection::N);
 
     printTileMap();
     std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
     std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
     std::cout << std::endl;
-    m_map->printMovementOptions();
+    printMovementOptions();
 }
 
 void Game::printMovementOptions(){

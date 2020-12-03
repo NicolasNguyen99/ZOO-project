@@ -8,6 +8,11 @@ Map::Map(){
 
 }
 
+void Map::createMap(){
+    renderSmallMap();
+    renderLocation();
+}
+
 void Map::renderSmallMap(){
     std::vector<Location*> row1;
     std::vector<Location*> row2;
@@ -20,6 +25,7 @@ void Map::renderSmallMap(){
     m_locations.push_back(row1);
     m_locations.push_back(row2);
     m_locations.push_back(row3);
+
     m_currentLocation = m_locations.at(2).at(0);
     m_currentCoorLocation = {2,0};
     m_size = sizeOfMap::Small;

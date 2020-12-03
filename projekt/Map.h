@@ -24,14 +24,15 @@ class Map {
 
 public:
     Map();
-    void renderSmallMap();
-    void renderLocation();
     void printLocationMap();
     void printTileMap();
     void printMovementOptions();
     positionCoor m_currentCoorLocation;
     positionCoor m_currentCoorTile;
     void moveHero(movementDirection direction);
+    void createMap();
+    void renderSmallMap();
+    void renderLocation();
 };
 
 
