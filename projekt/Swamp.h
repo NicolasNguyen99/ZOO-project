@@ -9,7 +9,7 @@
 
 class Swamp: public Location {
 public:
-    Swamp();
+    Swamp(std::string type);
     void printLocation(int rowNum);
     };
 

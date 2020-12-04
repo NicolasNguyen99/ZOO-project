@@ -4,7 +4,7 @@
 
 #include "Swamp.h"
 
-Swamp::Swamp():Location(){}
+Swamp::Swamp(std::string type):Location(type){}
 
 void Swamp::printLocation(int rowNum){
     std::array<std::string, 5> rowPattern;

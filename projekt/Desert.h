@@ -9,7 +9,7 @@
 
 class Desert: public Location {
 public:
-    Desert();
+    Desert(std::string type);
     void printLocation(int rowNum);
 };
 

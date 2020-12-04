@@ -25,46 +25,28 @@ void Game::createHero(){
     m_hero = new Hero("Nicolas", 110, 10);
 }
 
-void Game::createMap(){
+void Game::createMap() {
     m_map = new Map();
-    m_map->createMap();
 
     printLocationMap();
     std::cout << std::endl;
 
-    std::cout << "Tile map: " << std::endl;
-    printTileMap();
-    std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
-    std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
-    std::cout << std::endl;
-    printMovementOptions();
-    std::cout << std::endl;
-    moveHero(movementDirection::N);
-
-    std::cout << "Tile map: " << std::endl;
-    printTileMap();
-    std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
-    std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
-    std::cout << std::endl;
-    printMovementOptions();
-    std::cout << std::endl;
-    moveHero(movementDirection::N);
-
-    std::cout << "Tile map: " << std::endl;
-    printTileMap();
-    std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
-    std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
-    std::cout << std::endl;
-    printMovementOptions();
-    std::cout << std::endl;
-    moveHero(movementDirection::N);
-
-    std::cout << "Tile map: " << std::endl;
-    printTileMap();
-    std::cout << "Location coor: " << m_map->m_currentCoorLocation.x << m_map->m_currentCoorLocation.y << std::endl;
-    std::cout << "Tile coor: " << m_map->m_currentCoorTile.x << m_map->m_currentCoorTile.y << std::endl;
-    std::cout << std::endl;
-    printMovementOptions();
+    char vstup;
+    do {
+        std::cout << "#######################################################################" << std::endl;
+        std::cout << "Tile map: " << std::endl;
+        printTileMap();
+        std::cout << "Location coor: " << m_map->getCurrentCoorLocation().x << m_map->getCurrentCoorLocation().y << std::endl;
+        std::cout << "Tile coor: " << m_map->getTilepositionCoor().x << m_map->getTilepositionCoor().y << std::endl;
+        printMovementOptions();
+        std::cout << "Enter movement direction: " << std::endl;
+        std::cin >> vstup;
+        if (vstup == 'N') { moveHero(movementDirection::N); }
+        if (vstup == 'E') { moveHero(movementDirection::E); }
+        if (vstup == 'S') { moveHero(movementDirection::S); }
+        if (vstup == 'W') { moveHero(movementDirection::W); }
+        std::cout << "#######################################################################" << std::endl;
+    } while (vstup != 'K');
 }
 
 void Game::printMovementOptions(){

@@ -8,27 +8,46 @@
 #include <array>
 #include "Tile.h"
 
+struct availableMovement{
+    bool N = false;
+    bool E = false;
+    bool S = false;
+    bool W = false;
+};
+enum class sizeOfLocation{Small=3,Medium=4,Large=5};
 struct positionCoor{
+    int x;
+    int y;
+};
+struct sizeOfMovement{
     int x;
     int y;
 };
 typedef  std::vector<std::vector<Tile*>> matrixOfTiles;
 
 class Location {
-//    static positionCoor m_currentCoor;
-//    static Tile* currentTile;
+    sizeOfLocation m_sizeOfLocation;
+    static positionCoor m_currentCoorTile;
+    Tile* m_currentTile;
+    std::string m_type;
+
 protected:
     std::string m_locationType;
     matrixOfTiles m_tiles;
-//    positionCoor m_currentCoor;
-//    Tile* currentTile;
 
 public:
-    Location();
+    Location(std::string type);
     virtual void printLocation(int rowNum) = 0;
-    void printTileMap(positionCoor currentCoor);
+    void printTileMap();
     void renderLocation();
-    matrixOfTiles getTiles();
+    void moveCurrentCoorTile(sizeOfMovement sizePosition);
+    //void setCurrentCoorTile(positionCoor newPosition);
+    void setCurrentTile();
+    availableMovement checkMovement(positionCoor coor, int range);
+    positionCoor getTilepositionCoor();
+    void setStartingTile();
+    sizeOfLocation getSize();
+    std::string getType();
 };
 
 

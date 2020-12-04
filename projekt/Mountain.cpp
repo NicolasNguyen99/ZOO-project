@@ -4,7 +4,7 @@
 
 #include "Mountain.h"
 
-Mountain::Mountain():Location(){}
+Mountain::Mountain(std::string type):Location(type){}
 
 void Mountain::printLocation(int rowNum){
     std::array<std::string,5> rowPattern;

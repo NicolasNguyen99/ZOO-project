@@ -17,5 +17,4 @@ public:
     void printTile(bool isHeroStanding);
 };
 
-
 #endif //PROJEKT_TILE_H

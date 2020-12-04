@@ -8,7 +8,7 @@
 
 class Forest:public Location{
 public:
-    Forest();
+    Forest(std::string type);
     void printLocation(int rowNum);
 };
 
