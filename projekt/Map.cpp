@@ -13,10 +13,6 @@ void Map::createMap(){
     renderLocation();
 }
 
-void Map::createHero(){
-    m_hero = new Hero("Nicolas", 110, 10);
-}
-
 void Map::renderSmallMap(){
     std::vector<Location*> row1;
     std::vector<Location*> row2;
@@ -91,6 +87,7 @@ void Map::printLocationMap(){
 void Map::printMovementOptions(){
     availableMovement availableLocationMovement;
     availableLocationMovement = checkLocationMovement();
+
     if(m_currentCoorTile.x-1 >= 0){
         std::cout << "UP in the same location" << std::endl;
     } else if(availableLocationMovement.N){

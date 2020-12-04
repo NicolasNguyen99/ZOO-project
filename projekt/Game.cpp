@@ -22,7 +22,7 @@ void Game::setUpGame(){
 }
 
 void Game::createHero(){
-    m_map->createHero();
+    m_hero = new Hero("Nicolas", 110, 10);
 }
 
 void Game::createMap(){

@@ -5,8 +5,10 @@
 #ifndef PROJEKT_GAME_H
 #define PROJEKT_GAME_H
 #include "Map.h"
+#include "Hero.h"
 
 class Game {
+    Hero* m_hero;
     Map* m_map;
     void createHero();
     void createMap();
