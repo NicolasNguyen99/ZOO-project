@@ -25,9 +25,9 @@ void Map::renderMap(){
     std::vector<Location*> row2;
     std::vector<Location*> row3;
 
-    row1.push_back(new Forest("Forest"));row1.push_back(new Forest("Forest"));row1.push_back(new Forest("Forest"));
-    row2.push_back(new Forest("Forest"));row2.push_back(new Forest("Forest"));row2.push_back(new Forest("Forest"));
-    row3.push_back(new Mountain("Mountain"));row3.push_back(new Mountain("Mountain"));row3.push_back(new Mountain("Mountain"));
+    row1.push_back(Location::getLocation(locationType::Forest));row1.push_back(Location::getLocation(locationType::Forest));row1.push_back(Location::getLocation(locationType::Forest));
+    row2.push_back(Location::getLocation(locationType::Forest));row2.push_back(Location::getLocation(locationType::Forest));row2.push_back(Location::getLocation(locationType::Forest));
+    row3.push_back(Location::getLocation(locationType::Mountain));row3.push_back(Location::getLocation(locationType::Mountain));row3.push_back(Location::getLocation(locationType::Mountain));
 
     m_locations.push_back(row1);
     m_locations.push_back(row2);

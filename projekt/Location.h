@@ -8,6 +8,7 @@
 #include <array>
 #include "Tile.h"
 
+enum class locationType{Forest, Mountain, Swamp, Desert};
 struct availableMovement{
     bool N = false;
     bool E = false;
@@ -26,18 +27,19 @@ struct sizeOfMovement{
 typedef  std::vector<std::vector<Tile*>> matrixOfTiles;
 
 class Location {
-    sizeOfLocation m_sizeOfLocation;
+//    sizeOfLocation m_sizeOfLocation;
     static positionCoor m_currentCoorTile;
     Tile* m_currentTile;
-    std::string m_type;
 
 protected:
-    std::string m_locationType;
+    sizeOfLocation m_sizeOfLocation;
+    locationType m_type;
     matrixOfTiles m_tiles;
+    Location();
 
 public:
-    Location(std::string type);
     virtual void printLocation(int rowNum) = 0;
+    static Location* getLocation(locationType type);
     void printTileMap();
     void renderLocation();
     void moveCurrentCoorTile(sizeOfMovement sizePosition);
@@ -47,7 +49,8 @@ public:
     positionCoor getTilepositionCoor();
     void setStartingTile();
     sizeOfLocation getSize();
-    std::string getType();
+    locationType getType();
+    void setSizeOfLocation(sizeOfLocation size);
 };
 
 

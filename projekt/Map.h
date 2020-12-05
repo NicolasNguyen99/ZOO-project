@@ -4,8 +4,7 @@
 
 #ifndef PROJEKT_MAP_H
 #define PROJEKT_MAP_H
-#include "Forest.h"
-#include "Mountain.h"
+#include "Location.h"
 
 const int sizeOfMap = 3;
 const int asciiArtRows = 5;

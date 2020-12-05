@@ -4,7 +4,9 @@
 
 #include "Desert.h"
 
-Desert::Desert(std::string type):Location(type){}
+Desert::Desert():Location(){
+    m_type = locationType::Desert;
+}
 
 void Desert::printLocation(int rowNum){
     std::array<std::string,5> rowPattern;

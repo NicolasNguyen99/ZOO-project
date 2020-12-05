@@ -8,7 +8,7 @@
 
 class Mountain:public Location{
 public:
-    Mountain(std::string type);
+    Mountain();
     void printLocation(int rowNum);
 };
 

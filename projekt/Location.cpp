@@ -3,12 +3,32 @@
 //
 
 #include "Location.h"
+//zcela vyjimecne kvuli navrhovemu vzoru
+#include "Forest.h"
+#include "Mountain.h"
+#include "Swamp.h"
+
+
+void Location::setSizeOfLocation(sizeOfLocation size){
+    m_sizeOfLocation = size;
+}
 
 positionCoor Location::m_currentCoorTile;
 
-Location::Location(std::string type){
-    m_type = type;
-    m_sizeOfLocation = sizeOfLocation::Small;
+Location::Location(){
+    m_sizeOfLocation=sizeOfLocation::Small;
+}
+
+Location* Location::getLocation(locationType type){
+    Location* newLocation = nullptr;
+    if(type == locationType::Forest){
+        newLocation = new Forest();
+    } else if(type == locationType::Mountain){
+        newLocation = new Mountain();
+    } else if(type == locationType::Swamp){
+        newLocation = new Swamp();
+    }
+    return newLocation;
 }
 
 void Location::setStartingTile(){
@@ -85,6 +105,6 @@ void Location::renderLocation(){
 
 void printLocation(){}
 
-std::string Location::getType(){
+locationType Location::getType(){
     return m_type;
 }

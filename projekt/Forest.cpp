@@ -4,7 +4,9 @@
 
 #include "Forest.h"
 
-Forest::Forest(std::string type):Location(type){}
+Forest::Forest():Location(){
+    m_type = locationType::Forest;
+}
 
 void Forest::printLocation(int rowNum){
     std::array<std::string,5> rowPattern;
