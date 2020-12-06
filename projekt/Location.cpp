@@ -89,6 +89,14 @@ void Location::printTileMap(){
     }
 }
 
+//void Location::renderEnemies(){
+//    if(m_type == locationType::Forest){
+//        m_tiles.at(0).at(0)->setEnemy(getElf());
+//        m_factory = new HardEnemyFactory();
+//        m_tiles.at(0).at(1)->setEnemy(getElf());
+//    }
+//}
+
 void Location::renderLocation(){
     std::vector<Tile*> row1;
     std::vector<Tile*> row2;
