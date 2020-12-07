@@ -6,13 +6,18 @@
 #define PROJEKT_TILE_H
 #include <iostream>
 #include "Enemy.h"
+#include "Chest.h"
 
 class Tile {
-    bool m_isLocked;
-    bool m_isExplored;
+    //kdyztak na konci implementace, po spawnu chestek a ememy
+    //bool m_isExplored;
     Enemy* m_enemy;
+    Chest* m_chest;
 
 public:
+    Tile(Enemy* enemy, Chest* chest);
+    Tile(Enemy* enemy);
+    Tile(Chest* chest);
     Tile();
     void printTile(bool isHeroStanding);
 };

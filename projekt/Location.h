@@ -25,32 +25,44 @@ struct sizeOfMovement{
     int y;
 };
 typedef  std::vector<std::vector<Tile*>> matrixOfTiles;
+struct weaponBonusLocation{
+    int meleeWeapon;
+    int rangeWeapon;
+    int magicWeapon;
+};
 
 class Location {
-//    sizeOfLocation m_sizeOfLocation;
+    //tyto vlastnosti budou ruzne podle buildru lokaci
+    locationType m_type;
+    std::array<std::string,5> m_pattern;
+    int m_locationLevel;
+
     static positionCoor m_currentCoorTile;
     Tile* m_currentTile;
-
-protected:
-    sizeOfLocation m_sizeOfLocation;
-    locationType m_type;
+    weaponBonusLocation m_bonusOfLocation;
     matrixOfTiles m_tiles;
-    Location();
+    std::string m_name;
 
 public:
-    virtual void printLocation(int rowNum) = 0;
-    static Location* getLocation(locationType type);
+    Location(std::string name, int level);
+    void printLocation(int rowNum);
     void printTileMap();
-    void renderLocation();
     void moveCurrentCoorTile(sizeOfMovement sizePosition);
     //void setCurrentCoorTile(positionCoor newPosition);
-    void setCurrentTile();
     availableMovement checkMovement(positionCoor coor, int range);
     positionCoor getTilepositionCoor();
     void setStartingTile();
-    sizeOfLocation getSize();
+    void setCurrentTile();
+
+    void setPattern(std::array<std::string,5> rowPattern);
+    void setTiles(matrixOfTiles tiles);
+    int getSize();
+    void setBonusOfLocation(weaponBonusLocation bonus);
+    weaponBonusLocation getBonusOfLocation();
     locationType getType();
-    void setSizeOfLocation(sizeOfLocation size);
+    int getLocationLevel();
+    std::string getName();
+    void setType(locationType type);
 };
 
 

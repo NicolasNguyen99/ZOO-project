@@ -3,43 +3,39 @@
 //
 
 #include "Location.h"
-//zcela vyjimecne kvuli navrhovemu vzoru
-#include "Forest.h"
-#include "Mountain.h"
-#include "Swamp.h"
 
-
-void Location::setSizeOfLocation(sizeOfLocation size){
-    m_sizeOfLocation = size;
+Location::Location(std::string name, int level){
+    m_name = name;
+    m_locationLevel = level;
 }
 
 positionCoor Location::m_currentCoorTile;
 
-Location::Location(){
-    m_sizeOfLocation=sizeOfLocation::Small;
+weaponBonusLocation Location::getBonusOfLocation(){
+    return m_bonusOfLocation;
 }
 
-Location* Location::getLocation(locationType type){
-    Location* newLocation = nullptr;
-    if(type == locationType::Forest){
-        newLocation = new Forest();
-    } else if(type == locationType::Mountain){
-        newLocation = new Mountain();
-    } else if(type == locationType::Swamp){
-        newLocation = new Swamp();
-    }
-    return newLocation;
+void Location::setBonusOfLocation(weaponBonusLocation bonus){
+    m_bonusOfLocation = bonus;
+}
+
+void Location::setTiles(matrixOfTiles tiles){
+    m_tiles = tiles;
+}
+
+void Location::setPattern(std::array<std::string,5> rowPattern){
+    m_pattern = rowPattern;
 }
 
 void Location::setStartingTile(){
     //staticka slozka spolecna pro vsechny lokace
-    m_currentCoorTile = {int(m_sizeOfLocation)-1,0};
+    m_currentCoorTile = {int(m_tiles.size())-1,0};
     setCurrentTile();
 }
 
 void Location::moveCurrentCoorTile(sizeOfMovement sizePosition){
-    m_currentCoorTile.x = (m_currentCoorTile.x + sizePosition.x)%(int(m_sizeOfLocation));
-    m_currentCoorTile.y = (m_currentCoorTile.y + sizePosition.y)%(int(m_sizeOfLocation));
+    m_currentCoorTile.x = (m_currentCoorTile.x + sizePosition.x)%(int(m_tiles.size()));
+    m_currentCoorTile.y = (m_currentCoorTile.y + sizePosition.y)%(int(m_tiles.size()));
 }
 
 //void Location::setCurrentCoorTile(positionCoor newPosition){
@@ -50,12 +46,16 @@ void Location::setCurrentTile(){
     m_currentTile = m_tiles.at(m_currentCoorTile.x).at(m_currentCoorTile.y);
 }
 
+void Location::printLocation(int rowNum){
+    std::cout << m_pattern.at(rowNum);
+}
+
 positionCoor Location::getTilepositionCoor(){
     return m_currentCoorTile;
 }
 
-sizeOfLocation Location::getSize(){
-    return m_sizeOfLocation;
+int Location::getSize(){
+    return m_tiles.size();
 }
 
 availableMovement Location::checkMovement(positionCoor coor, int range){
@@ -76,8 +76,8 @@ availableMovement Location::checkMovement(positionCoor coor, int range){
 }
 
 void Location::printTileMap(){
-    for(int x = 0; x < int(m_sizeOfLocation); x++){
-        for(int y = 0; y < int(m_sizeOfLocation); y++){
+    for(int x = 0; x < int(m_tiles.size()); x++){
+        for(int y = 0; y < int(m_tiles.size()); y++){
             Tile* tile = m_tiles.at(x).at(y);
             if(m_currentCoorTile.x != x or m_currentCoorTile.y != y){
                 tile->printTile(false);
@@ -89,30 +89,18 @@ void Location::printTileMap(){
     }
 }
 
-//void Location::renderEnemies(){
-//    if(m_type == locationType::Forest){
-//        m_tiles.at(0).at(0)->setEnemy(getElf());
-//        m_factory = new HardEnemyFactory();
-//        m_tiles.at(0).at(1)->setEnemy(getElf());
-//    }
-//}
-
-void Location::renderLocation(){
-    std::vector<Tile*> row1;
-    std::vector<Tile*> row2;
-    std::vector<Tile*> row3;
-
-    row1.push_back(new Tile());row1.push_back(new Tile());row1.push_back(new Tile());
-    row2.push_back(new Tile());row2.push_back(new Tile());row2.push_back(new Tile());
-    row3.push_back(new Tile());row3.push_back(new Tile());row3.push_back(new Tile());
-
-    m_tiles.push_back(row1);
-    m_tiles.push_back(row2);
-    m_tiles.push_back(row3);
+int Location::getLocationLevel(){
+    return m_locationLevel;
 }
-
-void printLocation(){}
 
 locationType Location::getType(){
     return m_type;
+}
+
+void Location::setType(locationType type){
+    m_type = type;
+}
+
+std::string Location::getName(){
+    return m_name;
 }

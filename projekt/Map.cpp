@@ -11,35 +11,33 @@ Map::Map(){
 }
 
 void Map::createMap(){
-    renderMap();
-    renderLocation();
-}
-
-void Map::setStartingLocation(){
-    m_currentCoorLocation = {sizeOfMap-1,0};
-    m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-}
-
-void Map::renderMap(){
     std::vector<Location*> row1;
     std::vector<Location*> row2;
     std::vector<Location*> row3;
 
-    row1.push_back(Location::getLocation(locationType::Forest));row1.push_back(Location::getLocation(locationType::Forest));row1.push_back(Location::getLocation(locationType::Forest));
-    row2.push_back(Location::getLocation(locationType::Forest));row2.push_back(Location::getLocation(locationType::Forest));row2.push_back(Location::getLocation(locationType::Forest));
-    row3.push_back(Location::getLocation(locationType::Mountain));row3.push_back(Location::getLocation(locationType::Mountain));row3.push_back(Location::getLocation(locationType::Mountain));
+    LocationDirector* director = new LocationDirector(new ForestLocationBuilder);
+
+    row1.push_back(director->createLocation());
+    row1.push_back(director->createLocation());
+    row1.push_back(director->createLocation());
+
+    director->setBuilder(new MountainLocationBuilder);
+    row2.push_back(director->createLocation());
+    row2.push_back(director->createLocation());
+    row2.push_back(director->createLocation());
+
+    row3.push_back(director->createLocation());
+    row3.push_back(director->createLocation());
+    row3.push_back(director->createLocation());
 
     m_locations.push_back(row1);
     m_locations.push_back(row2);
     m_locations.push_back(row3);
 }
 
-void Map::renderLocation(){
-    for(auto row:m_locations){
-        for(auto location:row){
-            location->renderLocation();
-        }
-    }
+void Map::setStartingLocation(){
+    m_currentCoorLocation = {int(m_locations.size())-1,0};
+    m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
 }
 
 void Map::printTileMap(){
@@ -68,8 +66,8 @@ void Map::setStartingTile(){
 }
 
 void Map::printMovementOptions(){
-    availableMovement availableTileMovement = checkMovement(getTilepositionCoor(), int(m_currentLocation->getSize()));
-    availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, sizeOfMap);
+    availableMovement availableTileMovement = checkMovement(getTilepositionCoor(), m_currentLocation->getSize());
+    availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, m_locations.size());
 
     if(availableTileMovement.N){
         std::cout << "UP in the same location" << std::endl;
@@ -105,8 +103,8 @@ positionCoor Map::getCurrentCoorLocation(){
 }
 
 void Map::moveHero(movementDirection direction) {
-    availableMovement  availableTileMovement = checkMovement(m_currentLocation->getTilepositionCoor(), int(m_currentLocation->getSize()));
-    availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, sizeOfMap);
+    availableMovement  availableTileMovement = checkMovement(m_currentLocation->getTilepositionCoor(), m_currentLocation->getSize());
+    availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, m_locations.size());
 
     if (direction == movementDirection::N){
         if (availableTileMovement.N) {
@@ -115,7 +113,8 @@ void Map::moveHero(movementDirection direction) {
             std::cout << "Posun do jine lokace" << std::endl;
             m_currentCoorLocation.x--;
             m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-            m_currentLocation->moveCurrentCoorTile({sizeOfMap - 1, 0});
+            m_currentLocation->moveCurrentCoorTile({int(m_locations.size()) - 1, 0});
+            std::cout << m_currentLocation->getName() << std::endl;
         }
     } else if (direction == movementDirection::E){
         if (availableTileMovement.E){
@@ -125,6 +124,7 @@ void Map::moveHero(movementDirection direction) {
             m_currentCoorLocation.y++;
             m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
             m_currentLocation->moveCurrentCoorTile({0, +1});
+            std::cout << m_currentLocation->getName() << std::endl;
         }
     } else if (direction == movementDirection::S){
         if (availableTileMovement.S) {
@@ -134,6 +134,7 @@ void Map::moveHero(movementDirection direction) {
             m_currentCoorLocation.x++;
             m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
             m_currentLocation->moveCurrentCoorTile({+1, 0});
+            std::cout << m_currentLocation->getName() << std::endl;
         }
     } else if (direction == movementDirection::W){
         if (availableTileMovement.W) {
@@ -142,55 +143,9 @@ void Map::moveHero(movementDirection direction) {
             std::cout << "Posun do jine lokace LEFT" << std::endl;
             m_currentCoorLocation.y--;
             m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-            m_currentLocation->moveCurrentCoorTile({0, sizeOfMap - 1});
+            m_currentLocation->moveCurrentCoorTile({0, int(m_locations.size())-1});
+            std::cout << m_currentLocation->getName() << std::endl;
         }
     }
     m_currentLocation->setCurrentTile();
 }
-
-//    if(direction == movementDirection::N){
-//        if(m_currentCoorTile.x-1 >= 0){
-//            m_currentCoorTile.x--;
-//        } else if(m_currentCoorLocation.x-1 >= 0){
-//            std::cout << "Posun do jine lokace" << std::endl;
-//            m_currentCoorTile.x = 2;
-//            m_currentCoorLocation.x--;
-//            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-//        } else {
-//            std::cout << "ERROR: Posun mimo matici UP" << std::endl;
-//        }
-//    } else if(direction == movementDirection::E){
-//        if(m_currentCoorTile.y+1 < 3){
-//            m_currentCoorTile.y++;
-//        } else if(m_currentCoorLocation.y+1 < sizeOfMap){
-//            std::cout << "Posun do jine lokace RIGHT" << std::endl;
-//            m_currentCoorTile.y = 0;
-//            m_currentCoorLocation.y++;
-//            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-//        } else {
-//            std::cout << "ERROR: Posun mimo matici" << std::endl;
-//        }
-//    } else if(direction == movementDirection::S){
-//        if(m_currentCoorTile.x+1 < 3){
-//            m_currentCoorTile.x++;
-//        } else if(m_currentCoorLocation.x+1 < sizeOfMap){
-//            std::cout << "Posun do jine lokace DOWN" << std::endl;
-//            m_currentCoorTile.x = 0;
-//            m_currentCoorLocation.x++;
-//            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-//        } else {
-//            std::cout << "ERROR: Posun mimo matici DOWN" << std::endl;
-//        }
-//    } else if(direction == movementDirection::W){
-//        if(m_currentCoorTile.y-1 >= 0){
-//            m_currentCoorTile.y--;
-//        } else if(m_currentCoorLocation.y-1 >= 0){
-//            std::cout << "Posun do jine lokace LEFT" << std::endl;
-//            m_currentCoorTile.y = 2;
-//            m_currentCoorLocation.y--;
-//            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-//        } else {
-//            std::cout << "ERROR: Posun mimo matici LEFT" << std::endl;
-//        }
-//    }
-//    m_currentTile = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y)->getTiles().at(m_currentCoorTile.x).at(m_currentCoorTile.y);
