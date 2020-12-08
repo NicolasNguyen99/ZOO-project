@@ -13,13 +13,14 @@ class Tile {
     //bool m_isExplored;
     Enemy* m_enemy;
     Chest* m_chest;
+    Tile(Enemy* enemy, Chest* chest);
 
 public:
-    Tile(Enemy* enemy, Chest* chest);
     Tile(Enemy* enemy);
     Tile(Chest* chest);
     Tile();
     void printTile(bool isHeroStanding);
+    void setEnemy(Enemy* enemy);
 };
 
 #endif //PROJEKT_TILE_H

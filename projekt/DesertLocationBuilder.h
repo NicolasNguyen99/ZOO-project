@@ -4,10 +4,16 @@
 
 #ifndef PROJEKT_DESERTLOCATIONBUILDER_H
 #define PROJEKT_DESERTLOCATIONBUILDER_H
+#include "LocationBuilder.h"
 
+class DesertLocationBuilder:public LocationBuilder{
 
-class DesertLocationBuilder {
-
+public:
+    DesertLocationBuilder(){};
+    void createLocation();
+    void createTiles();
+    void spawnEnemies();
+    void spawnChests();
 };
 
 

@@ -17,8 +17,8 @@ void Game::printTileMap(){
 }
 
 void Game::setUpGame(){
-    createMap();
     createHero();
+    createMap();
 }
 
 void Game::createHero(){

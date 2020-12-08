@@ -1,23 +1,23 @@
 //
-// Created by Nicolas Nguyen on 06/12/2020.
+// Created by Nicolas Nguyen on 08/12/2020.
 //
 
-#include "ForestLocationBuilder.h"
+#include "HeavenLocationBuilder.h"
 
-void ForestLocationBuilder::createLocation(){
-    m_location = new Location("Forest of printers", 1);
+void HeavenLocationBuilder::createLocation(){
+    m_location = new Location("Heaven", 1);
     std::array<std::string,5> rowPattern;
-    rowPattern.at(0) ="                    ";
-    rowPattern.at(1) ="   /\\               ";
-    rowPattern.at(2) ="  /**\\   /\\         ";
-    rowPattern.at(3) =" /****\\ /**\\        ";
-    rowPattern.at(4) ="___||____||_______  ";
+    rowPattern.at(0) ="";
+    rowPattern.at(1) ="";
+    rowPattern.at(2) ="";
+    rowPattern.at(3) ="";
+    rowPattern.at(4) ="";
     m_location->setPattern(rowPattern);
     m_location->setBonusOfLocation({-2*m_location->getLocationLevel(), -1*m_location->getLocationLevel(), 0});
-    m_location->setType(locationType::Forest);
+    m_location->setType(locationType::Heaven);
 }
 
-void ForestLocationBuilder::createTiles(){
+void HeavenLocationBuilder::createTiles(){
     std::vector<Tile*> row1;
     std::vector<Tile*> row2;
     std::vector<Tile*> row3;
@@ -31,12 +31,12 @@ void ForestLocationBuilder::createTiles(){
     m_tiles.push_back(row3);
 }
 
-void ForestLocationBuilder::spawnEnemies(){
+void HeavenLocationBuilder::spawnEnemies(){
     m_tiles.at(1).at(1)->setEnemy(new Enemy());
     m_tiles.at(2).at(2)->setEnemy(new Enemy());
     m_tiles.at(2).at(1)->setEnemy(new Enemy());
 }
 
-void ForestLocationBuilder::spawnChests(){
+void HeavenLocationBuilder::spawnChests(){
 
 }

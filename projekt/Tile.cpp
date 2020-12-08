@@ -23,6 +23,13 @@ void Tile::printTile(bool isHeroStanding){
     if(m_chest != nullptr){
         std::cout << "CH";
     }
-    std::cout << (isHeroStanding ? " H " : "/\\");
+    if(isHeroStanding){
+        std::cout << " H ";
+    }
+
     std::cout << "/\\  ";
+}
+
+void Tile::setEnemy(Enemy* enemy){
+    m_enemy = enemy;
 }

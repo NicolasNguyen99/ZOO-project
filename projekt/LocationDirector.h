@@ -6,6 +6,13 @@
 #define PROJEKT_LOCATIONDIRECTOR_H
 #include "ForestLocationBuilder.h"
 #include "MountainLocationBuilder.h"
+#include "SwampLocationBuilder.h"
+#include "DesertLocationBuilder.h"
+#include "PlainLocationBuilder.h"
+#include "CastleLocationBuilder.h"
+#include "HellLocationBuilder.h"
+#include "HeavenLocationBuilder.h"
+#include "CaveLocationBuilder.h"
 
 class LocationDirector {
     LocationBuilder* m_builder;

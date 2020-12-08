@@ -8,7 +8,7 @@
 #include <array>
 #include "Tile.h"
 
-enum class locationType{Forest, Mountain, Swamp, Desert};
+enum class locationType{Forest, Mountain, Swamp, Desert, Plain, Castle, Cave, Heaven, Hell};
 struct availableMovement{
     bool N = false;
     bool E = false;
@@ -63,6 +63,7 @@ public:
     int getLocationLevel();
     std::string getName();
     void setType(locationType type);
+
 };
 
 

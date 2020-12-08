@@ -15,5 +15,7 @@ void LocationDirector::setBuilder(LocationBuilder* builder){
 Location* LocationDirector::createLocation(){
     m_builder->createLocation();
     m_builder->createTiles();
+    m_builder->spawnEnemies();
+    m_builder->setTiles();
     return m_builder->getLocation();
 }

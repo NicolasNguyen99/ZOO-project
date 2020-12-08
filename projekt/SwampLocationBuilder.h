@@ -4,10 +4,16 @@
 
 #ifndef PROJEKT_SWAMPLOCATIONBUILDER_H
 #define PROJEKT_SWAMPLOCATIONBUILDER_H
+#include "LocationBuilder.h"
 
+class SwampLocationBuilder:public LocationBuilder{
 
-class SwampLocationBuilder {
-
+public:
+    SwampLocationBuilder(){};
+    void createLocation();
+    void createTiles();
+    void spawnEnemies();
+    void spawnChests();
 };
 
 

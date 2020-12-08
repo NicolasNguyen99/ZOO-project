@@ -11,6 +11,9 @@ class MountainLocationBuilder:public LocationBuilder{
 public:
     MountainLocationBuilder(){};
     void createLocation();
+    void createTiles();
+    void spawnEnemies();
+    void spawnChests();
 };
 
 

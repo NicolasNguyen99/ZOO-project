@@ -9,12 +9,16 @@
 class LocationBuilder {
 protected:
     Location* m_location;
+    matrixOfTiles m_tiles;
 
 public:
     LocationBuilder(){};
     virtual void createLocation() = 0;
-    virtual Location* getLocation();
-    void createTiles();
+    virtual void createTiles() = 0;
+    virtual void spawnEnemies() = 0;
+    virtual void spawnChests() = 0;
+    Location* getLocation();
+    void setTiles();
 };
 
 

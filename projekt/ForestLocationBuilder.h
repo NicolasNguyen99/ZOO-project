@@ -11,6 +11,9 @@ class ForestLocationBuilder:public LocationBuilder{
 public:
     ForestLocationBuilder(){};
     void createLocation();
+    void createTiles();
+    void spawnEnemies();
+    void spawnChests();
 };
 
 
