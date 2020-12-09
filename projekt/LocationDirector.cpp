@@ -16,6 +16,7 @@ Location* LocationDirector::createLocation(){
     m_builder->createLocation();
     m_builder->createTiles();
     m_builder->spawnEnemies();
+    m_builder->spawnChests();
     m_builder->setTiles();
     return m_builder->getLocation();
 }

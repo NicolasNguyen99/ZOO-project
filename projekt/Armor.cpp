@@ -3,3 +3,6 @@
 //
 
 #include "Armor.h"
+
+Armor::Armor(std::string name):Item(name, "Armor"){
+}

@@ -55,4 +55,5 @@ void Game::printMovementOptions(){
 
 void Game::moveHero(movementDirection direction){
     m_map->moveHero(direction);
+    m_map->getEnemy();
 }

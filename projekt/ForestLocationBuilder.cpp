@@ -6,12 +6,13 @@
 
 void ForestLocationBuilder::createLocation(){
     m_location = new Location("Forest of printers", 1);
-    std::array<std::string,5> rowPattern;
-    rowPattern.at(0) ="                    ";
-    rowPattern.at(1) ="   /\\               ";
-    rowPattern.at(2) ="  /**\\   /\\         ";
-    rowPattern.at(3) =" /****\\ /**\\        ";
-    rowPattern.at(4) ="___||____||_______  ";
+    std::array<std::string,asciiArtRows> rowPattern;
+    rowPattern.at(0) ="      " + m_location->getName() + "           ";
+    rowPattern.at(1) ="            ,%%&%,  ";
+    rowPattern.at(2) ="   /\\      %&%&%&%  ";
+    rowPattern.at(3) ="  /**\\  /\\  %&%&&   ";
+    rowPattern.at(4) =" /****\\/**\\  ||     ";
+    rowPattern.at(5) ="___||___||___||___  ";
     m_location->setPattern(rowPattern);
     m_location->setBonusOfLocation({-2*m_location->getLocationLevel(), -1*m_location->getLocationLevel(), 0});
     m_location->setType(locationType::Forest);
@@ -38,5 +39,5 @@ void ForestLocationBuilder::spawnEnemies(){
 }
 
 void ForestLocationBuilder::spawnChests(){
-
+    m_tiles.at(0).at(1)->setChest(new Chest(new Armor("Light Armor")));
 }

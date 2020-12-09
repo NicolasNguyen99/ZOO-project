@@ -6,12 +6,13 @@
 
 void CastleLocationBuilder::createLocation(){
     m_location = new Location("Castle", 1);
-    std::array<std::string,5> rowPattern;
-    rowPattern.at(0) ="   __    |~   __    ";
-    rowPattern.at(1) ="  [__]---'---[__]   ";
-    rowPattern.at(2) ="  |''|\"\" ` \"\"|''|   ";
-    rowPattern.at(3) ="  |  |  /^\\  |  |   ";
-    rowPattern.at(4) ="__|__|__|I|__|__|_  ";
+    matrixOfAsciiArt rowPattern;
+    rowPattern.at(0) ="      " + m_location->getName() + "           ";
+    rowPattern.at(1) ="   __    |~   __    ";
+    rowPattern.at(2) ="  [__]---'---[__]   ";
+    rowPattern.at(3) ="  |''|\"\" ` \"\"|''|   ";
+    rowPattern.at(4) ="  |  |  /^\\  |  |   ";
+    rowPattern.at(5) ="__|__|__|I|__|__|_  ";
     m_location->setPattern(rowPattern);
     m_location->setBonusOfLocation({-2*m_location->getLocationLevel(), -1*m_location->getLocationLevel(), 0});
     m_location->setType(locationType::Castle);

@@ -12,8 +12,8 @@
 class Hero:public Character{
     int m_abilityPower;
     bool m_haveKey;
-    Weapon* m_weapon;
-    Armor* m_armor;
+    int m_weapon;
+    int m_armor;
     std::array<Weapon*,3> m_invWeapons;
     std::array<Armor*,3> m_invArmors;
     std::array<Potion*,5> m_invPotions;

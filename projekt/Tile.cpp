@@ -4,16 +4,10 @@
 
 #include "Tile.h"
 
-Tile::Tile(Enemy* enemy, Chest* chest){
-    m_enemy = enemy;
-    m_chest = chest;
+Tile::Tile(){
+    m_enemy = nullptr;
+    m_chest = nullptr;
 }
-
-Tile::Tile():Tile(nullptr, nullptr){}
-
-Tile::Tile(Enemy* enemy):Tile(enemy, nullptr){}
-
-Tile::Tile(Chest* chest):Tile(nullptr, chest){}
 
 void Tile::printTile(bool isHeroStanding){
     std::cout << "  /\\";
@@ -32,4 +26,12 @@ void Tile::printTile(bool isHeroStanding){
 
 void Tile::setEnemy(Enemy* enemy){
     m_enemy = enemy;
+}
+
+void Tile::setChest(Chest* chest){
+    m_chest = chest;
+}
+
+Enemy* Tile::getEnemy(){
+    return m_enemy;
 }

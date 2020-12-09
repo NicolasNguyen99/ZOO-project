@@ -16,11 +16,11 @@ class Tile {
     Tile(Enemy* enemy, Chest* chest);
 
 public:
-    Tile(Enemy* enemy);
-    Tile(Chest* chest);
     Tile();
     void printTile(bool isHeroStanding);
     void setEnemy(Enemy* enemy);
+    void setChest(Chest* chest);
+    Enemy* getEnemy();
 };
 
 #endif //PROJEKT_TILE_H

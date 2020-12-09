@@ -10,7 +10,7 @@ class Armor:public Item{
     int m_bonusArmor;
 
 public:
-    Armor();
+    Armor(std::string name);
     int getBonusArmor;
 };
 

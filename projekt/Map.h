@@ -6,7 +6,6 @@
 #define PROJEKT_MAP_H
 #include "LocationDirector.h"
 
-const int asciiArtRows = 5;
 enum class movementDirection{N,E,S,W};
 typedef  std::vector<std::vector<Location*>> matrixOfLocation;
 
@@ -27,6 +26,9 @@ public:
     void setStartingLocation();
     void setStartingTile();
     positionCoor getTilepositionCoor();
+    Enemy* getEnemy();
+    //prejmenovat promenne
+    void moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY);
 };
 
 

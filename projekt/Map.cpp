@@ -69,6 +69,10 @@ void Map::setStartingTile(){
     m_currentLocation->setStartingTile();
 }
 
+Enemy* Map::getEnemy(){
+    return m_currentLocation->getEnemy();
+}
+
 void Map::printMovementOptions(){
     availableMovement availableTileMovement = checkMovement(getTilepositionCoor(), m_currentLocation->getSize());
     availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, m_locations.size());
@@ -106,50 +110,31 @@ positionCoor Map::getCurrentCoorLocation(){
     return m_currentCoorLocation;
 }
 
+void Map::moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY){
+    //prejmenovat promenne
+    if(avaliableTileMovement){
+        m_currentLocation->moveCurrentCoorTile({x, y});
+    } else if (availableLocationMovement){
+        m_currentCoorLocation.x = m_currentCoorLocation.x + x;
+        m_currentCoorLocation.y = m_currentCoorLocation.y + y;
+        m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
+        m_currentLocation->moveCurrentCoorTile({moveX, moveY});
+        std::cout << "You have moved to " << m_currentLocation->getName() << std::endl;
+    }
+}
+
 void Map::moveHero(movementDirection direction) {
     availableMovement  availableTileMovement = checkMovement(m_currentLocation->getTilepositionCoor(), m_currentLocation->getSize());
     availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, m_locations.size());
 
-    if (direction == movementDirection::N){
-        if (availableTileMovement.N) {
-            m_currentLocation->moveCurrentCoorTile({-1, 0});
-        } else if (availableLocationMovement.N){
-            std::cout << "Posun do jine lokace" << std::endl;
-            m_currentCoorLocation.x--;
-            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-            m_currentLocation->moveCurrentCoorTile({int(m_locations.size()) - 1, 0});
-            std::cout << m_currentLocation->getName() << std::endl;
-        }
-    } else if (direction == movementDirection::E){
-        if (availableTileMovement.E){
-            m_currentLocation->moveCurrentCoorTile({0, +1});
-        } else if (availableLocationMovement.E){
-            std::cout << "Posun do jine lokace RIGHT" << std::endl;
-            m_currentCoorLocation.y++;
-            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-            m_currentLocation->moveCurrentCoorTile({0, +1});
-            std::cout << m_currentLocation->getName() << std::endl;
-        }
-    } else if (direction == movementDirection::S){
-        if (availableTileMovement.S) {
-            m_currentLocation->moveCurrentCoorTile({+1, 0});
-        } else if (availableLocationMovement.S){
-            std::cout << "Posun do jine lokace DOWN" << std::endl;
-            m_currentCoorLocation.x++;
-            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-            m_currentLocation->moveCurrentCoorTile({+1, 0});
-            std::cout << m_currentLocation->getName() << std::endl;
-        }
-    } else if (direction == movementDirection::W){
-        if (availableTileMovement.W) {
-            m_currentLocation->moveCurrentCoorTile({0, -1});
-        } else if (availableLocationMovement.W){
-            std::cout << "Posun do jine lokace LEFT" << std::endl;
-            m_currentCoorLocation.y--;
-            m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
-            m_currentLocation->moveCurrentCoorTile({0, int(m_locations.size())-1});
-            std::cout << m_currentLocation->getName() << std::endl;
-        }
+    if(direction == movementDirection::N) {
+        moveHeroFnc(availableTileMovement.N, availableLocationMovement.N, -1, 0, int(m_locations.size()) - 1, 0);
+    } else if(direction == movementDirection::E) {
+        moveHeroFnc(availableTileMovement.E, availableLocationMovement.E, 0, 1, 0, 1);
+    } else if(direction == movementDirection::S){
+        moveHeroFnc(availableTileMovement.S, availableLocationMovement.S, 1, 0, 1, 0);
+    } else if (direction == movementDirection::W) {
+        moveHeroFnc(availableTileMovement.W, availableLocationMovement.W, 0, -1, 0, int(m_locations.size()) - 1);
     }
     m_currentLocation->setCurrentTile();
 }

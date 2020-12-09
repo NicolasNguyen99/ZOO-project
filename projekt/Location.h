@@ -8,6 +8,7 @@
 #include <array>
 #include "Tile.h"
 
+const int asciiArtRows = 6;
 enum class locationType{Forest, Mountain, Swamp, Desert, Plain, Castle, Cave, Heaven, Hell};
 struct availableMovement{
     bool N = false;
@@ -24,6 +25,7 @@ struct sizeOfMovement{
     int x;
     int y;
 };
+typedef std::array<std::string,asciiArtRows> matrixOfAsciiArt;
 typedef  std::vector<std::vector<Tile*>> matrixOfTiles;
 struct weaponBonusLocation{
     int meleeWeapon;
@@ -34,7 +36,7 @@ struct weaponBonusLocation{
 class Location {
     //tyto vlastnosti budou ruzne podle buildru lokaci
     locationType m_type;
-    std::array<std::string,5> m_pattern;
+    matrixOfAsciiArt m_pattern;
     int m_locationLevel;
 
     static positionCoor m_currentCoorTile;
@@ -54,7 +56,8 @@ public:
     void setStartingTile();
     void setCurrentTile();
 
-    void setPattern(std::array<std::string,5> rowPattern);
+    Enemy* getEnemy();
+    void setPattern(matrixOfAsciiArt rowPattern);
     void setTiles(matrixOfTiles tiles);
     int getSize();
     void setBonusOfLocation(weaponBonusLocation bonus);

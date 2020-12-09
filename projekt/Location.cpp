@@ -23,8 +23,12 @@ void Location::setTiles(matrixOfTiles tiles){
     m_tiles = tiles;
 }
 
-void Location::setPattern(std::array<std::string,5> rowPattern){
+void Location::setPattern(matrixOfAsciiArt rowPattern){
     m_pattern = rowPattern;
+}
+
+Enemy* Location::getEnemy(){
+    return m_currentTile->getEnemy();
 }
 
 void Location::setStartingTile(){
@@ -77,9 +81,9 @@ availableMovement Location::checkMovement(positionCoor coor, int range){
 
 void Location::printTileMap(){
     for(int x = 0; x < int(m_tiles.size()); x++){
-        for(int y = 0; y < int(m_tiles.size()); y++){
-            Tile* tile = m_tiles.at(x).at(y);
-            if(m_currentCoorTile.x != x or m_currentCoorTile.y != y){
+        for (int y = 0; y < int(m_tiles.size()); y++) {
+            Tile *tile = m_tiles.at(x).at(y);
+            if (m_currentCoorTile.x != x or m_currentCoorTile.y != y) {
                 tile->printTile(false);
             } else {
                 tile->printTile(true);
