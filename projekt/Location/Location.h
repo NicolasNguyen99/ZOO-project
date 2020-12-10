@@ -6,7 +6,7 @@
 #define PROJEKT_LOCATION_H
 #include <vector>
 #include <array>
-#include "Tile.h"
+#include "../Tile.h"
 
 const int asciiArtRows = 6;
 enum class locationType{Forest, Mountain, Swamp, Desert, Plain, Castle, Cave, Heaven, Hell};

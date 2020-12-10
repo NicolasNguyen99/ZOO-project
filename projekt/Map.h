@@ -4,7 +4,7 @@
 
 #ifndef PROJEKT_MAP_H
 #define PROJEKT_MAP_H
-#include "LocationDirector.h"
+#include "Location/LocationDirector.h"
 
 enum class movementDirection{N,E,S,W};
 typedef  std::vector<std::vector<Location*>> matrixOfLocation;
