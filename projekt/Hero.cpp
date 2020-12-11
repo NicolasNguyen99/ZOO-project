@@ -4,8 +4,10 @@
 
 #include "Hero.h"
 
-Hero::Hero(std::string name, int health, int strength):Character(name, health, strength){
+Hero::Hero(std::string name, std::string profession):Character(name){
     m_abilityPower = 0;
+    m_health = 100;
+    m_strength = 10;
 }
 
 int Hero::getAbilityPower(){

@@ -13,6 +13,8 @@ class Game {
     void createHero();
     void createMap();
 
+    void startMenu();
+    void gameMenu();
 public:
     Game();
     void printLocationMap();
@@ -20,6 +22,10 @@ public:
     void printMovementOptions();
     void moveHero(movementDirection direction);
     void setUpGame();
+
+
+    void basicMenu();
+    void getHelp();
 };
 
 

@@ -5,21 +5,17 @@
 #ifndef PROJEKT_HERO_H
 #define PROJEKT_HERO_H
 #include "Character.h"
-#include "Weapon.h"
-#include "Armor.h"
-#include "Potion.h"
+#include "Inventory.h"
 
 class Hero:public Character{
     int m_abilityPower;
     bool m_haveKey;
     int m_weapon;
     int m_armor;
-    std::array<Weapon*,3> m_invWeapons;
-    std::array<Armor*,3> m_invArmors;
-    std::array<Potion*,5> m_invPotions;
+    Inventory* m_inventory;
 
 public:
-    Hero(std::string name, int health, int strength);
+    Hero(std::string name, std::string profession);
     int getAbilityPower();
 };
 

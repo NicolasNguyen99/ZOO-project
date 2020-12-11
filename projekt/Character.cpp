@@ -4,10 +4,8 @@
 
 #include "Character.h"
 
-Character::Character(std::string name, int health, int strength){
+Character::Character(std::string name){
     m_name = name;
-    m_health = health;
-    m_strength = strength;
 }
 
 std::string Character::getName(){

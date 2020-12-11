@@ -13,7 +13,7 @@ protected:
     int m_strength;
 
 public:
-    Character(std::string name, int health, int strength);
+    Character(std::string name);
     virtual std::string getName();
     virtual int getHealth();
     virtual int getStrength();
