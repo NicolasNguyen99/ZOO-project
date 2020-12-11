@@ -5,7 +5,7 @@
 #include "MountainLocationBuilder.h"
 
 void MountainLocationBuilder::createLocation(){
-    m_location = new Location("Hora osudu", 5);
+    m_location = new Location("Mountains of Destiny", 5);
     matrixOfAsciiArt rowPattern;
     rowPattern.at(0) ="      " + m_location->getName() + "           ";
     rowPattern.at(1) ="     /\\             ";

@@ -5,7 +5,7 @@
 #include "DesertLocationBuilder.h"
 
 void DesertLocationBuilder::createLocation() {
-    m_location = new Location("Desert", 1);
+    m_location = new Location("Black Sweltering Desert", 1);
     matrixOfAsciiArt rowPattern;
     rowPattern.at(0) ="      " + m_location->getName() + "           ";
     rowPattern.at(1) ="         ,,.        ";

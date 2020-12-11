@@ -5,7 +5,7 @@
 #include "CastleLocationBuilder.h"
 
 void CastleLocationBuilder::createLocation(){
-    m_location = new Location("Castle", 1);
+    m_location = new Location("Ancient Castle of Northerners", 1);
     matrixOfAsciiArt rowPattern;
     rowPattern.at(0) ="      " + m_location->getName() + "           ";
     rowPattern.at(1) ="   __    |~   __    ";

@@ -5,7 +5,7 @@
 #include "PlainLocationBuilder.h"
 
 void PlainLocationBuilder::createLocation(){
-    m_location = new Location("Plains", 1);
+    m_location = new Location("The Trackless Plains", 1);
     matrixOfAsciiArt rowPattern;
     rowPattern.at(0) ="      " + m_location->getName() + "           ";
     rowPattern.at(1) ="    ~~~     ~~~~    ";

@@ -5,7 +5,7 @@
 #include "SwampLocationBuilder.h"
 
 void SwampLocationBuilder::createLocation(){
-    m_location = new Location("Forest of printers", 1);
+    m_location = new Location("Shrek's Swamp", 1);
     matrixOfAsciiArt rowPattern;
     rowPattern.at(0) ="      " + m_location->getName() + "           ";
     rowPattern.at(1) ="                    ";

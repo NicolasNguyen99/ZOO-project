@@ -5,7 +5,7 @@
 #include "ForestLocationBuilder.h"
 
 void ForestLocationBuilder::createLocation(){
-    m_location = new Location("Forest of printers", 1);
+    m_location = new Location("Eternally Moonlit Forest", 1);
     std::array<std::string,asciiArtRows> rowPattern;
     rowPattern.at(0) ="      " + m_location->getName() + "           ";
     rowPattern.at(1) ="            ,%%&%,  ";

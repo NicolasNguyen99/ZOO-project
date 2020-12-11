@@ -5,7 +5,7 @@
 #include "HeavenLocationBuilder.h"
 
 void HeavenLocationBuilder::createLocation(){
-    m_location = new Location("Heaven", 1);
+    m_location = new Location(" Heaven of Elysium  ", 1);
     matrixOfAsciiArt rowPattern;
     rowPattern.at(0) ="      " + m_location->getName() + "           ";
     rowPattern.at(1) =" *  *┌─────┐ *  *   ";
