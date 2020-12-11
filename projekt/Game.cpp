@@ -101,38 +101,50 @@ void Game::setArmor(Armor* armor){
     m_hero->setArmor(armor);
 }
 
+void Game::positionMenu(){
+    int action;
+    std::cout << "Choose: " << std::endl;
+    std::cout << "  1. Print position on map" << std::endl;
+    std::cout << "  2. Print position in location" << std::endl;
+    std::cout << "  3. Back previous menu" << std::endl;
+    std::cin >> action;
+    switch(action){
+        case 1:
+            printLocationMap();
+            break;
+        case 2:
+            printTileMap();
+            break;
+        case 3:
+            gameMenu();
+            break;
+        default:;
+    }
+}
 
 void Game::gameMenu(){
     int action;
     std::cout << "You spawn in heaven blalba" << std::endl;
     std::cout << "Welcome to our game" << std::endl;
-    std::cout << "  1. Print map" << std::endl;
-    std::cout << "  2. Print location" << std::endl;
-    std::cout << "  3. Print hero stats" << std::endl;
-    std::cout << "  4. Print hero inventory" << std::endl;
-    std::cout << "  5. Move to different tile" << std::endl;
+    std::cout << "  1. Get position" << std::endl;
+    std::cout << "  2. Print hero stats" << std::endl;
+    std::cout << "  3. Print hero inventory" << std::endl;
+    std::cout << "  4. Move to different tile" << std::endl;
     std::cin >> action;
     switch (action){
         case 1:
-            printLocationMap();
+            positionMenu();
             gameMenu();
             break;
         case 2:
-            printTileMap();
-            gameMenu();
-            break;
-
-        case 3:
             printStats();
             gameMenu();
             break;
-
-        case 4:
+        case 3:
             printInventory();
             gameMenu();
             break;
-
-        case 5:
+        case 4:
             printMovementOptions();
             std::cout << "Choose movement direction: ";
             std::cin >> action;
