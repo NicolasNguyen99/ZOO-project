@@ -34,16 +34,14 @@ struct weaponBonusLocation{
 };
 
 class Location {
-    //tyto vlastnosti budou ruzne podle buildru lokaci
+    std::string m_name;
+    matrixOfTiles m_tiles;
+    Tile* m_currentTile;
+    static positionCoor m_currentCoorTile;
+    int m_locationLevel;
     locationType m_type;
     matrixOfAsciiArt m_pattern;
-    int m_locationLevel;
-
-    static positionCoor m_currentCoorTile;
-    Tile* m_currentTile;
     weaponBonusLocation m_bonusOfLocation;
-    matrixOfTiles m_tiles;
-    std::string m_name;
 
 public:
     Location(std::string name, int level);
