@@ -12,7 +12,7 @@ typedef std::array<Weapon*,3> arrayOfWeapons;
 typedef std::array<Armor*,3> arrayOfArmors;
 typedef std::array<Potion*,5> arrayOfPotions;
 
-struct Inventory {
+class Inventory {
 private:
     arrayOfWeapons m_weapons;
     arrayOfArmors m_armors;
@@ -23,7 +23,7 @@ public:
     arrayOfWeapons getWeapon();
     Weapon* getWeapon(int index);
     void setWeapon(Weapon* weapon);
-    void setWeapon(Weapon* weapon, int index);
+    void setArmor(Armor* armor);
     arrayOfArmors getArmor();
     Armor* getArmor(int index);
     void setArmor();
@@ -32,6 +32,10 @@ public:
     Potion* getPotion(int index);
     void setPotion();
     void setPotion(int index);
+
+    void printInventory();
+    template <typename Items>
+    void printItems(Items items);
 };
 
 

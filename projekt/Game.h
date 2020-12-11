@@ -23,9 +23,14 @@ public:
     void moveHero(movementDirection direction);
     void setUpGame();
 
-
+    void printStats();
+    void printInventory();
     void basicMenu();
     void getHelp();
+    void setWeapon(Weapon* weapon);
+    void setArmor(Armor* armor);
+    void pickWeapon(Weapon* weapon);
+    void pickArmor(Armor* armor);
 };
 
 

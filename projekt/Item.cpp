@@ -6,6 +6,7 @@
 
 Item::Item(std::string name, std::string type){
     m_name = name;
+    m_type = type;
 }
 
 std::string Item::getName(){

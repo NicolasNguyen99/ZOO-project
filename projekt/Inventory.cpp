@@ -5,14 +5,14 @@
 #include "Inventory.h"
 
 Inventory::Inventory(){
-    for(int i=0; i<m_weapons.size();i++){
-        m_weapons.at(i) = nullptr;
+    for(auto &m_weapon : m_weapons){
+        m_weapon = nullptr;
     }
-    for(int i=0; i<m_armors.size();i++){
-        m_armors.at(i) = nullptr;
+    for(auto &m_armor : m_armors){
+        m_armor = nullptr;
     }
-    for(int i=0; i<m_potions.size();i++){
-        m_potions.at(i) = nullptr;
+    for(auto &m_potion : m_potions){
+        m_potion = nullptr;
     }
 }
 
@@ -27,7 +27,7 @@ Weapon* Inventory::getWeapon(int index){
 void Inventory::setWeapon(Weapon* weapon){
     int num = 0;
     bool isSetted = false;
-    while(m_weapons.size() < num and !isSetted){
+    while(m_weapons.size() > num and !isSetted){
         if(m_weapons.at(num) == nullptr){
             m_weapons.at(num) = weapon;
             isSetted = true;
@@ -37,8 +37,17 @@ void Inventory::setWeapon(Weapon* weapon){
     }
 }
 
-void Inventory::setWeapon(Weapon* weapon, int index){
-    m_weapons.at(index) = weapon;
+void Inventory::setArmor(Armor* Armor){
+    int num = 0;
+    bool isSetted = false;
+    while(m_armors.size() > num and !isSetted){
+        if(m_armors.at(num) == nullptr){
+            m_armors.at(num) = Armor;
+            isSetted = true;
+        } else {
+            num++;
+        }
+    }
 }
 
 arrayOfArmors Inventory::getArmor(){
@@ -55,4 +64,30 @@ arrayOfPotions Inventory::getPotion(){
 
 Potion* Inventory::getPotion(int index){
     return m_potions.at(index);
+}
+
+template <typename Items>
+void Inventory::printItems(Items items){
+    int index = 1;
+    for(auto item:items){
+        if(item != nullptr){
+            std::cout << index << ": " + item->getName() << std::endl;
+            std::cout << "  -Type: " + item->getType() << std::endl;
+//            std::cout << index << ": " << item->getBonusStrength() << std::endl;
+            index++;
+        }
+    }
+}
+
+void Inventory::printInventory(){
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "Weapons: " << std::endl;
+    printItems(m_weapons);
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "Armors: " << std::endl;
+    printItems(m_armors);
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "Potions: " << std::endl;
+    printItems(m_potions);
+    std::cout << "--------------------------------" << std::endl;
 }

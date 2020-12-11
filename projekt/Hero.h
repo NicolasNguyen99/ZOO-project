@@ -10,13 +10,20 @@
 class Hero:public Character{
     int m_abilityPower;
     bool m_haveKey;
-    int m_weapon;
-    int m_armor;
+    Weapon* m_weapon;
+    Armor* m_armor;
     Inventory* m_inventory;
 
 public:
     Hero(std::string name, std::string profession);
     int getAbilityPower();
+    void printStats();
+    void printInventory();
+    void setWeapon(Weapon* weapon);
+    void setArmor(Armor* armor);
+    void pickWeapon(Weapon* weapon);
+    void pickArmor(Armor* armor);
+
 };
 
 

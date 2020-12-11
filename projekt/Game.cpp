@@ -62,6 +62,9 @@ void Game::startMenu(){
     switch (action) {
         case 1:
             setUpGame();
+            pickWeapon(new Weapon("Light-Hammer","Hammer", 10));
+            pickWeapon(new Weapon("Light-Sword","Sword", 20));
+            pickWeapon(new Weapon("Dagger","Dagger", 5));
             break;
         case 2:
             getHelp();
@@ -73,13 +76,41 @@ void Game::startMenu(){
     }
 }
 
+void Game::printStats(){
+    m_hero->printStats();
+}
+
+void Game::printInventory(){
+    m_hero->printInventory();
+}
+
+void Game::pickWeapon(Weapon* weapon){
+    m_hero->pickWeapon(weapon);
+}
+
+void Game::pickArmor(Armor* armor){
+    m_hero->pickArmor(armor);
+}
+
+
+void Game::setWeapon(Weapon* weapon){
+    m_hero->setWeapon(weapon);
+}
+
+void Game::setArmor(Armor* armor){
+    m_hero->setArmor(armor);
+}
+
+
 void Game::gameMenu(){
     int action;
     std::cout << "You spawn in heaven blalba" << std::endl;
     std::cout << "Welcome to our game" << std::endl;
     std::cout << "  1. Print map" << std::endl;
     std::cout << "  2. Print location" << std::endl;
-    std::cout << "  3. Move to different tile" << std::endl;
+    std::cout << "  3. Print hero stats" << std::endl;
+    std::cout << "  4. Print hero inventory" << std::endl;
+    std::cout << "  5. Move to different tile" << std::endl;
     std::cin >> action;
     switch (action){
         case 1:
@@ -90,7 +121,18 @@ void Game::gameMenu(){
             printTileMap();
             gameMenu();
             break;
+
         case 3:
+            printStats();
+            gameMenu();
+            break;
+
+        case 4:
+            printInventory();
+            gameMenu();
+            break;
+
+        case 5:
             printMovementOptions();
             std::cout << "Choose movement direction: ";
             std::cin >> action;
@@ -104,24 +146,7 @@ void Game::gameMenu(){
     }
 }
 
-void Game::basicMenu(){
+void Game::basicMenu() {
     startMenu();
     gameMenu();
-
-
-//    do {
-//        std::cout << "#######################################################################" << std::endl;
-//        std::cout << "Tile map: " << std::endl;
-//        printTileMap();
-//        std::cout << "Location coor: " << m_map->getCurrentCoorLocation().x << m_map->getCurrentCoorLocation().y << std::endl;
-//        std::cout << "Tile coor: " << m_map->getTilepositionCoor().x << m_map->getTilepositionCoor().y << std::endl;
-//        printMovementOptions();
-//        std::cout << "Enter movement direction: " << std::endl;
-//        std::cin >> action;
-//        if (action == 'N') { moveHero(movementDirection::N); }
-//        if (action == 'E') { moveHero(movementDirection::E); }
-//        if (action == 'S') { moveHero(movementDirection::S); }
-//        if (action == 'W') { moveHero(movementDirection::W); }
-//        std::cout << "#######################################################################" << std::endl;
-//    } while (action != 'K');
 }
