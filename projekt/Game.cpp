@@ -122,14 +122,34 @@ void Game::positionMenu(){
     }
 }
 
+void Game::heroInfoMenu(){
+    int action;
+    std::cout << "Choose: " << std::endl;
+    std::cout << "  1. Print hero stats" << std::endl;
+    std::cout << "  2. Print hero inventory" << std::endl;
+    std::cout << "  3. Back previous menu" << std::endl;
+    std::cin >> action;
+    switch(action){
+        case 1:
+            printStats();
+            break;
+        case 2:
+            printInventory();
+            break;
+        case 3:
+            gameMenu();
+            break;
+        default:;
+    }
+}
+
 void Game::gameMenu(){
     int action;
     std::cout << "You spawn in heaven blalba" << std::endl;
     std::cout << "Welcome to our game" << std::endl;
     std::cout << "  1. Get position" << std::endl;
-    std::cout << "  2. Print hero stats" << std::endl;
-    std::cout << "  3. Print hero inventory" << std::endl;
-    std::cout << "  4. Move to different tile" << std::endl;
+    std::cout << "  2. Get information of your hero" << std::endl;
+    std::cout << "  3. Move to different tile" << std::endl;
     std::cin >> action;
     switch (action){
         case 1:
@@ -137,12 +157,7 @@ void Game::gameMenu(){
             gameMenu();
             break;
         case 2:
-            printStats();
-            gameMenu();
-            break;
-        case 3:
-            printInventory();
-            gameMenu();
+            heroInfoMenu();
             break;
         case 4:
             printMovementOptions();

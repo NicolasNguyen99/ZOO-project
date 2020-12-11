@@ -22,7 +22,7 @@ public:
     void printMovementOptions();
     void moveHero(movementDirection direction);
     void setUpGame();
-
+    void heroInfoMenu();
     void positionMenu();
     void printStats();
     void printInventory();
