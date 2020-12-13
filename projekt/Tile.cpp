@@ -9,6 +9,10 @@ Tile::Tile(){
     m_chest = nullptr;
 }
 
+objectsInTile Tile::getObjectsInTile(){
+    return objectsInTile{m_chest, m_enemy};
+}
+
 void Tile::printTile(bool isHeroStanding){
     std::cout << "  /\\";
     if(m_enemy != nullptr){

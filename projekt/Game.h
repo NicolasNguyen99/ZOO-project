@@ -26,12 +26,13 @@ public:
     void positionMenu();
     void printStats();
     void printInventory();
-    void basicMenu();
     void getHelp();
+    void getObjectsInTile();
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
     void pickWeapon(Weapon* weapon);
     void pickArmor(Armor* armor);
+    void movementMenu();
 };
 
 

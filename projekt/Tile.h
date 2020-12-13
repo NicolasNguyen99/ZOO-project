@@ -8,6 +8,11 @@
 #include "Enemy.h"
 #include "Chest.h"
 
+struct objectsInTile{
+    Chest* chest;
+    Enemy* enemy;
+};
+
 class Tile {
     //kdyztak na konci implementace, po spawnu chestek a ememy
     //bool m_isExplored;
@@ -21,6 +26,7 @@ public:
     void setEnemy(Enemy* enemy);
     void setChest(Chest* chest);
     Enemy* getEnemy();
+    objectsInTile getObjectsInTile();
 };
 
 #endif //PROJEKT_TILE_H

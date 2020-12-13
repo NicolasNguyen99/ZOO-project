@@ -53,6 +53,7 @@ public:
     positionCoor getTilepositionCoor();
     void setStartingTile();
     void setCurrentTile();
+    objectsInTile getObjectsInTile();
 
     Enemy* getEnemy();
     void setPattern(matrixOfAsciiArt rowPattern);

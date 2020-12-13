@@ -4,6 +4,6 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy():Character("Enemy"){
+Enemy::Enemy():Character("Enemacek"){
 
 };

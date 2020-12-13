@@ -79,6 +79,10 @@ availableMovement Location::checkMovement(positionCoor coor, int range){
     return movement;
 }
 
+objectsInTile Location::getObjectsInTile(){
+    return m_currentTile->getObjectsInTile();
+}
+
 void Location::printTileMap(){
     for(int x = 0; x < int(m_tiles.size()); x++){
         for (int y = 0; y < int(m_tiles.size()); y++) {

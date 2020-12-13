@@ -5,7 +5,7 @@
 #include "Game.h"
 
 Game::Game(){
-    basicMenu();
+    startMenu();
 }
 
 void Game::printLocationMap(){
@@ -13,7 +13,7 @@ void Game::printLocationMap(){
 }
 
 void Game::printTileMap(){
-    std::cout << "Tile map: " << std::endl;
+    std::cout << "Tile map: \n";
     m_map->printTileMap();
 }
 
@@ -26,10 +26,10 @@ void Game::createHero(){
     std::string name, profession;
     std::cout << "Enter hero name: ";
     std::cin >> name;
-    std::cout << "Choose hero class: " << std::endl;
-    std::cout << "  1. Warrior" << std::endl;;
-    std::cout << "  2. Ranger" << std::endl;;
-    std::cout << "  3. Mage" << std::endl;;
+    std::cout << "Choose hero class: \n";
+    std::cout << "  1. Warrior\n";;
+    std::cout << "  2. Ranger\n";;
+    std::cout << "  3. Mage\n";;
     std::cin >> profession;
 
     m_hero = new Hero(name, profession);
@@ -49,26 +49,24 @@ void Game::moveHero(movementDirection direction){
 }
 
 void Game::getHelp(){
-    std::cout << "Help 12312313" << std::endl;
+    std::cout << "Help 12312313\n";
 }
 
 void Game::startMenu(){
     int action;
-    std::cout << "Welcome to our game" << std::endl;
-    std::cout << "  1. Start game" << std::endl;
-    std::cout << "  2. Get help" << std::endl;
-    std::cout << "  3. Exit game" << std::endl;
+    std::cout << "Welcome to our game\n";
+    std::cout << "  1. Start game\n";
+    std::cout << "  2. Get help\n";
+    std::cout << "  3. Exit game\n";
     std::cin >> action;
     switch (action) {
         case 1:
             setUpGame();
-            pickWeapon(new Weapon("Light-Hammer","Hammer", 10));
-            pickWeapon(new Weapon("Light-Sword","Sword", 20));
-            pickWeapon(new Weapon("Dagger","Dagger", 5));
+
             break;
         case 2:
             getHelp();
-            basicMenu();
+            startMenu();
             break;
         case 3:
             exit(0);
@@ -84,8 +82,14 @@ void Game::printInventory(){
     m_hero->printInventory();
 }
 
-void Game::pickWeapon(Weapon* weapon){
-    m_hero->pickWeapon(weapon);
+void Game::getObjectsInTile(){
+    objectsInTile objects = m_map->getObjectsInTile();
+    std::cout << objects.chest << std::endl;
+    if(objects.enemy == nullptr){
+        std::cout << "Na tomto policku neni enemy\n";
+    } else {
+        std::cout << objects.enemy->getName() << std::endl;
+    }
 }
 
 void Game::pickArmor(Armor* armor){
@@ -103,10 +107,10 @@ void Game::setArmor(Armor* armor){
 
 void Game::positionMenu(){
     int action;
-    std::cout << "Choose: " << std::endl;
-    std::cout << "  1. Print position on map" << std::endl;
-    std::cout << "  2. Print position in location" << std::endl;
-    std::cout << "  3. Back previous menu" << std::endl;
+    std::cout << "Choose: \n";
+    std::cout << "  1. Print position on map\n";
+    std::cout << "  2. Print position in location\n";
+    std::cout << "  3. Back previous menu\n";
     std::cin >> action;
     switch(action){
         case 1:
@@ -124,10 +128,10 @@ void Game::positionMenu(){
 
 void Game::heroInfoMenu(){
     int action;
-    std::cout << "Choose: " << std::endl;
-    std::cout << "  1. Print hero stats" << std::endl;
-    std::cout << "  2. Print hero inventory" << std::endl;
-    std::cout << "  3. Back previous menu" << std::endl;
+    std::cout << "Choose: \n";
+    std::cout << "  1. Print hero stats\n";
+    std::cout << "  2. Print hero inventory\n";
+    std::cout << "  3. Back previous menu\n";
     std::cin >> action;
     switch(action){
         case 1:
@@ -143,13 +147,26 @@ void Game::heroInfoMenu(){
     }
 }
 
+void Game::movementMenu(){
+    char action;
+    printMovementOptions();
+    std::cout << "Choose movement direction: ";
+    std::cin >> action;
+    if (action == 'N'){ moveHero(movementDirection::N);}
+    else if (action == 'E'){ moveHero(movementDirection::E);}
+    else if (action == 'S'){ moveHero(movementDirection::S);}
+    else if (action == 'W'){ moveHero(movementDirection::W);}
+}
+
 void Game::gameMenu(){
     int action;
-    std::cout << "You spawn in heaven blalba" << std::endl;
-    std::cout << "Welcome to our game" << std::endl;
-    std::cout << "  1. Get position" << std::endl;
-    std::cout << "  2. Get information of your hero" << std::endl;
-    std::cout << "  3. Move to different tile" << std::endl;
+    std::cout << "You spawn in heaven blalba\n";
+    std::cout << "Welcome to our game\n";
+    std::cout << "  1. Get position\n";
+    std::cout << "  2. Get information of your hero\n";
+    std::cout << "  3. Move to different tile\n";
+    std::cin.clear();
+    std::cin.ignore(256, '\n');
     std::cin >> action;
     switch (action){
         case 1:
@@ -159,21 +176,10 @@ void Game::gameMenu(){
         case 2:
             heroInfoMenu();
             break;
-        case 4:
-            printMovementOptions();
-            std::cout << "Choose movement direction: ";
-            std::cin >> action;
-            if (action == 'N'){ moveHero(movementDirection::N);}
-            else if (action == 'E'){ moveHero(movementDirection::E);}
-            else if (action == 'S'){ moveHero(movementDirection::S);}
-            else if (action == 'W'){ moveHero(movementDirection::W);}
+        case 3:
+            movementMenu();
             gameMenu();
             break;
         default:;
     }
-}
-
-void Game::basicMenu() {
-    startMenu();
-    gameMenu();
 }

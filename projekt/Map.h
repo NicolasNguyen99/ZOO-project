@@ -27,6 +27,7 @@ public:
     void setStartingTile();
     positionCoor getTilepositionCoor();
     Enemy* getEnemy();
+    objectsInTile getObjectsInTile();
     //prejmenovat promenne
     void moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY);
 };

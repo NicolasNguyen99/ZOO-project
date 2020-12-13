@@ -73,6 +73,10 @@ Enemy* Map::getEnemy(){
     return m_currentLocation->getEnemy();
 }
 
+objectsInTile Map::getObjectsInTile(){
+    return m_currentLocation->getObjectsInTile();
+}
+
 void Map::printMovementOptions(){
     availableMovement availableTileMovement = checkMovement(getTilepositionCoor(), m_currentLocation->getSize());
     availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, m_locations.size());
