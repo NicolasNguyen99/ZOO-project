@@ -62,7 +62,7 @@ void Game::startMenu(){
     switch (action) {
         case 1:
             setUpGame();
-
+            gameMenu();
             break;
         case 2:
             getHelp();
