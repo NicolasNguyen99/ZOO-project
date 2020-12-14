@@ -22,6 +22,56 @@ void Game::setUpGame(){
     createMap();
 }
 
+void Game::inventoryActionMenu() {
+    int action;
+    std::cout << "Choose: \n";
+    std::cout << "  2. Show inventory actions\n";
+    std::cout << "  3. Search tile\n";
+    std::cout << "  4. Back to previous menu\n";
+    std::cin >> action;
+    switch (action) {
+        case 1:
+            //   manageInventory();//
+            break;
+        case 2:
+            //    swapWeapon();//
+            break;
+        case 3:
+            //    swapArmor();//
+            break;
+        case 4:
+            gameMenu();
+            break;
+        default:;
+    }
+}
+
+void Game::actionMenu(){
+    int action;
+    std::cout << "Choose: \n";
+    std::cout << "  1. Travel\n";
+    std::cout << "  2. Show inventory actions\n";
+    std::cout << "  3. Search tile\n";
+    std::cout << "  4. Back to previous menu\n";
+    std::cin >> action;
+    switch (action) {
+        case 1:
+            movementMenu();
+            actionMenu();
+            break;
+        case 2:
+            inventoryActionMenu();
+            break;
+        case 3:
+            getObjectsInTile();
+            break;
+        case 4:
+            gameMenu();
+            break;
+        default:;
+    }
+}
+
 void Game::createHero(){
     std::string name, profession;
     std::cout << "Enter hero name: ";
@@ -82,20 +132,23 @@ void Game::printInventory(){
     m_hero->printInventory();
 }
 
-void Game::getObjectsInTile(){
-    objectsInTile objects = m_map->getObjectsInTile();
-    std::cout << objects.chest << std::endl;
-    if(objects.enemy == nullptr){
-        std::cout << "Na tomto policku neni enemy\n";
-    } else {
-        std::cout << objects.enemy->getName() << std::endl;
+objectsInTile Game::getObjectsInTile(){
+    return m_map->getObjectsInTile();
+}
+
+void Game::printChestItem(Chest* chest){
+    if(chest->getWeapon() != nullptr){
+        std::cout << "V cheste je weapon\n";
+    } else if(chest->getArmor()){
+        std::cout << "V cheste je armor\n";
+    } else if(chest->getPotion()){
+        std::cout << "V cheste je potion\n";
     }
 }
 
 void Game::pickArmor(Armor* armor){
     m_hero->pickArmor(armor);
 }
-
 
 void Game::setWeapon(Weapon* weapon){
     m_hero->setWeapon(weapon);
@@ -105,19 +158,21 @@ void Game::setArmor(Armor* armor){
     m_hero->setArmor(armor);
 }
 
-void Game::positionMenu(){
+void Game::mapMenu(){
     int action;
     std::cout << "Choose: \n";
-    std::cout << "  1. Print position on map\n";
-    std::cout << "  2. Print position in location\n";
+    std::cout << "  1. Show map\n";
+    std::cout << "  2. Show your position\n";
     std::cout << "  3. Back previous menu\n";
     std::cin >> action;
     switch(action){
         case 1:
             printLocationMap();
+            mapMenu();
             break;
         case 2:
             printTileMap();
+            mapMenu();
             break;
         case 3:
             gameMenu();
@@ -136,9 +191,11 @@ void Game::heroInfoMenu(){
     switch(action){
         case 1:
             printStats();
+            heroInfoMenu();
             break;
         case 2:
             printInventory();
+            heroInfoMenu();
             break;
         case 3:
             gameMenu();
@@ -160,25 +217,21 @@ void Game::movementMenu(){
 
 void Game::gameMenu(){
     int action;
-    std::cout << "You spawn in heaven blalba\n";
-    std::cout << "Welcome to our game\n";
-    std::cout << "  1. Get position\n";
-    std::cout << "  2. Get information of your hero\n";
-    std::cout << "  3. Move to different tile\n";
+    std::cout << "  1. Get hero review\n";
+    std::cout << "  2. Open map\n";
+    std::cout << "  3. Open action menu\n";
     std::cin.clear();
     std::cin.ignore(256, '\n');
     std::cin >> action;
     switch (action){
         case 1:
-            positionMenu();
-            gameMenu();
-            break;
-        case 2:
             heroInfoMenu();
             break;
+        case 2:
+            mapMenu();
+            break;
         case 3:
-            movementMenu();
-            gameMenu();
+            actionMenu();
             break;
         default:;
     }

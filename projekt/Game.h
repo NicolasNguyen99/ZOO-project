@@ -22,17 +22,20 @@ public:
     void printMovementOptions();
     void moveHero(movementDirection direction);
     void setUpGame();
-    void heroInfoMenu();
-    void positionMenu();
     void printStats();
     void printInventory();
     void getHelp();
-    void getObjectsInTile();
+    objectsInTile getObjectsInTile();
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
     void pickWeapon(Weapon* weapon);
     void pickArmor(Armor* armor);
     void movementMenu();
+    void mapMenu();
+    void heroInfoMenu();
+    void inventoryActionMenu();
+    void actionMenu();
+    void printChestItem(Chest* chest);
 };
 
 
