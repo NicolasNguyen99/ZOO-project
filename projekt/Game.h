@@ -22,12 +22,6 @@ class Game {
     void itemMenu();
     void setUpGame();
     void getHelp();
-
-public:
-    Game();
-    void startMenu();
-
-    //zbytek private
     void printLocationMap();
     void printTileMap();
     void printMovementOptions();
@@ -43,6 +37,10 @@ public:
     void searchTile();
     void printChestItem(Chest* chest);
     void addItem(Chest* chest);
+
+public:
+    Game(){};
+    void startMenu();
 };
 
 

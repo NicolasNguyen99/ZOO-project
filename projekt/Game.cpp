@@ -4,10 +4,6 @@
 
 #include "Game.h"
 
-Game::Game(){
-    startMenu();
-}
-
 void Game::printLocationMap(){
     m_map->printLocationMap();
 }
