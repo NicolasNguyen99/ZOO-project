@@ -12,9 +12,16 @@ class Game {
     Map* m_map;
     void createHero();
     void createMap();
-
     void startMenu();
     void gameMenu();
+    void movementMenu();
+    void mapMenu();
+    void heroInfoMenu();
+    void inventoryActionMenu();
+    void actionMenu();
+    void chestMenu();
+    void itemMenu();
+
 public:
     Game();
     void printLocationMap();
@@ -29,13 +36,11 @@ public:
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
     void pickWeapon(Weapon* weapon);
+    void removeChest();
     void pickArmor(Armor* armor);
-    void movementMenu();
-    void mapMenu();
-    void heroInfoMenu();
-    void inventoryActionMenu();
-    void actionMenu();
+    void searchTile();
     void printChestItem(Chest* chest);
+    void addItem(Chest* chest);
 };
 
 

@@ -10,7 +10,7 @@ Tile::Tile(){
 }
 
 objectsInTile Tile::getObjectsInTile(){
-    return objectsInTile{m_chest, m_enemy};
+    return objectsInTile{m_chest};
 }
 
 void Tile::printTile(bool isHeroStanding){
@@ -38,4 +38,11 @@ void Tile::setChest(Chest* chest){
 
 Enemy* Tile::getEnemy(){
     return m_enemy;
+}
+
+void Tile::removeChest(){
+    if(m_chest != nullptr){
+        delete m_chest;
+        m_chest = nullptr;
+    }
 }

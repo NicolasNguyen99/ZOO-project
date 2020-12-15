@@ -39,5 +39,5 @@ void HeavenLocationBuilder::spawnEnemies(){
 }
 
 void HeavenLocationBuilder::spawnChests(){
-
+    m_tiles.at(2).at(0)->setChest(new Chest(new Weapon("Axe", "Light axe", 20)));
 }

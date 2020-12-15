@@ -11,8 +11,9 @@ typedef  std::vector<std::vector<Location*>> matrixOfLocation;
 
 class Map {
     matrixOfLocation m_locations;
-    positionCoor m_currentCoorLocation;
+    positionCoor m_currentLocationCoor;
     Location* m_currentLocation;
+    void createMap();
 
 public:
     Map();
@@ -21,12 +22,11 @@ public:
     void printMovementOptions();
     availableMovement checkMovement(positionCoor coor, int range);
     void moveHero(movementDirection direction);
-    void createMap();
-    positionCoor getCurrentCoorLocation();
     void setStartingLocation();
     void setStartingTile();
-    positionCoor getTilepositionCoor();
+    positionCoor getTilePositionCoor();
     Enemy* getEnemy();
+    void removeChest();
     objectsInTile getObjectsInTile();
     //prejmenovat promenne
     void moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY);

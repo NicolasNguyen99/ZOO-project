@@ -21,6 +21,7 @@ public:
     Weapon* getWeapon();
     Armor* getArmor();
     Potion* getPotion();
+    ~Chest();
 };
 
 

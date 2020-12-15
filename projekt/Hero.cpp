@@ -41,3 +41,7 @@ void Hero::pickWeapon(Weapon* weapon){
 void Hero::pickArmor(Armor* armor){
     m_inventory->setArmor(armor);
 }
+
+void Hero::pickPotion(Potion* potion){
+    m_inventory->setPotion(potion);
+}

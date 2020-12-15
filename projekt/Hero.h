@@ -23,6 +23,7 @@ public:
     void setArmor(Armor* armor);
     void pickWeapon(Weapon* weapon);
     void pickArmor(Armor* armor);
+    void pickPotion(Potion* potion);
 
 };
 

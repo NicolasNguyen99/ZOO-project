@@ -24,15 +24,14 @@ public:
     Weapon* getWeapon(int index);
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
+    void setPotion(Potion* potion);
     arrayOfArmors getArmor();
     Armor* getArmor(int index);
     void setArmor();
     void setArmor(int index);
     arrayOfPotions getPotion();
     Potion* getPotion(int index);
-    void setPotion();
     void setPotion(int index);
-
     void printInventory();
     template <typename Items>
     void printItems(Items items);

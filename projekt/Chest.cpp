@@ -27,3 +27,9 @@ Armor* Chest::getArmor(){
 Potion* Chest::getPotion(){
     return m_potion;
 }
+
+Chest::~Chest(){
+    delete m_weapon;
+    delete m_armor;
+    delete m_potion;
+}

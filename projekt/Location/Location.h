@@ -48,13 +48,12 @@ public:
     void printLocation(int rowNum);
     void printTileMap();
     void moveCurrentCoorTile(sizeOfMovement sizePosition);
-    //void setCurrentCoorTile(positionCoor newPosition);
     availableMovement checkMovement(positionCoor coor, int range);
     positionCoor getTilepositionCoor();
     void setStartingTile();
     void setCurrentTile();
     objectsInTile getObjectsInTile();
-
+    void removeChest();
     Enemy* getEnemy();
     void setPattern(matrixOfAsciiArt rowPattern);
     void setTiles(matrixOfTiles tiles);

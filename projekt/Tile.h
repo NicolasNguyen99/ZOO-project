@@ -10,7 +10,7 @@
 
 struct objectsInTile{
     Chest* chest;
-    Enemy* enemy;
+    //+suroviny, strom, kamen atd
 };
 
 class Tile {
@@ -18,7 +18,6 @@ class Tile {
     //bool m_isExplored;
     Enemy* m_enemy;
     Chest* m_chest;
-    Tile(Enemy* enemy, Chest* chest);
 
 public:
     Tile();
@@ -26,6 +25,7 @@ public:
     void setEnemy(Enemy* enemy);
     void setChest(Chest* chest);
     Enemy* getEnemy();
+    void removeChest();
     objectsInTile getObjectsInTile();
 };
 

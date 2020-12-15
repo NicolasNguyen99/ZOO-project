@@ -63,12 +63,85 @@ void Game::actionMenu(){
             inventoryActionMenu();
             break;
         case 3:
-            getObjectsInTile();
+            searchTile();
             break;
         case 4:
             gameMenu();
             break;
         default:;
+    }
+}
+
+void Game::addItem(Chest* chest){
+    if(chest->getWeapon() != nullptr){
+        m_hero->pickWeapon(chest->getWeapon());
+    } else if(chest->getArmor() != nullptr){
+        m_hero->pickArmor(chest->getArmor());
+    } else if(chest->getPotion() != nullptr){
+        m_hero->pickPotion(chest->getPotion());
+    }
+    std::cout << "Item has been added to your inventory\n";
+}
+
+void Game::removeChest(){
+    m_map->removeChest();
+}
+
+void Game::itemMenu(){
+    Chest* chest = getObjectsInTile().chest;
+    std::cout << "Choose: \n";
+    std::cout << "  1: Add item to inventory\n";
+    std::cout << "  2: Show inventory\n";
+    std::cout << "  3: Go back to previous menu\n";
+    int action;
+    std::cin >> action;
+    switch(action){
+        case 1:
+            addItem(chest);
+            removeChest();
+            gameMenu();
+            break;
+        case 2:
+            printInventory();
+            itemMenu();
+            break;
+        case 3:
+            chestMenu();
+            break;
+        default:;
+    }
+}
+
+void Game::chestMenu(){
+    objectsInTile objects = getObjectsInTile();
+    if(objects.chest != nullptr){
+        std::cout << "You have found a chest!\n";
+        std::cout << "Choose: \n";
+        std::cout << "  1. Open chest \n";
+        std::cout << "  2. Leave chest \n";
+        int action;
+        std::cin >> action;
+        switch(action){
+            case 1:
+                printChestItem(objects.chest);
+                itemMenu();
+                break;
+            case 2:
+                actionMenu();
+                break;
+            default:;
+        }
+    } else {
+        std::cout << "You didnt find anything in this tile!\n";
+    }
+}
+
+void Game::searchTile(){
+    objectsInTile objects = getObjectsInTile();
+    if(objects.chest != nullptr){
+        chestMenu();
+    } else {
+        std::cout << "You didnt find anything in this tile!\n";
     }
 }
 
@@ -81,7 +154,6 @@ void Game::createHero(){
     std::cout << "  2. Ranger\n";;
     std::cout << "  3. Mage\n";;
     std::cin >> profession;
-
     m_hero = new Hero(name, profession);
 }
 
@@ -138,11 +210,23 @@ objectsInTile Game::getObjectsInTile(){
 
 void Game::printChestItem(Chest* chest){
     if(chest->getWeapon() != nullptr){
-        std::cout << "V cheste je weapon\n";
-    } else if(chest->getArmor()){
-        std::cout << "V cheste je armor\n";
-    } else if(chest->getPotion()){
-        std::cout << "V cheste je potion\n";
+        Weapon* weapon = chest->getWeapon();
+        std::cout << "You have found a weapon!\n";
+        std::cout << "  Name: " + weapon->getName() + "\n";
+        std::cout << "  Type: " + weapon->getType() + "\n";
+        std::cout << "  Strength: " << weapon->getBonusStrength() << "\n";
+    } else if(chest->getArmor() != nullptr){
+        Armor* armor = chest->getArmor();
+        std::cout << "You have found a armor!\n";
+        std::cout << "  Name: " + armor->getName() + "\n";
+        std::cout << "  Type: " + armor->getType() + "\n";
+        std::cout << "  Armor: " << armor->getBonusArmor<< "\n";
+    } else if(chest->getPotion() != nullptr){
+        Potion* potion = chest->getPotion();
+        std::cout << "You have found a potion!\n";
+        std::cout << "  Name: " + potion->getName() + "\n";
+        std::cout << "  Type: " + potion->getType() + "\n";
+        std::cout << "  Heal amount: " << potion->getHealAmount()<< "\n";
     }
 }
 

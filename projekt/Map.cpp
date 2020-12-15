@@ -10,6 +10,11 @@ Map::Map(){
     setStartingTile();
 }
 
+void Map::removeChest(){
+    m_currentLocation->removeChest();
+}
+
+
 void Map::createMap(){
     std::vector<Location*> row1;
     std::vector<Location*> row2;
@@ -40,8 +45,8 @@ void Map::createMap(){
 }
 
 void Map::setStartingLocation(){
-    m_currentCoorLocation = {int(m_locations.size())-1,0};
-    m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
+    m_currentLocationCoor = {int(m_locations.size())-1,0};
+    m_currentLocation = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y);
 }
 
 void Map::printTileMap(){
@@ -61,7 +66,7 @@ void Map::printLocationMap(){
     }
 }
 
-positionCoor Map::getTilepositionCoor(){
+positionCoor Map::getTilePositionCoor(){
     return m_currentLocation->getTilepositionCoor();
 }
 
@@ -78,8 +83,8 @@ objectsInTile Map::getObjectsInTile(){
 }
 
 void Map::printMovementOptions(){
-    availableMovement availableTileMovement = checkMovement(getTilepositionCoor(), m_currentLocation->getSize());
-    availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, m_locations.size());
+    availableMovement availableTileMovement = checkMovement(getTilePositionCoor(), m_currentLocation->getSize());
+    availableMovement availableLocationMovement = checkMovement(m_currentLocationCoor, m_locations.size());
 
     if(availableTileMovement.N){
         std::cout << "UP in the same location" << std::endl;
@@ -110,18 +115,14 @@ availableMovement Map::checkMovement(positionCoor coor, int range){
     return m_currentLocation->checkMovement(coor, range);
 }
 
-positionCoor Map::getCurrentCoorLocation(){
-    return m_currentCoorLocation;
-}
-
 void Map::moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY){
     //prejmenovat promenne
     if(avaliableTileMovement){
         m_currentLocation->moveCurrentCoorTile({x, y});
     } else if (availableLocationMovement){
-        m_currentCoorLocation.x = m_currentCoorLocation.x + x;
-        m_currentCoorLocation.y = m_currentCoorLocation.y + y;
-        m_currentLocation = m_locations.at(m_currentCoorLocation.x).at(m_currentCoorLocation.y);
+        m_currentLocationCoor.x = m_currentLocationCoor.x + x;
+        m_currentLocationCoor.y = m_currentLocationCoor.y + y;
+        m_currentLocation = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y);
         m_currentLocation->moveCurrentCoorTile({moveX, moveY});
         std::cout << "You have moved to " << m_currentLocation->getName() << std::endl;
     }
@@ -129,7 +130,7 @@ void Map::moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement
 
 void Map::moveHero(movementDirection direction) {
     availableMovement  availableTileMovement = checkMovement(m_currentLocation->getTilepositionCoor(), m_currentLocation->getSize());
-    availableMovement availableLocationMovement = checkMovement(m_currentCoorLocation, m_locations.size());
+    availableMovement availableLocationMovement = checkMovement(m_currentLocationCoor, m_locations.size());
 
     if(direction == movementDirection::N) {
         moveHeroFnc(availableTileMovement.N, availableLocationMovement.N, -1, 0, int(m_locations.size()) - 1, 0);

@@ -37,12 +37,25 @@ void Inventory::setWeapon(Weapon* weapon){
     }
 }
 
-void Inventory::setArmor(Armor* Armor){
+void Inventory::setArmor(Armor* armor){
     int num = 0;
     bool isSetted = false;
     while(m_armors.size() > num and !isSetted){
         if(m_armors.at(num) == nullptr){
-            m_armors.at(num) = Armor;
+            m_armors.at(num) = armor;
+            isSetted = true;
+        } else {
+            num++;
+        }
+    }
+}
+
+void Inventory::setPotion(Potion* potion){
+    int num = 0;
+    bool isSetted = false;
+    while(m_potions.size() > num and !isSetted){
+        if(m_potions.at(num) == nullptr){
+            m_potions.at(num) = potion;
             isSetted = true;
         } else {
             num++;
