@@ -12,7 +12,6 @@ class Game {
     Map* m_map;
     void createHero();
     void createMap();
-    void startMenu();
     void gameMenu();
     void movementMenu();
     void mapMenu();
@@ -26,6 +25,9 @@ class Game {
 
 public:
     Game();
+    void startMenu();
+
+    //zbytek private
     void printLocationMap();
     void printTileMap();
     void printMovementOptions();

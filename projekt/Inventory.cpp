@@ -63,6 +63,19 @@ void Inventory::setPotion(Potion* potion){
     }
 }
 
+template <typename Items>
+void Inventory::printItems(Items items){
+    int index = 1;
+    for(auto item:items){
+        if(item != nullptr){
+            std::cout << index << ": " + item->getName() << std::endl;
+            std::cout << "  -Type: " + item->getType() << std::endl;
+//            std::cout << index << ": " << item->getBonusStrength() << std::endl;
+            index++;
+        }
+    }
+}
+
 arrayOfArmors Inventory::getArmor(){
     return m_armors;
 }
@@ -77,19 +90,6 @@ arrayOfPotions Inventory::getPotion(){
 
 Potion* Inventory::getPotion(int index){
     return m_potions.at(index);
-}
-
-template <typename Items>
-void Inventory::printItems(Items items){
-    int index = 1;
-    for(auto item:items){
-        if(item != nullptr){
-            std::cout << index << ": " + item->getName() << std::endl;
-            std::cout << "  -Type: " + item->getType() << std::endl;
-//            std::cout << index << ": " << item->getBonusStrength() << std::endl;
-            index++;
-        }
-    }
 }
 
 void Inventory::printInventory(){

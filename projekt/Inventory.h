@@ -8,10 +8,12 @@
 #include "Armor.h"
 #include "Potion.h"
 
+//zvetsit nazvy typedefu
 typedef std::array<Weapon*,3> arrayOfWeapons;
 typedef std::array<Armor*,3> arrayOfArmors;
 typedef std::array<Potion*,5> arrayOfPotions;
 
+//template <class Items> class Inventory {
 class Inventory {
 private:
     arrayOfWeapons m_weapons;
@@ -33,9 +35,23 @@ public:
     Potion* getPotion(int index);
     void setPotion(int index);
     void printInventory();
-    template <typename Items>
+    template <class Items>
     void printItems(Items items);
 };
 
+
+//
+//template <class Items>
+//void Inventory<Items>::printItems(Items items){
+//    int index = 1;
+//    for(auto item:items){
+//        if(item != nullptr){
+//            std::cout << index << ": " + item->getName() << std::endl;
+//            std::cout << "  -Type: " + item->getType() << std::endl;
+////            std::cout << index << ": " << item->getBonusStrength() << std::endl;
+//            index++;
+//        }
+//    }
+//}
 
 #endif //PROJEKT_INVENTORY_H

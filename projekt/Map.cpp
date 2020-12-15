@@ -14,7 +14,6 @@ void Map::removeChest(){
     m_currentLocation->removeChest();
 }
 
-
 void Map::createMap(){
     std::vector<Location*> row1;
     std::vector<Location*> row2;
