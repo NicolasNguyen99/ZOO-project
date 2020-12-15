@@ -21,6 +21,8 @@ class Game {
     void actionMenu();
     void chestMenu();
     void itemMenu();
+    void setUpGame();
+    void getHelp();
 
 public:
     Game();
@@ -28,10 +30,8 @@ public:
     void printTileMap();
     void printMovementOptions();
     void moveHero(movementDirection direction);
-    void setUpGame();
     void printStats();
     void printInventory();
-    void getHelp();
     objectsInTile getObjectsInTile();
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);

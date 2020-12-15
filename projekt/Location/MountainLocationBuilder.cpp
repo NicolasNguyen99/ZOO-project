@@ -7,7 +7,7 @@
 void MountainLocationBuilder::createLocation(){
     m_location = new Location("Mountains of Destiny", 5);
     matrixOfAsciiArt rowPattern;
-    rowPattern.at(0) ="      " + m_location->getName() + "           ";
+    rowPattern.at(0) =m_location->getName();
     rowPattern.at(1) ="     /\\             ";
     rowPattern.at(2) ="    /**\\            ";
     rowPattern.at(3) ="   /****\\  /\\       ";

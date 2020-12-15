@@ -7,7 +7,7 @@
 void CaveLocationBuilder::createLocation(){
     m_location = new Location("The Forgotten Cave", 1);
     matrixOfAsciiArt rowPattern;
-    rowPattern.at(0) ="      " + m_location->getName() + "           ";
+    rowPattern.at(0) =m_location->getName();
     rowPattern.at(1) ="   ___..-.          ";
     rowPattern.at(2) =" _/  __ \\_`-.__     ";
     rowPattern.at(3) ="/ .'/##\\_ `-.  \\   ";

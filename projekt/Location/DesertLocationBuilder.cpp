@@ -7,7 +7,7 @@
 void DesertLocationBuilder::createLocation() {
     m_location = new Location("Black Sweltering Desert", 1);
     matrixOfAsciiArt rowPattern;
-    rowPattern.at(0) ="      " + m_location->getName() + "           ";
+    rowPattern.at(0) =m_location->getName();
     rowPattern.at(1) ="         ,,.        ";
     rowPattern.at(2) ="        || |  ,.    ";
     rowPattern.at(3) ="        || '-' |    ";

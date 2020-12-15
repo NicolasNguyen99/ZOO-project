@@ -58,7 +58,9 @@ void Map::printLocationMap(){
     for(auto row:m_locations){
         for(int i = 0; i < asciiArtRows; i++){
             for(auto location:row) {
+                std::cout << "     ";
                 location->printLocation(i);
+                std::cout << "     ";
             }
             std::cout << std::endl;
         }
@@ -87,27 +89,27 @@ void Map::printMovementOptions(){
     availableMovement availableLocationMovement = checkMovement(m_currentLocationCoor, m_locations.size());
 
     if(availableTileMovement.N){
-        std::cout << "UP in the same location" << std::endl;
+        std::cout << "[N] UP in the same location" << std::endl;
     } else if(availableLocationMovement.N){
-        std::cout << "UP into different location" << std::endl;
+        std::cout << "[N] UP into different location" << std::endl;
     }
 
     if(availableTileMovement.E){
-        std::cout << "RIGHT in the same location" << std::endl;
+        std::cout << "[E] RIGHT in the same location" << std::endl;
     } else if(availableLocationMovement.E){
-        std::cout << "RIGHT into different location" << std::endl;
+        std::cout << "[E] RIGHT into different location" << std::endl;
     }
 
     if(availableTileMovement.S){
-        std::cout << "DOWN in the same location" << std::endl;
+        std::cout << "[S] DOWN in the same location" << std::endl;
     } else if(availableLocationMovement.S){
-        std::cout << "DOWN into different location" << std::endl;
+        std::cout << "[S] DOWN into different location" << std::endl;
     }
 
     if(availableTileMovement.W){
-        std::cout << "LEFT in the same location" << std::endl;
+        std::cout << "[W] LEFT in the same location" << std::endl;
     } else if(availableLocationMovement.W){
-        std::cout << "LEFT into different location" << std::endl;
+        std::cout << "[W] LEFT into different location" << std::endl;
     }
 }
 
