@@ -6,7 +6,7 @@
 
 void CastleLocationBuilder::createLocation(){
     m_location = new Location("Ancient Castle", 1);
-    matrixOfAsciiArt rowPattern;
+    MatrixOfAsciiArt rowPattern;
     rowPattern.at(0) =m_location->getName();
     rowPattern.at(1) ="   __    |~   __    ";
     rowPattern.at(2) ="  [__]---'---[__]   ";

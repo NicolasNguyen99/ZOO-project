@@ -9,7 +9,7 @@
 class LocationBuilder {
 protected:
     Location* m_location;
-    matrixOfTiles m_tiles;
+    MatrixOfTiles m_tiles;
 
 public:
     LocationBuilder(){};

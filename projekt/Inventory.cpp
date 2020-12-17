@@ -16,7 +16,7 @@ Inventory::Inventory(){
     }
 }
 
-arrayOfWeapons Inventory::getWeapon(){
+ArrayOfWeapons Inventory::getWeapon(){
     return m_weapons;
 }
 
@@ -76,7 +76,7 @@ void Inventory::printItems(Items items){
     }
 }
 
-arrayOfArmors Inventory::getArmor(){
+ArrayOfArmors Inventory::getArmor(){
     return m_armors;
 }
 
@@ -84,7 +84,7 @@ Armor* Inventory::getArmor(int index){
     return m_armors.at(index);
 }
 
-arrayOfPotions Inventory::getPotion(){
+ArrayOfPotions Inventory::getPotion(){
     return m_potions;
 }
 
@@ -92,15 +92,27 @@ Potion* Inventory::getPotion(int index){
     return m_potions.at(index);
 }
 
-void Inventory::printInventory(){
-    std::cout << "--------------------------------" << std::endl;
+void Inventory::printWeapons(){
     std::cout << "Weapons: " << std::endl;
     printItems(m_weapons);
-    std::cout << "--------------------------------" << std::endl;
+}
+
+void Inventory::printArmors(){
     std::cout << "Armors: " << std::endl;
     printItems(m_armors);
-    std::cout << "--------------------------------" << std::endl;
+}
+
+void Inventory::printPotions(){
     std::cout << "Potions: " << std::endl;
     printItems(m_potions);
+}
+
+void Inventory::printInventory(){
+    std::cout << "--------------------------------" << std::endl;
+    printWeapons();
+    std::cout << "--------------------------------" << std::endl;
+    printArmors();
+    std::cout << "--------------------------------" << std::endl;
+    printPotions();
     std::cout << "--------------------------------" << std::endl;
 }

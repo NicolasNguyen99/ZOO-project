@@ -10,13 +10,13 @@
 
 const int asciiArtRows = 6;
 enum class locationType{Forest, Mountain, Swamp, Desert, Plain, Castle, Cave, Heaven, Hell};
+enum class sizeOfLocation{Small=3,Medium=4,Large=5};
 struct availableMovement{
     bool N = false;
     bool E = false;
     bool S = false;
     bool W = false;
 };
-enum class sizeOfLocation{Small=3,Medium=4,Large=5};
 struct positionCoor{
     int x;
     int y;
@@ -25,22 +25,22 @@ struct sizeOfMovement{
     int x;
     int y;
 };
-typedef std::array<std::string,asciiArtRows> matrixOfAsciiArt;
-typedef  std::vector<std::vector<Tile*>> matrixOfTiles;
 struct weaponBonusLocation{
     int meleeWeapon;
     int rangeWeapon;
     int magicWeapon;
 };
+typedef std::array<std::string,asciiArtRows> MatrixOfAsciiArt;
+typedef  std::vector<std::vector<Tile*>> MatrixOfTiles;
 
 class Location {
     std::string m_name;
-    matrixOfTiles m_tiles;
+    MatrixOfTiles m_tiles;
     Tile* m_currentTile;
     static positionCoor m_currentCoorTile;
     int m_locationLevel;
     locationType m_type;
-    matrixOfAsciiArt m_pattern;
+    MatrixOfAsciiArt m_pattern;
     weaponBonusLocation m_bonusOfLocation;
 
 public:
@@ -55,8 +55,8 @@ public:
     objectsInTile getObjectsInTile();
     void removeChest();
     Enemy* getEnemy();
-    void setPattern(matrixOfAsciiArt rowPattern);
-    void setTiles(matrixOfTiles tiles);
+    void setPattern(MatrixOfAsciiArt rowPattern);
+    void setTiles(MatrixOfTiles tiles);
     int getSize();
     void setBonusOfLocation(weaponBonusLocation bonus);
     weaponBonusLocation getBonusOfLocation();

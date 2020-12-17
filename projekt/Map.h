@@ -7,10 +7,10 @@
 #include "Location/LocationDirector.h"
 
 enum class movementDirection{N,E,S,W};
-typedef  std::vector<std::vector<Location*>> matrixOfLocation;
+typedef  std::vector<std::vector<Location*>> MatrixOfLocation;
 
 class Map {
-    matrixOfLocation m_locations;
+    MatrixOfLocation m_locations;
     positionCoor m_currentLocationCoor;
     Location* m_currentLocation;
     void createMap();

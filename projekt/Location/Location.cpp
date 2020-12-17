@@ -19,11 +19,11 @@ void Location::setBonusOfLocation(weaponBonusLocation bonus){
     m_bonusOfLocation = bonus;
 }
 
-void Location::setTiles(matrixOfTiles tiles){
+void Location::setTiles(MatrixOfTiles tiles){
     m_tiles = tiles;
 }
 
-void Location::setPattern(matrixOfAsciiArt rowPattern){
+void Location::setPattern(MatrixOfAsciiArt rowPattern){
     m_pattern = rowPattern;
 }
 
@@ -88,6 +88,7 @@ void Location::removeChest(){
 }
 
 void Location::printTileMap(){
+    std::cout << "Tile map: \n";
     for(int x = 0; x < int(m_tiles.size()); x++){
         for (int y = 0; y < int(m_tiles.size()); y++) {
             Tile *tile = m_tiles.at(x).at(y);

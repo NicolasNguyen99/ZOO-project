@@ -6,7 +6,7 @@
 
 void SwampLocationBuilder::createLocation(){
     m_location = new Location("Shrek's Swamp", 1);
-    matrixOfAsciiArt rowPattern;
+    MatrixOfAsciiArt rowPattern;
     rowPattern.at(0) =m_location->getName();
     rowPattern.at(1) ="                    ";
     rowPattern.at(2) ="   /\\               ";

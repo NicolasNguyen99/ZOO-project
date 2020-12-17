@@ -6,7 +6,7 @@
 
 void HellLocationBuilder::createLocation(){
     m_location = new Location(" Hell of Lost Souls ", 1);
-    matrixOfAsciiArt rowPattern;
+    MatrixOfAsciiArt rowPattern;
     rowPattern.at(0) =m_location->getName();
     rowPattern.at(1) ="                    ";
     rowPattern.at(2) ="                    ";

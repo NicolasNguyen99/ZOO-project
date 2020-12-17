@@ -8,35 +8,37 @@
 #include "Armor.h"
 #include "Potion.h"
 
-//zvetsit nazvy typedefu
-typedef std::array<Weapon*,3> arrayOfWeapons;
-typedef std::array<Armor*,3> arrayOfArmors;
-typedef std::array<Potion*,5> arrayOfPotions;
+typedef std::array<Weapon*,3> ArrayOfWeapons;
+typedef std::array<Armor*,3> ArrayOfArmors;
+typedef std::array<Potion*,5> ArrayOfPotions;
 
 //template <class Items> class Inventory {
 class Inventory {
 private:
-    arrayOfWeapons m_weapons;
-    arrayOfArmors m_armors;
-    arrayOfPotions m_potions;
+    ArrayOfWeapons m_weapons;
+    ArrayOfArmors m_armors;
+    ArrayOfPotions m_potions;
 
 public:
     Inventory();
-    arrayOfWeapons getWeapon();
+    ArrayOfWeapons getWeapon();
     Weapon* getWeapon(int index);
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
     void setPotion(Potion* potion);
-    arrayOfArmors getArmor();
+    ArrayOfArmors getArmor();
     Armor* getArmor(int index);
     void setArmor();
     void setArmor(int index);
-    arrayOfPotions getPotion();
+    ArrayOfPotions getPotion();
     Potion* getPotion(int index);
     void setPotion(int index);
     void printInventory();
     template <class Items>
     void printItems(Items items);
+    void printWeapons();
+    void printArmors();
+    void printPotions();
 };
 
 
