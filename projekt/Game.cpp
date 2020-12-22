@@ -4,13 +4,10 @@
 
 #include "Game.h"
 
-void Game::printLocationMap(){
-    m_map->printLocationMap();
-}
-
-void Game::printTileMap(){
-    std::cout << "Tile map: \n";
-    m_map->printTileMap();
+int Game::getInput(){
+    int action;
+    std::cin >> action;
+    return action;
 }
 
 void Game::setUpGame(){
@@ -18,19 +15,101 @@ void Game::setUpGame(){
     createMap();
 }
 
-void Game::inventoryActionMenu() {
-    int action;
+void Game::battle(Enemy* enemy){
+    std::cout << "You are in battle with "<< enemy->getName() << "\n";
+    bool isRunning;
+    do{
+        isRunning = battleMenu();
+    }while(m_hero->getHealth()>0 and enemy->getHealth()>0 and !isRunning);
+    if(isRunning){
+        std::cout << "Kvo kvo run you little chicken!\n";
+    } else if(m_hero->getHealth()>0){
+        std::cout << "You dead\n";
+        //end game nebo odejit z boje na predchozi policko
+    } else if(enemy->getHealth()>0){
+        std::cout << "You killed" << enemy->getName() <<"\n";
+        //loot enemy
+    }
+}
+
+bool Game::battleMenu(){
+    bool isRunning = false;
     std::cout << "Choose: \n";
-    std::cout << "  2. Show inventory actions\n";
-    std::cout << "  3. Search tile\n";
-    std::cout << "  4. Back to previous menu\n";
-    std::cin >> action;
-    switch (action) {
+    std::cout << "  1. Get battle stats\n";
+    std::cout << "  2. Attack\n";
+//    std::cout << "  2. Defend\n";
+    std::cout << "  3. Drink Potion\n";
+    std::cout << "  4. Run away from battle\n";
+    switch (getInput()) {
         case 1:
-            //   manageInventory();//
+            printHeroStats();
+
             break;
         case 2:
-            //    swapWeapon();//
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+            isRunning = true;
+            break;
+        default:;
+    }
+    return isRunning;
+}
+
+void Game::weaponChangeMenu(){
+    std::cout << "Equiped weapon: \n";
+    m_hero->printEquipedWeapon();
+    std::cout << "Weapons in your inventory: \n";
+    m_hero->printWeapons();
+    switch (getInput()) {
+        case 1:
+            weaponChangeMenu();
+            break;
+        case 2:
+
+            break;
+        case 3:
+            //    swapArmor();//
+            break;
+        default:;
+    }
+}
+
+void Game::itemChangeMenu(){
+    std::cout << "Choose: \n";
+    std::cout << "  1. Change equipped weapon\n";
+    std::cout << "  2. Change equipped armor\n";
+    std::cout << "  3. Back to previous menu\n";
+    switch (getInput()) {
+        case 1:
+            weaponChangeMenu();
+            break;
+        case 2:
+
+            break;
+        case 3:
+            //    swapArmor();//
+            break;
+        default:;
+    }
+}
+
+void Game::inventoryMenu() {
+    std::cout << "Choose: \n";
+    std::cout << "  1. Show inventory\n";
+    std::cout << "  2. Change equipment\n";
+    std::cout << "  3. Drop item\n";
+    std::cout << "  4. Back to previous menu\n";
+    switch (getInput()) {
+        case 1:
+            printInventory();
+            inventoryMenu();
+            break;
+        case 2:
+            itemChangeMenu();
             break;
         case 3:
             //    swapArmor();//
@@ -43,20 +122,18 @@ void Game::inventoryActionMenu() {
 }
 
 void Game::actionMenu(){
-    int action;
     std::cout << "Choose: \n";
     std::cout << "  1. Travel\n";
-    std::cout << "  2. Show inventory actions\n";
+    std::cout << "  2. Show inventory menu\n";
     std::cout << "  3. Search tile\n";
     std::cout << "  4. Back to previous menu\n";
-    std::cin >> action;
-    switch (action) {
+    switch (getInput()) {
         case 1:
             movementMenu();
             actionMenu();
             break;
         case 2:
-            inventoryActionMenu();
+            inventoryMenu();
             break;
         case 3:
             searchTile();
@@ -79,19 +156,13 @@ void Game::addItem(Chest* chest){
     std::cout << "Item has been added to your inventory\n";
 }
 
-void Game::removeChest(){
-    m_map->removeChest();
-}
-
 void Game::itemMenu(){
     Chest* chest = getObjectsInTile().chest;
     std::cout << "Choose: \n";
     std::cout << "  1: Add item to inventory\n";
     std::cout << "  2: Show inventory\n";
     std::cout << "  3: Go back to previous menu\n";
-    int action;
-    std::cin >> action;
-    switch(action){
+    switch(getInput()){
         case 1:
             addItem(chest);
             removeChest();
@@ -115,9 +186,7 @@ void Game::chestMenu(){
         std::cout << "Choose: \n";
         std::cout << "  1. Open chest \n";
         std::cout << "  2. Leave chest \n";
-        int action;
-        std::cin >> action;
-        switch(action){
+        switch(getInput()){
             case 1:
                 printChestItem(objects.chest);
                 itemMenu();
@@ -146,9 +215,9 @@ void Game::createHero(){
     std::cout << "Enter hero name: ";
     std::cin >> name;
     std::cout << "Choose hero class: \n";
-    std::cout << "  1. Warrior\n";;
-    std::cout << "  2. Ranger\n";;
-    std::cout << "  3. Mage\n";;
+    std::cout << "  1. Warrior\n";
+    std::cout << "  2. Ranger\n";
+    std::cout << "  3. Mage\n";
     std::cin >> profession;
     m_hero = new Hero(name, profession);
 }
@@ -157,27 +226,16 @@ void Game::createMap() {
     m_map = new Map();
 }
 
-void Game::printMovementOptions(){
-    m_map->printMovementOptions();
-}
-
-void Game::moveHero(movementDirection direction){
-    m_map->moveHero(direction);
-    m_map->getEnemy();
-}
-
 void Game::getHelp(){
     std::cout << "Help 12312313\n";
 }
 
 void Game::startMenu(){
-    int action;
     std::cout << "Welcome to our game\n";
     std::cout << "  1. Start game\n";
     std::cout << "  2. Get help\n";
     std::cout << "  3. Exit game\n";
-    std::cin >> action;
-    switch (action) {
+    switch (getInput()) {
         case 1:
             setUpGame();
             gameMenu();
@@ -192,60 +250,28 @@ void Game::startMenu(){
     }
 }
 
-void Game::printStats(){
-    m_hero->printStats();
-}
-
-void Game::printInventory(){
-    m_hero->printInventory();
-}
-
-objectsInTile Game::getObjectsInTile(){
-    return m_map->getObjectsInTile();
-}
-
 void Game::printChestItem(Chest* chest){
     if(chest->getWeapon() != nullptr){
         Weapon* weapon = chest->getWeapon();
         std::cout << "You have found a weapon!\n";
-        std::cout << "  Name: " + weapon->getName() + "\n";
-        std::cout << "  Type: " + weapon->getType() + "\n";
-        std::cout << "  Strength: " << weapon->getBonusStrength() << "\n";
+        weapon->printItem();
     } else if(chest->getArmor() != nullptr){
         Armor* armor = chest->getArmor();
         std::cout << "You have found a armor!\n";
-        std::cout << "  Name: " + armor->getName() + "\n";
-        std::cout << "  Type: " + armor->getType() + "\n";
-        std::cout << "  Armor: " << armor->getBonusArmor<< "\n";
+        armor->printItem();
     } else if(chest->getPotion() != nullptr){
         Potion* potion = chest->getPotion();
         std::cout << "You have found a potion!\n";
-        std::cout << "  Name: " + potion->getName() + "\n";
-        std::cout << "  Type: " + potion->getType() + "\n";
-        std::cout << "  Heal amount: " << potion->getHealAmount()<< "\n";
+        potion->printItem();
     }
 }
 
-void Game::pickArmor(Armor* armor){
-    m_hero->pickArmor(armor);
-}
-
-void Game::setWeapon(Weapon* weapon){
-    m_hero->setWeapon(weapon);
-}
-
-void Game::setArmor(Armor* armor){
-    m_hero->setArmor(armor);
-}
-
 void Game::mapMenu(){
-    int action;
     std::cout << "Choose: \n";
     std::cout << "  1. Show map\n";
     std::cout << "  2. Show your position\n";
     std::cout << "  3. Back previous menu\n";
-    std::cin >> action;
-    switch(action){
+    switch(getInput()){
         case 1:
             printLocationMap();
             mapMenu();
@@ -262,15 +288,13 @@ void Game::mapMenu(){
 }
 
 void Game::heroInfoMenu(){
-    int action;
     std::cout << "Choose: \n";
     std::cout << "  1. Print hero stats\n";
     std::cout << "  2. Print hero inventory\n";
     std::cout << "  3. Back previous menu\n";
-    std::cin >> action;
-    switch(action){
+    switch(getInput()){
         case 1:
-            printStats();
+            printHeroStats();
             heroInfoMenu();
             break;
         case 2:
@@ -296,14 +320,12 @@ void Game::movementMenu(){
 }
 
 void Game::gameMenu(){
-    int action;
     std::cout << "  1. Get hero review\n";
     std::cout << "  2. Open map\n";
     std::cout << "  3. Open action menu\n";
     std::cin.clear();
     std::cin.ignore(256, '\n');
-    std::cin >> action;
-    switch (action){
+    switch (getInput()){
         case 1:
             heroInfoMenu();
             break;
@@ -315,4 +337,57 @@ void Game::gameMenu(){
             break;
         default:;
     }
+}
+
+//provolavaci metody do classy Map
+void Game::moveHero(movementDirection direction){
+    m_map->moveHero(direction);
+    if(m_map->getEnemy() != nullptr){
+        battle(m_map->getEnemy());
+    }
+}
+
+void Game::printLocationMap(){
+    m_map->printLocationMap();
+}
+
+void Game::printTileMap(){
+    m_map->printTileMap();
+}
+
+void Game::killEnemy(){
+    m_map->killEnemy();
+}
+
+void Game::removeChest(){
+    m_map->removeChest();
+}
+
+objectsInTile Game::getObjectsInTile(){
+    return m_map->getObjectsInTile();
+}
+
+void Game::printMovementOptions(){
+    m_map->printMovementOptions();
+}
+
+//provolavaci metody do classy Hero
+void Game::pickArmor(Armor* armor){
+    m_hero->pickArmor(armor);
+}
+
+void Game::setWeapon(Weapon* weapon){
+    m_hero->setWeapon(weapon);
+}
+
+void Game::setArmor(Armor* armor){
+    m_hero->setArmor(armor);
+}
+
+void Game::printHeroStats(){
+    m_hero->printStats();
+}
+
+void Game::printInventory(){
+    m_hero->printInventory();
 }

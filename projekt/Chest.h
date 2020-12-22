@@ -4,9 +4,9 @@
 
 #ifndef PROJEKT_CHEST_H
 #define PROJEKT_CHEST_H
-#include "Weapon.h"
-#include "Armor.h"
-#include "Potion.h"
+#include "Items/Weapon.h"
+#include "Items/Armor.h"
+#include "Items/Potion.h"
 
 class Chest {
     Weapon* m_weapon;

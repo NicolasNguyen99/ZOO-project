@@ -16,7 +16,7 @@ class Game {
     void movementMenu();
     void mapMenu();
     void heroInfoMenu();
-    void inventoryActionMenu();
+    void inventoryMenu();
     void actionMenu();
     void chestMenu();
     void itemMenu();
@@ -26,8 +26,9 @@ class Game {
     void printTileMap();
     void printMovementOptions();
     void moveHero(movementDirection direction);
-    void printStats();
+    void printHeroStats();
     void printInventory();
+    void itemChangeMenu();
     objectsInTile getObjectsInTile();
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
@@ -37,6 +38,11 @@ class Game {
     void searchTile();
     void printChestItem(Chest* chest);
     void addItem(Chest* chest);
+    int getInput();
+    void killEnemy();
+    void battle(Enemy* enemy);
+    bool battleMenu();
+    void weaponChangeMenu();
 
 public:
     Game(){};
