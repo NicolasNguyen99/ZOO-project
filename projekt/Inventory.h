@@ -18,6 +18,8 @@ private:
     ArrayOfWeapons m_weapons;
     ArrayOfArmors m_armors;
     ArrayOfPotions m_potions;
+    template <class Items>
+    bool checkEmptyInv(Items items);
 
 public:
     Inventory();

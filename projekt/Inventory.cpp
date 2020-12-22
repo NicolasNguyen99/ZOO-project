@@ -63,16 +63,30 @@ void Inventory::setPotion(Potion* potion){
     }
 }
 
-template <typename Items>
-void Inventory::printItems(Items items){
-    int index = 1;
+template <class Items>
+bool Inventory::checkEmptyInv(Items items){
+    bool isEmpty = true;
     for(auto item:items){
         if(item != nullptr){
-            std::cout << index << ": " + item->getName() << std::endl;
-            std::cout << "  -Type: " + item->getType() << std::endl;
-//            std::cout << index << ": " << item->getBonusStrength() << std::endl;
-            index++;
+            isEmpty = false;
         }
+    }
+    return isEmpty;
+}
+
+template <typename Items>
+void Inventory::printItems(Items items){
+    if(!checkEmptyInv(items)){
+        int index = 1;
+        for(auto item:items){
+            if(item != nullptr){
+                std::cout << index << ": ";
+                item->printItem();
+                index++;
+            }
+        }
+    } else {
+        std::cout << "Your inventory is empty\n";
     }
 }
 
@@ -93,26 +107,26 @@ Potion* Inventory::getPotion(int index){
 }
 
 void Inventory::printWeapons(){
-    std::cout << "Weapons: " << std::endl;
     printItems(m_weapons);
 }
 
 void Inventory::printArmors(){
-    std::cout << "Armors: " << std::endl;
     printItems(m_armors);
 }
 
 void Inventory::printPotions(){
-    std::cout << "Potions: " << std::endl;
     printItems(m_potions);
 }
 
 void Inventory::printInventory(){
     std::cout << "--------------------------------" << std::endl;
+    std::cout << "Weapons: " << std::endl;
     printWeapons();
     std::cout << "--------------------------------" << std::endl;
+    std::cout << "Armors: " << std::endl;
     printArmors();
     std::cout << "--------------------------------" << std::endl;
+    std::cout << "Potions: " << std::endl;
     printPotions();
     std::cout << "--------------------------------" << std::endl;
 }
