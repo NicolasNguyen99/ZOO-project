@@ -9,11 +9,12 @@
 class Character {
 protected:
     std::string m_name;
-    int m_health;
+    int m_currentHealth;
+    int m_maxHealth;
     int m_strength;
 
 public:
-    Character(std::string name);
+    Character(std::string name, int maxHealth, int strength);
     virtual std::string getName();
     virtual int getHealth();
     virtual int getStrength();

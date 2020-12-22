@@ -4,8 +4,11 @@
 
 #include "Character.h"
 
-Character::Character(std::string name){
+Character::Character(std::string name, int maxHealth, int strength){
     m_name = name;
+    m_strength = strength;
+    m_maxHealth = maxHealth;
+    m_currentHealth = m_maxHealth;
 }
 
 std::string Character::getName(){
@@ -13,7 +16,7 @@ std::string Character::getName(){
 }
 
 int Character::getHealth(){
-    return m_health;
+    return m_currentHealth;
 }
 
 int Character::getStrength(){
