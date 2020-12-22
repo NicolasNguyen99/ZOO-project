@@ -24,12 +24,18 @@ void Tile::printTile(bool isHeroStanding){
     if(isHeroStanding){
         std::cout << " H ";
     }
-
     std::cout << "/\\  ";
 }
 
 void Tile::setEnemy(Enemy* enemy){
     m_enemy = enemy;
+}
+
+void Tile::killEnemy(){
+    if(m_enemy != nullptr){
+        delete m_enemy;
+        m_enemy = nullptr;
+    }
 }
 
 void Tile::setChest(Chest* chest){
@@ -42,7 +48,6 @@ Enemy* Tile::getEnemy(){
 
 void Tile::removeChest(){
     if(m_chest != nullptr){
-        delete m_chest;
         m_chest = nullptr;
     }
 }

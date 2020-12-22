@@ -26,6 +26,7 @@ public:
     void setChest(Chest* chest);
     Enemy* getEnemy();
     void removeChest();
+    void killEnemy();
     objectsInTile getObjectsInTile();
 };
 

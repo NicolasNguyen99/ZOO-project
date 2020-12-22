@@ -28,6 +28,7 @@ public:
     Enemy* getEnemy();
     void removeChest();
     objectsInTile getObjectsInTile();
+    void killEnemy();
     //prejmenovat promenne
     void moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY);
 };
