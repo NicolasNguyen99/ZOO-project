@@ -4,6 +4,7 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy():Character("Enemacek"){
-
+Enemy::Enemy(int level):Character("Enemacek", 100, 20){
+    m_level = level;
+    m_Xp = level*5;
 };

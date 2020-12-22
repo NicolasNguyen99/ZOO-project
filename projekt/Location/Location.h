@@ -37,7 +37,7 @@ class Location {
     std::string m_name;
     MatrixOfTiles m_tiles;
     Tile* m_currentTile;
-    static positionCoor m_currentCoorTile;
+    static positionCoor s_currentCoorTile;
     int m_locationLevel;
     locationType m_type;
     MatrixOfAsciiArt m_pattern;
@@ -64,6 +64,7 @@ public:
     int getLocationLevel();
     std::string getName();
     void setType(locationType type);
+    void killEnemy();
 
 };
 

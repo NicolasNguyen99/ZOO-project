@@ -7,10 +7,12 @@
 #include "Character.h"
 
 class Enemy:public Character{
+    int m_level;
     std::string m_race;
+    int m_Xp;
 
 public:
-    Enemy();
+    Enemy(int level);
 
 };
 

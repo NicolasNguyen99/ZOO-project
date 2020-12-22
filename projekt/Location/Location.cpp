@@ -9,7 +9,7 @@ Location::Location(std::string name, int level){
     m_locationLevel = level;
 }
 
-positionCoor Location::m_currentCoorTile;
+positionCoor Location::s_currentCoorTile;
 
 weaponBonusLocation Location::getBonusOfLocation(){
     return m_bonusOfLocation;
@@ -33,13 +33,13 @@ Enemy* Location::getEnemy(){
 
 void Location::setStartingTile(){
     //staticka slozka spolecna pro vsechny lokace
-    m_currentCoorTile = {int(m_tiles.size())-1,0};
+    s_currentCoorTile = {int(m_tiles.size())-1,0};
     setCurrentTile();
 }
 
 void Location::moveCurrentCoorTile(sizeOfMovement sizePosition){
-    m_currentCoorTile.x = (m_currentCoorTile.x + sizePosition.x)%(int(m_tiles.size()));
-    m_currentCoorTile.y = (m_currentCoorTile.y + sizePosition.y)%(int(m_tiles.size()));
+    s_currentCoorTile.x = (s_currentCoorTile.x + sizePosition.x)%(int(m_tiles.size()));
+    s_currentCoorTile.y = (s_currentCoorTile.y + sizePosition.y)%(int(m_tiles.size()));
 }
 
 //void Location::setCurrentCoorTile(positionCoor newPosition){
@@ -47,7 +47,7 @@ void Location::moveCurrentCoorTile(sizeOfMovement sizePosition){
 //}
 
 void Location::setCurrentTile(){
-    m_currentTile = m_tiles.at(m_currentCoorTile.x).at(m_currentCoorTile.y);
+    m_currentTile = m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y);
 }
 
 void Location::printLocation(int rowNum){
@@ -55,11 +55,15 @@ void Location::printLocation(int rowNum){
 }
 
 positionCoor Location::getTilepositionCoor(){
-    return m_currentCoorTile;
+    return s_currentCoorTile;
 }
 
 int Location::getSize(){
     return m_tiles.size();
+}
+
+void Location::killEnemy(){
+    m_currentTile->killEnemy();
 }
 
 availableMovement Location::checkMovement(positionCoor coor, int range){
@@ -92,7 +96,7 @@ void Location::printTileMap(){
     for(int x = 0; x < int(m_tiles.size()); x++){
         for (int y = 0; y < int(m_tiles.size()); y++) {
             Tile *tile = m_tiles.at(x).at(y);
-            if (m_currentCoorTile.x != x or m_currentCoorTile.y != y) {
+            if (s_currentCoorTile.x != x or s_currentCoorTile.y != y) {
                 tile->printTile(false);
             } else {
                 tile->printTile(true);

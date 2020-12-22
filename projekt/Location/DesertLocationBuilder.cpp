@@ -33,9 +33,9 @@ void DesertLocationBuilder::createTiles(){
 }
 
 void DesertLocationBuilder::spawnEnemies(){
-    m_tiles.at(1).at(1)->setEnemy(new Enemy());
-    m_tiles.at(2).at(2)->setEnemy(new Enemy());
-    m_tiles.at(2).at(1)->setEnemy(new Enemy());
+    m_tiles.at(1).at(1)->setEnemy(new Enemy(m_location->getLocationLevel()));
+    m_tiles.at(2).at(2)->setEnemy(new Enemy(m_location->getLocationLevel()));
+    m_tiles.at(2).at(1)->setEnemy(new Enemy(m_location->getLocationLevel()));
 }
 
 void DesertLocationBuilder::spawnChests(){
