@@ -65,6 +65,7 @@ public:
     std::string getName();
     void setType(locationType type);
     void killEnemy();
+    void printEnemyStats();
 
 };
 

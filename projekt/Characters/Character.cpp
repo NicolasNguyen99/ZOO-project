@@ -22,3 +22,7 @@ int Character::getHealth(){
 int Character::getStrength(){
     return m_strength;
 }
+
+void Character::takeDamage(int damage){
+    m_currentHealth-=damage;
+}

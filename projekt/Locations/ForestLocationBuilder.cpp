@@ -39,5 +39,5 @@ void ForestLocationBuilder::spawnEnemies(){
 }
 
 void ForestLocationBuilder::spawnChests(){
-    m_tiles.at(0).at(1)->setChest(new Chest(new Armor("Light Armor")));
+    m_tiles.at(0).at(1)->setChest(new Chest(new Armor("Light Armor", 15)));
 }

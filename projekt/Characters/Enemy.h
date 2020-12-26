@@ -13,7 +13,8 @@ class Enemy:public Character{
 
 public:
     Enemy(int level);
-
+    void printEnemyStats();
+    int getXpReward();
 };
 
 

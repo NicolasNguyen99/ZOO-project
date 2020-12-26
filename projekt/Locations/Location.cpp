@@ -31,6 +31,10 @@ Enemy* Location::getEnemy(){
     return m_currentTile->getEnemy();
 }
 
+void Location::printEnemyStats(){
+    m_currentTile->printEnemyStats();
+}
+
 void Location::setStartingTile(){
     //staticka slozka spolecna pro vsechny lokace
     s_currentCoorTile = {int(m_tiles.size())-1,0};

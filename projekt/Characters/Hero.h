@@ -33,7 +33,8 @@ public:
     void printEquipedArmor();
     void printWeapons();
     void printArmors();
-
+    void takeDamage(int damage);
+    void addXp(int xp);
 };
 
 

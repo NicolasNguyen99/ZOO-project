@@ -7,17 +7,42 @@
 Hero::Hero(std::string name, std::string profession):Character(name, 100, 20){
     m_level = 1;
     m_currentXp = 0;
-    m_maxXp = 25;
+    m_maxXp = 20;
     m_abilityPower = 0;
-    m_strength = 10;
+    m_strength = 25;
     m_inventory = new Inventory();
     m_weapon = nullptr;
-    m_armor = nullptr;
+    m_armor = new Armor("Light armor", 10);
     m_haveKey = false;
 }
 
 int Hero::getAbilityPower(){
     return m_abilityPower;
+}
+
+void Hero::takeDamage(int damage){
+    if(m_armor != nullptr){
+        if(m_armor->getBonusArmor()-damage <= 0){
+            std::cout << "Enemy attack has destroyed your armor! \n";
+            m_currentHealth += m_armor->getBonusArmor()-damage;
+            delete m_armor;
+            m_armor = nullptr;
+        } else {
+            m_armor->reduceArmor(damage);
+        }
+    } else {
+        m_currentHealth -= damage;
+    }
+}
+
+void Hero::addXp(int xp){
+    if(m_currentXp+xp >= m_maxXp){
+        levelCalc();
+        levelUp();
+        std::cout << "Level Up!\n";
+    } else {
+        m_currentXp += xp;
+    }
 }
 
 void Hero::printEquipedWeapon(){
@@ -26,7 +51,6 @@ void Hero::printEquipedWeapon(){
     } else {
         std::cout << "You dont have equipped any weapon\n";
     }
-
 }
 
 void Hero::printEquipedArmor(){
@@ -42,12 +66,20 @@ void Hero::printArmors(){
 }
 
 void Hero::printStats(){
-    std::cout << m_name + " stats: " << std::endl;
-    std::cout << "  -level: " << m_level << std::endl;
-    std::cout << "  -xp: " << m_currentXp << "/" << m_maxXp << std::endl;
-    std::cout << "  -health: " << m_currentHealth << "/" << m_maxHealth<< std::endl;
-    std::cout << "  -strength: " << m_strength << std::endl;
-    std::cout << "  -ability power: " << m_abilityPower << std::endl;
+    std::cout << m_name + " stats: \n";
+    std::cout << "  -level: " << m_level << "\n";
+    std::cout << "  -xp: " << m_currentXp << "/" << m_maxXp << "\n";
+    std::cout << "  -health: " << m_currentHealth << "/" << m_maxHealth<< "\n";
+    std::cout << "  -strength: " << m_strength << "\n";
+    std::cout << "  -ability power: " << m_abilityPower << "\n";
+    std::cout << "\n";
+    std::cout << "  Equipped armor: \n";
+    if(m_armor != nullptr){
+        m_armor->printItem();
+    } else {
+        std::cout << "no equipped armor \n";
+    }
+
 }
 
 void Hero::printInventory(){

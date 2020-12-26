@@ -10,9 +10,10 @@ class Armor:public Item{
     int m_bonusArmor;
 
 public:
-    Armor(std::string name);
-    int getBonusArmor;
+    Armor(std::string name, int bonusArmor);
+    int getBonusArmor();
     void printItem();
+    void reduceArmor(int damage);
 };
 
 

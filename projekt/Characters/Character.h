@@ -18,6 +18,7 @@ public:
     virtual std::string getName();
     virtual int getHealth();
     virtual int getStrength();
+    virtual void takeDamage(int damage);
 };
 
 
