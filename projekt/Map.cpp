@@ -75,6 +75,10 @@ positionCoor Map::getTilePositionCoor(){
     return m_currentLocation->getTilepositionCoor();
 }
 
+void Map::printEnemyStats(){
+    m_currentLocation->printEnemyStats();
+}
+
 void Map::setStartingTile(){
     m_currentLocation->setStartingTile();
 }
@@ -133,7 +137,8 @@ void Map::moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement
     }
 }
 
-void Map::moveHero(movementDirection direction) {
+void Map::moveHero(movementDirection direction){
+    m_previousMovement = direction;
     availableMovement  availableTileMovement = checkMovement(m_currentLocation->getTilepositionCoor(), m_currentLocation->getSize());
     availableMovement availableLocationMovement = checkMovement(m_currentLocationCoor, m_locations.size());
 
@@ -147,4 +152,8 @@ void Map::moveHero(movementDirection direction) {
         moveHeroFnc(availableTileMovement.W, availableLocationMovement.W, 0, -1, 0, int(m_locations.size()) - 1);
     }
     m_currentLocation->setCurrentTile();
+}
+
+movementDirection Map::getPreviousMovement(){
+    return m_previousMovement;
 }
