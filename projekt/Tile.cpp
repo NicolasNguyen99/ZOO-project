@@ -42,6 +42,10 @@ void Tile::setChest(Chest* chest){
     m_chest = chest;
 }
 
+void Tile::printEnemyStats(){
+    m_enemy->printEnemyStats();
+}
+
 Enemy* Tile::getEnemy(){
     return m_enemy;
 }

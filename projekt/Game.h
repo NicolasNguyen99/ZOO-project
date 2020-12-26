@@ -10,9 +10,6 @@
 class Game {
     Hero* m_hero;
     Map* m_map;
-    void createHero();
-    void createMap();
-    void gameMenu();
     void movementMenu();
     void mapMenu();
     void heroInfoMenu();
@@ -20,33 +17,28 @@ class Game {
     void actionMenu();
     void chestMenu();
     void itemMenu();
-    void setUpGame();
-    void getHelp();
-    void printLocationMap();
-    void printTileMap();
-    void printMovementOptions();
     void moveHero(movementDirection direction);
-    void printHeroStats();
-    void printInventory();
     void itemChangeMenu();
     objectsInTile getObjectsInTile();
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
     void pickWeapon(Weapon* weapon);
-    void removeChest();
     void pickArmor(Armor* armor);
     void searchTile();
     void printChestItem(Chest* chest);
     void addItem(Chest* chest);
-    int getInput();
-    void killEnemy();
+    void attack(Enemy* enemy);
     void battle(Enemy* enemy);
-    bool battleMenu();
+    bool battleMenu(Enemy* enemy);
     void weaponChangeMenu();
+    void printBattleStats();
 
 public:
-    Game(){};
-    void startMenu();
+    Game();
+    void gameMenu();
+    void setHero(Hero* hero);
+    void setMap(Map* map);
+    int getInput();
 };
 
 

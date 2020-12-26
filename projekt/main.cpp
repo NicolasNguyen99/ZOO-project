@@ -1,8 +1,10 @@
 #include <iostream>
-#include "Game.h"
+#include "GamePrepare.h"
 
 int main() {
-    Game* game = new Game();
+    GamePrepare* game = new GamePrepare();
     game->startMenu();
+//    Game* game = new Game();
+//    game->startMenu();
     return 0;
 }

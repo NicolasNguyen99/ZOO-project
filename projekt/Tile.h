@@ -27,6 +27,7 @@ public:
     Enemy* getEnemy();
     void removeChest();
     void killEnemy();
+    void printEnemyStats();
     objectsInTile getObjectsInTile();
 };
 
