@@ -5,7 +5,7 @@
 #ifndef PROJEKT_HERO_H
 #define PROJEKT_HERO_H
 #include "Character.h"
-#include "Inventory.h"
+#include "../Inventory.h"
 
 class Hero:public Character{
     int m_level;

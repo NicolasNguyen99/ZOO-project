@@ -42,7 +42,7 @@ void Location::moveCurrentCoorTile(sizeOfMovement sizePosition){
     s_currentCoorTile.y = (s_currentCoorTile.y + sizePosition.y)%(int(m_tiles.size()));
 }
 
-//void Location::setCurrentCoorTile(positionCoor newPosition){
+//void Locations::setCurrentCoorTile(positionCoor newPosition){
 //    m_currentCoorTile = newPosition;
 //}
 

@@ -5,7 +5,7 @@
 #ifndef PROJEKT_TILE_H
 #define PROJEKT_TILE_H
 #include <iostream>
-#include "Enemy.h"
+#include "Characters/Enemy.h"
 #include "Chest.h"
 
 struct objectsInTile{
