@@ -63,33 +63,6 @@ void Inventory::setPotion(Potion* potion){
     }
 }
 
-template <class Items>
-bool Inventory::checkEmptyInv(Items items){
-    bool isEmpty = true;
-    for(auto item:items){
-        if(item != nullptr){
-            isEmpty = false;
-        }
-    }
-    return isEmpty;
-}
-
-template <typename Items>
-void Inventory::printItems(Items items){
-    if(!checkEmptyInv(items)){
-        int index = 1;
-        for(auto item:items){
-            if(item != nullptr){
-                std::cout << index << ": ";
-                item->printItem();
-                index++;
-            }
-        }
-    } else {
-        std::cout << "Your inventory is empty\n";
-    }
-}
-
 ArrayOfArmors Inventory::getArmor(){
     return m_armors;
 }
@@ -107,15 +80,15 @@ Potion* Inventory::getPotion(int index){
 }
 
 void Inventory::printWeapons(){
-    printItems(m_weapons);
+    printItems<>(m_weapons);
 }
 
 void Inventory::printArmors(){
-    printItems(m_armors);
+    printItems<>(m_armors);
 }
 
 void Inventory::printPotions(){
-    printItems(m_potions);
+    printItems<>(m_potions);
 }
 
 void Inventory::printInventory(){
