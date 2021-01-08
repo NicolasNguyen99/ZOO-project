@@ -128,6 +128,7 @@ void Map::moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement
     //prejmenovat promenne
     if(avaliableTileMovement){
         m_currentLocation->moveCurrentCoorTile({x, y});
+        m_currentLocation->setTileExploration();
     } else if (availableLocationMovement){
         m_currentLocationCoor.x = m_currentLocationCoor.x + x;
         m_currentLocationCoor.y = m_currentLocationCoor.y + y;

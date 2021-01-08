@@ -14,8 +14,7 @@ struct objectsInTile{
 };
 
 class Tile {
-    //kdyztak na konci implementace, po spawnu chestek a ememy
-    //bool m_isExplored;
+    bool m_isExplored;
     Enemy* m_enemy;
     Chest* m_chest;
 
@@ -29,6 +28,7 @@ public:
     void killEnemy();
     void printEnemyStats();
     objectsInTile getObjectsInTile();
+    void setIsExplored();
 };
 
 #endif //PROJEKT_TILE_H

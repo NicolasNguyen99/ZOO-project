@@ -23,7 +23,7 @@ void GamePrepare::startMenu(){
             startMenu();
             break;
         case 3:
-            exit(0);
+            return;
         default:
             std::cout << "Choose action from menu\n";
             startMenu();

@@ -7,6 +7,7 @@
 Tile::Tile(){
     m_enemy = nullptr;
     m_chest = nullptr;
+    m_isExplored = false;
 }
 
 objectsInTile Tile::getObjectsInTile(){
@@ -14,17 +15,21 @@ objectsInTile Tile::getObjectsInTile(){
 }
 
 void Tile::printTile(bool isHeroStanding){
-    std::cout << "  /\\";
-    if(m_enemy != nullptr){
-        std::cout << "E";
+    if(m_isExplored){
+        std::cout << "  /\\";
+        if(m_enemy != nullptr){
+            std::cout << "E";
+        }
+        if(m_chest != nullptr){
+            std::cout << "C";
+        }
+        if(isHeroStanding){
+            std::cout << "H";
+        }
+        std::cout << "/\\  ";
+    } else {
+        std::cout << "  ???  ";
     }
-    if(m_chest != nullptr){
-        std::cout << "CH";
-    }
-    if(isHeroStanding){
-        std::cout << " H ";
-    }
-    std::cout << "/\\  ";
 }
 
 void Tile::setEnemy(Enemy* enemy){
@@ -54,4 +59,8 @@ void Tile::removeChest(){
     if(m_chest != nullptr){
         m_chest = nullptr;
     }
+}
+
+void Tile::setIsExplored(){
+    m_isExplored = true;
 }

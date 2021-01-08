@@ -39,6 +39,24 @@ void Location::setStartingTile(){
     //staticka slozka spolecna pro vsechny lokace
     s_currentCoorTile = {int(m_tiles.size())-1,0};
     setCurrentTile();
+    m_currentTile->setIsExplored();
+    setTileExploration();
+}
+
+void Location::setTileExploration(){
+    availableMovement availableTileMovement = checkMovement(s_currentCoorTile, m_tiles.size());
+    if(availableTileMovement.N){
+        m_tiles.at(s_currentCoorTile.x-1).at(s_currentCoorTile.y)->setIsExplored();
+    }
+    if(availableTileMovement.E){
+        m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y+1)->setIsExplored();
+    }
+    if(availableTileMovement.S){
+        m_tiles.at(s_currentCoorTile.x+1).at(s_currentCoorTile.y)->setIsExplored();
+    }
+    if(availableTileMovement.W){
+        m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y-1)->setIsExplored();
+    }
 }
 
 void Location::moveCurrentCoorTile(sizeOfMovement sizePosition){

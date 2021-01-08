@@ -137,6 +137,7 @@ void Game::inventoryMenu() {
 }
 
 void Game::actionMenu(){
+    m_map->printTileMap();
     std::cout << "Choose: \n";
     std::cout << "  1. Travel\n";
     std::cout << "  2. Show inventory menu\n";
@@ -144,7 +145,6 @@ void Game::actionMenu(){
     std::cout << "  4. Back to previous menu\n";
     switch (getInput()) {
         case 1:
-            m_map->printTileMap();
             movementMenu();
             actionMenu();
             break;
