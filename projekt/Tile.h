@@ -29,6 +29,7 @@ public:
     void printEnemyStats();
     objectsInTile getObjectsInTile();
     void setIsExplored();
+    bool getIsExplored();
 };
 
 #endif //PROJEKT_TILE_H

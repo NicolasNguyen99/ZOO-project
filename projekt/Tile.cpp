@@ -64,3 +64,7 @@ void Tile::removeChest(){
 void Tile::setIsExplored(){
     m_isExplored = true;
 }
+
+bool Tile::getIsExplored(){
+    return m_isExplored;
+}

@@ -39,22 +39,24 @@ void Location::setStartingTile(){
     //staticka slozka spolecna pro vsechny lokace
     s_currentCoorTile = {int(m_tiles.size())-1,0};
     setCurrentTile();
-    m_currentTile->setIsExplored();
     setTileExploration();
 }
 
 void Location::setTileExploration(){
     availableMovement availableTileMovement = checkMovement(s_currentCoorTile, m_tiles.size());
-    if(availableTileMovement.N){
+    if(!m_currentTile->getIsExplored()){
+        m_currentTile->setIsExplored();
+    }
+    if(availableTileMovement.N and !m_tiles.at(s_currentCoorTile.x-1).at(s_currentCoorTile.y)->getIsExplored()){
         m_tiles.at(s_currentCoorTile.x-1).at(s_currentCoorTile.y)->setIsExplored();
     }
-    if(availableTileMovement.E){
+    if(availableTileMovement.E and !m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y+1)->getIsExplored()){
         m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y+1)->setIsExplored();
     }
-    if(availableTileMovement.S){
+    if(availableTileMovement.S and  !m_tiles.at(s_currentCoorTile.x+1).at(s_currentCoorTile.y)->getIsExplored()){
         m_tiles.at(s_currentCoorTile.x+1).at(s_currentCoorTile.y)->setIsExplored();
     }
-    if(availableTileMovement.W){
+    if(availableTileMovement.W and !m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y-1)->getIsExplored()){
         m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y-1)->setIsExplored();
     }
 }
