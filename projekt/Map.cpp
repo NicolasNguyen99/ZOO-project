@@ -53,7 +53,34 @@ void Map::setStartingLocation(){
 }
 
 void Map::printTileMap(){
-    m_currentLocation->printTileMap();
+    availableMovement availableLocationMovement = m_currentLocation->checkMovement(m_currentLocationCoor, m_locations.size());
+    MatrixOfTiles tiles;
+    TileStrip topStrip = {nullptr, nullptr, nullptr};
+    TileStrip rightStrip = {nullptr, nullptr, nullptr};
+    TileStrip bottomStrip = {nullptr, nullptr, nullptr};
+    TileStrip leftStrip = {nullptr, nullptr, nullptr};
+
+
+    if(availableLocationMovement.N){
+        tiles = m_locations.at(m_currentLocationCoor.x-1).at(m_currentLocationCoor.y)->getTiles();
+        topStrip = {tiles.at(2).at(0),tiles.at(2).at(1), tiles.at(2).at(2)};
+    }
+
+    if(availableLocationMovement.E){
+        tiles = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y+1)->getTiles();
+        rightStrip = {tiles.at(0).at(0),tiles.at(1).at(0), tiles.at(2).at(0)};
+    }
+
+    if(availableLocationMovement.S){
+        tiles = m_locations.at(m_currentLocationCoor.x+1).at(m_currentLocationCoor.y)->getTiles();
+        bottomStrip = {tiles.at(0).at(0),tiles.at(0).at(1), tiles.at(0).at(2)};
+    }
+
+    if(availableLocationMovement.W){
+        tiles = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y-1)->getTiles();
+        leftStrip = {tiles.at(0).at(2),tiles.at(1).at(2), tiles.at(2).at(2)};
+    }
+    m_currentLocation->printTileMap(topStrip, bottomStrip, rightStrip, leftStrip);
 }
 
 void Map::printLocationMap(){
@@ -92,8 +119,8 @@ objectsInTile Map::getObjectsInTile(){
 }
 
 void Map::printMovementOptions(){
-    availableMovement availableTileMovement = checkMovement(getTilePositionCoor(), m_currentLocation->getSize());
-    availableMovement availableLocationMovement = checkMovement(m_currentLocationCoor, m_locations.size());
+    availableMovement availableTileMovement = m_currentLocation->checkMovement(getTilePositionCoor(), m_currentLocation->getSize());
+    availableMovement availableLocationMovement = m_currentLocation->checkMovement(m_currentLocationCoor, m_locations.size());
 
     if(availableTileMovement.N){
         std::cout << "[N] UP in the same location" << std::endl;
@@ -120,10 +147,6 @@ void Map::printMovementOptions(){
     }
 }
 
-availableMovement Map::checkMovement(positionCoor coor, int range){
-    return m_currentLocation->checkMovement(coor, range);
-}
-
 void Map::moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY){
     //prejmenovat promenne
     if(avaliableTileMovement){
@@ -139,8 +162,8 @@ void Map::moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement
 
 void Map::moveHero(movementDirection direction){
     m_previousMovement = direction;
-    availableMovement  availableTileMovement = checkMovement(m_currentLocation->getTilepositionCoor(), m_currentLocation->getSize());
-    availableMovement availableLocationMovement = checkMovement(m_currentLocationCoor, m_locations.size());
+    availableMovement  availableTileMovement = m_currentLocation->checkMovement(m_currentLocation->getTilepositionCoor(), m_currentLocation->getSize());
+    availableMovement availableLocationMovement = m_currentLocation->checkMovement(m_currentLocationCoor, m_locations.size());
 
     if(direction == movementDirection::N) {
         moveHeroFnc(availableTileMovement.N, availableLocationMovement.N, -1, 0, int(m_locations.size()) - 1, 0);
@@ -153,6 +176,30 @@ void Map::moveHero(movementDirection direction){
     }
     m_currentLocation->setCurrentTile();
     m_currentLocation->setTileExploration();
+
+    availableTileMovement = m_currentLocation->checkMovement(m_currentLocation->getTilepositionCoor(), m_currentLocation->getSize());
+    availableLocationMovement = m_currentLocation->checkMovement(m_currentLocationCoor, m_locations.size());
+
+    if(!availableTileMovement.N and availableLocationMovement.N){
+        MatrixOfTiles tiles = m_locations.at(m_currentLocationCoor.x - 1).at(m_currentLocationCoor.y)->getTiles();
+        positionCoor tileCoor = {int(tiles.size()-1), m_currentLocation->getTilepositionCoor().y};
+        tiles.at(tileCoor.x).at(tileCoor.y)->setIsExplored();
+    }
+    if(!availableTileMovement.E and availableLocationMovement.E){
+        MatrixOfTiles tiles = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y+1)->getTiles();
+        positionCoor tileCoor = {m_currentLocation->getTilepositionCoor().x, 0};
+        tiles.at(tileCoor.x).at(tileCoor.y)->setIsExplored();
+    }
+    if(!availableTileMovement.S and availableLocationMovement.S){
+        MatrixOfTiles tiles = m_locations.at(m_currentLocationCoor.x+1).at(m_currentLocationCoor.y)->getTiles();
+        positionCoor tileCoor = {0, m_currentLocation->getTilepositionCoor().y};
+        tiles.at(tileCoor.x).at(tileCoor.y)->setIsExplored();
+    }
+    if(!availableTileMovement.W and availableLocationMovement.W){
+        MatrixOfTiles tiles = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y-1)->getTiles();
+        positionCoor tileCoor = {m_currentLocation->getTilepositionCoor().x, int(tiles.size()-1)};
+        tiles.at(tileCoor.x).at(tileCoor.y)->setIsExplored();
+    }
 }
 
 movementDirection Map::getPreviousMovement(){

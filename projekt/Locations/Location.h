@@ -11,6 +11,7 @@
 const int asciiArtRows = 6;
 enum class locationType{Forest, Mountain, Swamp, Desert, Plain, Castle, Cave, Heaven, Hell};
 enum class sizeOfLocation{Small=3,Medium=4,Large=5};
+
 struct availableMovement{
     bool N = false;
     bool E = false;
@@ -32,6 +33,7 @@ struct weaponBonusLocation{
 };
 typedef std::array<std::string,asciiArtRows> MatrixOfAsciiArt;
 typedef  std::vector<std::vector<Tile*>> MatrixOfTiles;
+typedef std::array<Tile*,3> TileStrip;
 
 class Location {
     std::string m_name;
@@ -46,7 +48,7 @@ class Location {
 public:
     Location(std::string name, int level);
     void printLocation(int rowNum);
-    void printTileMap();
+    void printTileMap(TileStrip topStrip, TileStrip bottomStrip, TileStrip rightStrip, TileStrip leftStrip);
     void moveCurrentCoorTile(sizeOfMovement sizePosition);
     availableMovement checkMovement(positionCoor coor, int range);
     positionCoor getTilepositionCoor();
@@ -67,6 +69,8 @@ public:
     void killEnemy();
     void printEnemyStats();
     void setTileExploration();
+    MatrixOfTiles getTiles();
+    positionCoor getCurrentCoorTile();
 };
 
 

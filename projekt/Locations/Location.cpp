@@ -1,7 +1,6 @@
 //
 // Created by Nicolas Nguyen on 01/12/2020.
 //
-
 #include "Location.h"
 
 Location::Location(std::string name, int level){
@@ -66,10 +65,6 @@ void Location::moveCurrentCoorTile(sizeOfMovement sizePosition){
     s_currentCoorTile.y = (s_currentCoorTile.y + sizePosition.y)%(int(m_tiles.size()));
 }
 
-//void Locations::setCurrentCoorTile(positionCoor newPosition){
-//    m_currentCoorTile = newPosition;
-//}
-
 void Location::setCurrentTile(){
     m_currentTile = m_tiles.at(s_currentCoorTile.x).at(s_currentCoorTile.y);
 }
@@ -115,9 +110,21 @@ void Location::removeChest(){
     m_currentTile->removeChest();
 }
 
-void Location::printTileMap(){
+void Location::printTileMap(TileStrip topStrip, TileStrip bottomStrip, TileStrip rightStrip, TileStrip leftStrip){
     std::cout << "Tile map: \n";
+    if(leftStrip.at(0) != nullptr){
+        std::cout << "          ";
+    }
+    for(auto tile:topStrip){
+        if(tile != nullptr){
+            tile->printTile(false);
+        }
+    }
+    std::cout << "\n\n";
     for(int x = 0; x < int(m_tiles.size()); x++){
+        if(leftStrip.at(x) != nullptr){
+            leftStrip.at(x)->printTile(false);
+        }
         for (int y = 0; y < int(m_tiles.size()); y++) {
             Tile *tile = m_tiles.at(x).at(y);
             if (s_currentCoorTile.x != x or s_currentCoorTile.y != y) {
@@ -126,8 +133,21 @@ void Location::printTileMap(){
                 tile->printTile(true);
             }
         }
-        std::cout << std::endl;
+        if(rightStrip.at(x) != nullptr){
+            rightStrip.at(x)->printTile(false);
+        }
+        std::cout << "\n";
     }
+    std::cout << "\n";
+    if(leftStrip.at(0) != nullptr){
+        std::cout << "          ";
+    }
+    for(auto tile:bottomStrip){
+        if(tile != nullptr){
+            tile->printTile(false);
+        }
+    }
+    std::cout << "\n\n";
 }
 
 int Location::getLocationLevel(){
@@ -145,3 +165,11 @@ void Location::setType(locationType type){
 std::string Location::getName(){
     return m_name;
 }
+
+MatrixOfTiles Location::getTiles(){
+    return m_tiles;
+}
+
+positionCoor Location::getCurrentCoorTile(){
+    return s_currentCoorTile;
+};

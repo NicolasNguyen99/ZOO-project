@@ -21,7 +21,6 @@ public:
     void printLocationMap();
     void printTileMap();
     void printMovementOptions();
-    availableMovement checkMovement(positionCoor coor, int range);
     void moveHero(movementDirection direction);
     void setStartingLocation();
     void setStartingTile();
@@ -32,6 +31,7 @@ public:
     void killEnemy();
     void printEnemyStats();
     movementDirection getPreviousMovement();
+
     //prejmenovat promenne
     void moveHeroFnc(bool avaliableTileMovement, bool availableLocationMovement, int x, int y, int moveX, int moveY);
 };

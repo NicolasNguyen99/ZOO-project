@@ -15,20 +15,27 @@ objectsInTile Tile::getObjectsInTile(){
 }
 
 void Tile::printTile(bool isHeroStanding){
+    bool emptyTile = true;
     if(m_isExplored){
         std::cout << "  /\\";
         if(m_enemy != nullptr){
             std::cout << "E";
+            emptyTile = false;
         }
         if(m_chest != nullptr){
             std::cout << "C";
+            emptyTile = false;
         }
         if(isHeroStanding){
             std::cout << "H";
+            emptyTile = false;
+        }
+        if(emptyTile){
+            std::cout << "/\\";
         }
         std::cout << "/\\  ";
     } else {
-        std::cout << "  ???  ";
+        std::cout << "  ??????  ";
     }
 }
 
