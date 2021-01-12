@@ -10,7 +10,6 @@
 
 const int asciiArtRows = 6;
 enum class locationType{Forest, Mountain, Swamp, Desert, Plain, Castle, Cave, Heaven, Hell};
-enum class sizeOfLocation{Small=3,Medium=4,Large=5};
 
 struct availableMovement{
     bool N = false;
@@ -70,7 +69,6 @@ public:
     void printEnemyStats();
     void setTileExploration();
     MatrixOfTiles getTiles();
-    positionCoor getCurrentCoorTile();
 };
 
 

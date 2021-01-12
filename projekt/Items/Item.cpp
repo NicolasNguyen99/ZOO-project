@@ -18,6 +18,6 @@ std::string Item::getType(){
 }
 
 void Item::printItem(){
-    std::cout << "Name: " << m_name << "\n";
-    std::cout << "Type: " << m_type << "\n";
+    std::cout << " -Name: " << m_name << "\n";
+    std::cout << " -Type: " << m_type << "\n";
 }

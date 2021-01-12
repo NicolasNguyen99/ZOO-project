@@ -10,7 +10,7 @@ Armor::Armor(std::string name, int bonusArmor):Item(name, "Armor"){
 
 void Armor::printItem(){
     Item::printItem();
-    std::cout << "Armor bonus: " << m_bonusArmor << "\n";
+    std::cout << " -Armor bonus: " << m_bonusArmor << "\n";
 }
 
 void Armor::reduceArmor(int damage){

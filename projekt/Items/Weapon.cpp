@@ -15,5 +15,5 @@ int Weapon::getBonusStrength(){
 
 void Weapon::printItem(){
     Item::printItem();
-    std::cout << "Strength bonus: " << m_bonusStrength << "\n";
+    std::cout << " -Strength bonus: " << m_bonusStrength << "\n";
 }

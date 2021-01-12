@@ -35,7 +35,6 @@ void Location::printEnemyStats(){
 }
 
 void Location::setStartingTile(){
-    //staticka slozka spolecna pro vsechny lokace
     s_currentCoorTile = {int(m_tiles.size())-1,0};
     setCurrentTile();
     setTileExploration();
@@ -112,6 +111,7 @@ void Location::removeChest(){
 
 void Location::printTileMap(TileStrip topStrip, TileStrip bottomStrip, TileStrip rightStrip, TileStrip leftStrip){
     std::cout << "Tile map: \n";
+    std::cout << "|";
     if(leftStrip.at(0) != nullptr){
         std::cout << "          ";
     }
@@ -120,8 +120,10 @@ void Location::printTileMap(TileStrip topStrip, TileStrip bottomStrip, TileStrip
             tile->printTile(false);
         }
     }
-    std::cout << "\n\n";
+    std::cout << "|";
+    std::cout << "\n|------------------------------|\n";
     for(int x = 0; x < int(m_tiles.size()); x++){
+        std::cout << "|";
         if(leftStrip.at(x) != nullptr){
             leftStrip.at(x)->printTile(false);
         }
@@ -133,12 +135,14 @@ void Location::printTileMap(TileStrip topStrip, TileStrip bottomStrip, TileStrip
                 tile->printTile(true);
             }
         }
+        std::cout << "|";
         if(rightStrip.at(x) != nullptr){
             rightStrip.at(x)->printTile(false);
         }
         std::cout << "\n";
     }
-    std::cout << "\n";
+    std::cout << "|------------------------------|\n";
+    std::cout << "|";
     if(leftStrip.at(0) != nullptr){
         std::cout << "          ";
     }
@@ -147,7 +151,8 @@ void Location::printTileMap(TileStrip topStrip, TileStrip bottomStrip, TileStrip
             tile->printTile(false);
         }
     }
-    std::cout << "\n\n";
+    std::cout << "|";
+    std::cout << "\n";
 }
 
 int Location::getLocationLevel(){
@@ -169,7 +174,3 @@ std::string Location::getName(){
 MatrixOfTiles Location::getTiles(){
     return m_tiles;
 }
-
-positionCoor Location::getCurrentCoorTile(){
-    return s_currentCoorTile;
-};
