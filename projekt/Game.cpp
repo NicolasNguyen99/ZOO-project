@@ -1,7 +1,3 @@
-//
-// Created by Nicolas Nguyen on 02/12/2020.
-//
-
 #include "Game.h"
 Game::Game(){
     m_hero = nullptr;
@@ -79,18 +75,14 @@ void Game::weaponChangeMenu(){
     m_hero->printEquipedWeapon();
     std::cout << "Weapons in your inventory: \n";
     m_hero->printWeapons();
-    switch (getInput()) {
-        case 1:
-            weaponChangeMenu();
-            break;
-        case 2:
-
-            break;
-        case 3:
-            //    swapArmor();//
-            break;
-        default:;
+    std::cout << "Choose index of weapon: \n";
+    if(m_hero->equipWeapon(getInput()) == 0){
+        std::cout << "Weapon is equipped\n";
+    } else {
+        std::cout << "Weapon on wasnt found\n";
+        weaponChangeMenu();
     }
+    inventoryMenu();
 }
 
 void Game::itemChangeMenu(){
@@ -161,17 +153,6 @@ void Game::actionMenu(){
     }
 }
 
-void Game::addItem(Chest* chest){
-    if(chest->getWeapon() != nullptr){
-        m_hero->pickWeapon(chest->getWeapon());
-    } else if(chest->getArmor() != nullptr){
-        m_hero->pickArmor(chest->getArmor());
-    } else if(chest->getPotion() != nullptr){
-        m_hero->pickPotion(chest->getPotion());
-    }
-    std::cout << "Item has been added to your inventory\n";
-}
-
 void Game::itemMenu(){
     Chest* chest = m_map->getObjectsInTile().chest;
     std::cout << "Choose: \n";
@@ -180,16 +161,16 @@ void Game::itemMenu(){
     std::cout << "  3: Go back to previous menu\n";
     switch(getInput()){
         case 1:
-            addItem(chest);
+            m_hero->addItem(chest);
             m_map->removeChest();;
-            gameMenu();
+            actionMenu();
             break;
         case 2:
             m_hero->printInventory();
             itemMenu();
             break;
         case 3:
-            chestMenu();
+            actionMenu();
             break;
         default:;
     }
@@ -250,7 +231,7 @@ void Game::mapMenu(){
             mapMenu();
             break;
         case 2:
-             m_map->printTileMap();
+            m_map->printTileMap();
             mapMenu();
             break;
         case 3:
@@ -293,7 +274,7 @@ void Game::movementMenu(){
 }
 
 void Game::gameMenu(){
-    std::cout << "  1. Get hero review\n";
+    std::cout << "  1. Hero review\n";
     std::cout << "  2. Open map\n";
     std::cout << "  3. Open action menu\n";
     std::cin.clear();
@@ -317,18 +298,6 @@ void Game::moveHero(movementDirection direction){
     if(m_map->getEnemy() != nullptr){
         battle(m_map->getEnemy());
     }
-}
-
-void Game::pickArmor(Armor* armor){
-    m_hero->pickArmor(armor);
-}
-
-void Game::setWeapon(Weapon* weapon){
-    m_hero->setWeapon(weapon);
-}
-
-void Game::setArmor(Armor* armor){
-    m_hero->setArmor(armor);
 }
 
 void Game::setHero(Hero* hero){

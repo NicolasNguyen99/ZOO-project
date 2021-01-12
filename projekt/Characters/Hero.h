@@ -5,6 +5,7 @@
 #ifndef PROJEKT_HERO_H
 #define PROJEKT_HERO_H
 #include "Character.h"
+#include "../Chest.h"
 #include "../Inventory.h"
 
 class Hero:public Character{
@@ -26,15 +27,14 @@ public:
     void printInventory();
     void setWeapon(Weapon* weapon);
     void setArmor(Armor* armor);
-    void pickWeapon(Weapon* weapon);
-    void pickArmor(Armor* armor);
-    void pickPotion(Potion* potion);
     void printEquipedWeapon();
     void printEquipedArmor();
     void printWeapons();
     void printArmors();
     void takeDamage(int damage);
     void addXp(int xp);
+    int equipWeapon(int index);
+    void addItem(Chest* chest);
 };
 
 

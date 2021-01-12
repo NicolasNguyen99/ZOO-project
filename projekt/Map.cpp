@@ -60,26 +60,23 @@ void Map::printTileMap(){
     TileStrip bottomStrip = {nullptr, nullptr, nullptr};
     TileStrip leftStrip = {nullptr, nullptr, nullptr};
 
-
     if(availableLocationMovement.N){
         tiles = m_locations.at(m_currentLocationCoor.x-1).at(m_currentLocationCoor.y)->getTiles();
         topStrip = {tiles.at(2).at(0),tiles.at(2).at(1), tiles.at(2).at(2)};
     }
-
     if(availableLocationMovement.E){
         tiles = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y+1)->getTiles();
         rightStrip = {tiles.at(0).at(0),tiles.at(1).at(0), tiles.at(2).at(0)};
     }
-
     if(availableLocationMovement.S){
         tiles = m_locations.at(m_currentLocationCoor.x+1).at(m_currentLocationCoor.y)->getTiles();
         bottomStrip = {tiles.at(0).at(0),tiles.at(0).at(1), tiles.at(0).at(2)};
     }
-
     if(availableLocationMovement.W){
         tiles = m_locations.at(m_currentLocationCoor.x).at(m_currentLocationCoor.y-1)->getTiles();
         leftStrip = {tiles.at(0).at(2),tiles.at(1).at(2), tiles.at(2).at(2)};
     }
+
     m_currentLocation->printTileMap(topStrip, bottomStrip, rightStrip, leftStrip);
 }
 

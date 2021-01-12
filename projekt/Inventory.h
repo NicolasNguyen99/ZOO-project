@@ -18,6 +18,7 @@ private:
     ArrayOfWeapons m_weapons;
     ArrayOfArmors m_armors;
     ArrayOfPotions m_potions;
+
     template <class Items>
     bool checkEmptyInv(Items items){
         bool isEmpty = true;
@@ -29,28 +30,27 @@ private:
         return isEmpty;
     }
 
-public:
-    Inventory();
-    ArrayOfWeapons getWeapon();
-    Weapon* getWeapon(int index);
-    void setWeapon(Weapon* weapon);
-    void setArmor(Armor* armor);
-    void setPotion(Potion* potion);
-    ArrayOfArmors getArmor();
-    Armor* getArmor(int index);
-    void setArmor();
-    void setArmor(int index);
-    ArrayOfPotions getPotion();
-    Potion* getPotion(int index);
-    void setPotion(int index);
-    void printInventory();
+    template <class ArrayItems, class Item>
+    void addItem(ArrayItems &arrayItems, Item item){
+        int num = 0;
+        bool isSetted = false;
+        while(arrayItems.size() > num and !isSetted){
+            if(arrayItems.at(num) == nullptr){
+                arrayItems.at(num) = item;
+                isSetted = true;
+            } else {
+                num++;
+            }
+        }
+    }
+
     template <class Items>
     void printItems(Items items){
         if(!checkEmptyInv<>(items)){
             int index = 1;
             for(auto item:items){
                 if(item != nullptr){
-                    std::cout << index << ": ";
+                    std::cout << " " << index << ": \n";
                     item->printItem();
                     index++;
                 }
@@ -59,9 +59,20 @@ public:
             std::cout << "Your inventory is empty\n";
         }
     }
+
+public:
+    Inventory();
+    void addWeapon(Weapon* weapon);
+    void addArmor(Armor* armor);
+    void addPotion(Potion* potion);
+    Weapon* getWeapon(int index);
+    Armor* getArmor(int index);
+    Potion* getPotion(int index);
+    void printInventory();
     void printWeapons();
     void printArmors();
     void printPotions();
+    void removeWeapon(int index);
 };
 
 #endif //PROJEKT_INVENTORY_H

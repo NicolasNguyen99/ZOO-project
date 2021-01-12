@@ -47,14 +47,20 @@ void Hero::addXp(int xp){
 
 void Hero::printEquipedWeapon(){
     if(m_weapon != nullptr){
+        std::cout << "Equipped weapon: \n";
         m_weapon->printItem();
     } else {
-        std::cout << "You dont have equipped any weapon\n";
+        std::cout << " -No equipped weapon\n";
     }
 }
 
 void Hero::printEquipedArmor(){
-    m_armor->printItem();
+    if(m_armor != nullptr){
+        std::cout << "Equipped armor: \n";
+        m_armor->printItem();
+    } else {
+        std::cout << " -No equipped armor\n";
+    }
 }
 
 void Hero::printWeapons(){
@@ -65,21 +71,32 @@ void Hero::printArmors(){
     m_inventory->printArmors();
 }
 
+int Hero::equipWeapon(int index){
+    int endNum;
+    Weapon* selectedWeapon = m_inventory->getWeapon(index);
+    if(selectedWeapon != nullptr){
+        if(m_weapon != nullptr){
+            m_inventory->addWeapon(m_weapon);
+        }
+        setWeapon(selectedWeapon);
+        endNum = 0;
+        m_inventory->removeWeapon(index);
+    } else {
+        endNum = 1;
+    }
+    return endNum;
+}
+
 void Hero::printStats(){
     std::cout << m_name + " stats: \n";
-    std::cout << "  -level: " << m_level << "\n";
-    std::cout << "  -xp: " << m_currentXp << "/" << m_maxXp << "\n";
-    std::cout << "  -health: " << m_currentHealth << "/" << m_maxHealth<< "\n";
-    std::cout << "  -strength: " << m_strength << "\n";
-    std::cout << "  -ability power: " << m_abilityPower << "\n";
+    std::cout << " -Level: " << m_level << "\n";
+    std::cout << " -Xp: " << m_currentXp << "/" << m_maxXp << "\n";
+    std::cout << " -Health: " << m_currentHealth << "/" << m_maxHealth<< "\n";
+    std::cout << " -Strength: " << m_strength << "\n";
+    std::cout << " -Ability power: " << m_abilityPower << "\n";
     std::cout << "\n";
-    std::cout << "  Equipped armor: \n";
-    if(m_armor != nullptr){
-        m_armor->printItem();
-    } else {
-        std::cout << "no equipped armor \n";
-    }
-
+    printEquipedWeapon();
+    printEquipedArmor();
 }
 
 void Hero::printInventory(){
@@ -94,20 +111,19 @@ void Hero::setArmor(Armor* armor){
     m_armor = armor;
 }
 
-void Hero::pickWeapon(Weapon* weapon){
-    m_inventory->setWeapon(weapon);
-}
-
-void Hero::pickArmor(Armor* armor){
-    m_inventory->setArmor(armor);
-}
-
-void Hero::pickPotion(Potion* potion){
-    m_inventory->setPotion(potion);
+void Hero::addItem(Chest* chest){
+    if(chest->getWeapon() != nullptr){
+        m_inventory->addWeapon(chest->getWeapon());
+    } else if(chest->getArmor() != nullptr){
+        m_inventory->addArmor(chest->getArmor());
+    } else if(chest->getPotion() != nullptr){
+        m_inventory->addPotion(chest->getPotion());
+    }
+    std::cout << "Item has been added to your inventory\n";
 }
 
 void Hero::levelCalc(){
-    m_currentXp = m_currentXp - m_maxXp;
+    m_currentXp -= m_maxXp;
     m_level++;
     m_maxXp += m_level * 5;
 }

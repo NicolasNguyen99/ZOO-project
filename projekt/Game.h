@@ -19,11 +19,6 @@ class Game {
     void itemMenu();
     void moveHero(movementDirection direction);
     void itemChangeMenu();
-    objectsInTile getObjectsInTile();
-    void setWeapon(Weapon* weapon);
-    void setArmor(Armor* armor);
-    void pickWeapon(Weapon* weapon);
-    void pickArmor(Armor* armor);
     void searchTile();
     void printChestItem(Chest* chest);
     void addItem(Chest* chest);
