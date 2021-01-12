@@ -12,12 +12,57 @@ Hero::Hero(std::string name, std::string profession):Character(name, 100, 20){
     m_strength = 25;
     m_inventory = new Inventory();
     m_weapon = nullptr;
-    m_armor = new Armor("Light armor", 10);
+    m_armor = nullptr;
+//    m_armor = new Armor("Light armor", 10);
     m_haveKey = false;
+}
+
+int Hero::getInput(){
+    int action;
+    std::cin >> action;
+    return action;
 }
 
 int Hero::getAbilityPower(){
     return m_abilityPower;
+}
+
+void Hero::weaponChangeMenu(){
+    printEquipedWeapon();
+    printWeapons();
+    std::cout << "Choose index of weapon, that you want to equip: \n";
+    int index = getInput();
+    if(equipWeapon(index) == 0){
+        std::cout << "Weapon is equipped\n";
+    } else {
+        std::cout << "Weapon on " << index << ". index wasnt found\n";
+        weaponChangeMenu();
+    }
+}
+
+void Hero::armorChangeMenu(){
+    printEquipedArmor();
+    printArmors();
+    std::cout << "Choose index of armor, that you want to equip: \n";
+    int index = getInput();
+    if(equipArmor(index) == 0){
+        std::cout << "Armor is equipped\n";
+    } else {
+        std::cout << "Armor on " << index << ". index wasnt found\n";
+        armorChangeMenu();
+    }
+}
+
+void Hero::drinkPotionMenu(){
+    std::cout << "Choose index of potion that you want to drink: \n";
+    m_inventory->printPotions();
+    int index = getInput();
+    if(drinkPotion(index) == 0){
+        std::cout << "You drank a potion\n";
+    } else {
+        std::cout << "Potion on " << index << ". index wasnt found\n";
+        drinkPotionMenu();
+    }
 }
 
 void Hero::takeDamage(int damage){
@@ -36,31 +81,22 @@ void Hero::takeDamage(int damage){
 }
 
 void Hero::addXp(int xp){
-    if(m_currentXp+xp >= m_maxXp){
-        levelCalc();
-        levelUp();
-        std::cout << "Level Up!\n";
-    } else {
+    if((m_currentXp + xp) >= m_maxXp){
         m_currentXp += xp;
+        levelCalc();
     }
 }
 
 void Hero::printEquipedWeapon(){
-    if(m_weapon != nullptr){
-        std::cout << "Equipped weapon: \n";
-        m_weapon->printItem();
-    } else {
-        std::cout << " -No equipped weapon\n";
-    }
+    std::cout << "\nEquipped weapon: \n";
+    printEquipedItem(m_weapon);
+    std::cout << "\n";
 }
 
 void Hero::printEquipedArmor(){
-    if(m_armor != nullptr){
-        std::cout << "Equipped armor: \n";
-        m_armor->printItem();
-    } else {
-        std::cout << " -No equipped armor\n";
-    }
+    std::cout << "\nEquipped armor: \n";
+    printEquipedItem(m_armor);
+    std::cout << "\n";
 }
 
 void Hero::printWeapons(){
@@ -80,11 +116,48 @@ int Hero::equipWeapon(int index){
         }
         setWeapon(selectedWeapon);
         endNum = 0;
-        m_inventory->removeWeapon(index);
+        m_inventory->suspendWeapon(index);
     } else {
         endNum = 1;
     }
     return endNum;
+}
+
+int Hero::equipArmor(int index){
+    int endNum;
+    Armor* selectedArmor = m_inventory->getArmor(index);
+    if(selectedArmor != nullptr){
+        if(m_armor != nullptr){
+            m_inventory->addArmor(m_armor);
+        }
+        setArmor(selectedArmor);
+        endNum = 0;
+        m_inventory->suspendArmor(index);
+    } else {
+        endNum = 1;
+    }
+    return endNum;
+}
+
+int Hero::drinkPotion(int index){
+    int endNum;
+    Potion* selectedPotion = m_inventory->getPotion(index);
+    if(selectedPotion != nullptr){
+        heal(selectedPotion->getHealAmount());
+        m_inventory->removePotion(index);
+        endNum = 0;
+    } else {
+        endNum = 1;
+    }
+    return endNum;
+}
+
+void Hero::heal(int amount){
+    if(m_currentHealth + amount >= m_maxHealth){
+        m_currentHealth = m_maxHealth;
+    } else {
+        m_currentHealth += amount;
+    }
 }
 
 void Hero::printStats(){
@@ -94,7 +167,6 @@ void Hero::printStats(){
     std::cout << " -Health: " << m_currentHealth << "/" << m_maxHealth<< "\n";
     std::cout << " -Strength: " << m_strength << "\n";
     std::cout << " -Ability power: " << m_abilityPower << "\n";
-    std::cout << "\n";
     printEquipedWeapon();
     printEquipedArmor();
 }
@@ -123,12 +195,20 @@ void Hero::addItem(Chest* chest){
 }
 
 void Hero::levelCalc(){
-    m_currentXp -= m_maxXp;
-    m_level++;
-    m_maxXp += m_level * 5;
+    bool didLevelUp = false;
+    while((m_currentXp - m_maxXp) >= 0){
+        m_currentXp -= m_maxXp;
+        m_level++;
+        levelUp();
+        didLevelUp = true;
+    }
+    if(didLevelUp){
+        std::cout << "Level up!\n";
+    }
 }
 
 void Hero::levelUp(){
     m_maxHealth += 2*m_level;
     m_currentHealth += 2*m_level;
+    m_maxXp += m_level * 5;
 }

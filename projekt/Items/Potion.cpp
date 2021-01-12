@@ -14,5 +14,5 @@ int Potion::getHealAmount(){
 
 void Potion::printItem(){
     Item::printItem();
-    std::cout << "Heal amount: " << m_healAmount<< "\n";
+    std::cout << " -Heal amount: " << m_healAmount<< "\n";
 }

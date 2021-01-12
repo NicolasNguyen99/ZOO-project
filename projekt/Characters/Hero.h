@@ -20,6 +20,17 @@ class Hero:public Character{
     void levelCalc();
     void levelUp();
 
+    template <class Item>
+    void printEquipedItem(Item item){
+        if(item != nullptr){
+            item->printItem();
+        } else {
+            std::cout << " -No equipped item";
+        }
+    }
+    int drinkPotion(int index);
+    void heal(int amount);
+
 public:
     Hero(std::string name, std::string profession);
     int getAbilityPower();
@@ -34,7 +45,14 @@ public:
     void takeDamage(int damage);
     void addXp(int xp);
     int equipWeapon(int index);
+    int equipArmor(int index);
     void addItem(Chest* chest);
+    void drinkPotionMenu();
+    void weaponChangeMenu();
+    void armorChangeMenu();
+    //provizorne
+    int getInput();
+
 };
 
 

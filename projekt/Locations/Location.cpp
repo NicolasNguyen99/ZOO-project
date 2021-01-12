@@ -127,7 +127,7 @@ void Location::printTileMap(TileStrip topStrip, TileStrip bottomStrip, TileStrip
         if(leftStrip.at(x) != nullptr){
             leftStrip.at(x)->printTile(false);
         }
-        for (int y = 0; y < int(m_tiles.size()); y++) {
+        for(int y = 0; y < int(m_tiles.size()); y++) {
             Tile *tile = m_tiles.at(x).at(y);
             if (s_currentCoorTile.x != x or s_currentCoorTile.y != y) {
                 tile->printTile(false);

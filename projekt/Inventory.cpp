@@ -27,11 +27,23 @@ Weapon* Inventory::getWeapon(int index){
 }
 
 Armor* Inventory::getArmor(int index){
-    return m_armors.at(index);
+    Armor* armor;
+    if(index > 0 and index <= m_armors.size()){
+        armor = m_armors.at(index-1);
+    } else {
+        armor = nullptr;
+    }
+    return armor;
 }
 
 Potion* Inventory::getPotion(int index){
-    return m_potions.at(index);
+    Potion* potion;
+    if(index > 0 and index <= m_potions.size()){
+        potion = m_potions.at(index-1);
+    } else {
+        potion = nullptr;
+    }
+    return potion;
 }
 
 void Inventory::addWeapon(Weapon* weapon){
@@ -47,32 +59,40 @@ void Inventory::addPotion(Potion* potion){
 }
 
 void Inventory::printWeapons(){
+    std::cout << "Weapons: " << std::endl;
     printItems<>(m_weapons);
 }
 
 void Inventory::printArmors(){
+    std::cout << "Armors: " << std::endl;
     printItems<>(m_armors);
 }
 
 void Inventory::printPotions(){
+    std::cout << "Potions: " << std::endl;
     printItems<>(m_potions);
 }
 
 void Inventory::printInventory(){
+    std::cout << "Inventory: \n";
     std::cout << "--------------------------------" << std::endl;
-    std::cout << "Weapons: " << std::endl;
     printWeapons();
     std::cout << "--------------------------------" << std::endl;
-    std::cout << "Armors: " << std::endl;
     printArmors();
     std::cout << "--------------------------------" << std::endl;
-    std::cout << "Potions: " << std::endl;
     printPotions();
     std::cout << "--------------------------------" << std::endl;
 }
 
-void Inventory::removeWeapon(int index){
-    if(index > 0 and index <= m_weapons.size()){
-        m_weapons.at(index-1) = nullptr;
-    }
+void Inventory::suspendWeapon(int index){
+    suspendItem<>(m_weapons, index);
+}
+
+void Inventory::suspendArmor(int index){
+    suspendItem<>(m_armors, index);
+}
+
+void Inventory::removePotion(int index){
+    suspendItem(m_potions, index);
+    m_potions.at(index) = nullptr;
 }

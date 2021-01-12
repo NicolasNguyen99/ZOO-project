@@ -60,6 +60,13 @@ private:
         }
     }
 
+    template <class Items>
+    void suspendItem(Items &items, int index){
+        if(index > 0 and index <= items.size()){
+            items.at(index-1) = nullptr;
+        }
+    }
+
 public:
     Inventory();
     void addWeapon(Weapon* weapon);
@@ -72,7 +79,9 @@ public:
     void printWeapons();
     void printArmors();
     void printPotions();
-    void removeWeapon(int index);
+    void suspendWeapon(int index);
+    void suspendArmor(int index);
+    void removePotion(int index);
 };
 
 #endif //PROJEKT_INVENTORY_H

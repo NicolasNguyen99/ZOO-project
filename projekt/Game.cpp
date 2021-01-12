@@ -11,7 +11,7 @@ int Game::getInput(){
 }
 
 void Game::battle(Enemy* enemy){
-    std::cout << "You are in battle with "<< enemy->getName() << "\n";
+    std::cout << "You are in battle with: "<< enemy->getName() << "\n";
     bool isRunning;
     do{
         isRunning = battleMenu(enemy);
@@ -48,9 +48,9 @@ bool Game::battleMenu(Enemy* enemy){
     std::cout << "Choose: \n";
     std::cout << "  1. Get battle stats\n";
     std::cout << "  2. Attack\n";
-//    std::cout << "  2. Defend\n";
-    std::cout << "  3. Drink Potion\n";
-    std::cout << "  4. Run away from battle\n";
+//    std::cout << "  3. Defend\n";
+    std::cout << "  4. Drink Potion\n";
+    std::cout << "  5. Run away from battle\n";
     switch (getInput()) {
         case 1:
             printBattleStats();
@@ -63,26 +63,14 @@ bool Game::battleMenu(Enemy* enemy){
 
             break;
         case 4:
+            m_hero->drinkPotionMenu();
+            break;
+        case 5:
             isRunning = true;
             break;
         default:;
     }
     return isRunning;
-}
-
-void Game::weaponChangeMenu(){
-    std::cout << "Equiped weapon: \n";
-    m_hero->printEquipedWeapon();
-    std::cout << "Weapons in your inventory: \n";
-    m_hero->printWeapons();
-    std::cout << "Choose index of weapon: \n";
-    if(m_hero->equipWeapon(getInput()) == 0){
-        std::cout << "Weapon is equipped\n";
-    } else {
-        std::cout << "Weapon on wasnt found\n";
-        weaponChangeMenu();
-    }
-    inventoryMenu();
 }
 
 void Game::itemChangeMenu(){
@@ -92,13 +80,15 @@ void Game::itemChangeMenu(){
     std::cout << "  3. Back to previous menu\n";
     switch (getInput()) {
         case 1:
-            weaponChangeMenu();
+            m_hero->weaponChangeMenu();
+            itemChangeMenu();
             break;
         case 2:
-
+            m_hero->armorChangeMenu();
+            itemChangeMenu();
             break;
         case 3:
-            //    swapArmor();//
+            inventoryMenu();
             break;
         default:;
     }

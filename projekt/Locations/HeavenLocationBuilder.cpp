@@ -46,4 +46,6 @@ void HeavenLocationBuilder::spawnEnemies(){
 
 void HeavenLocationBuilder::spawnChests(){
     m_tiles.at(2).at(0)->setChest(new Chest(new Weapon("Axe", "Light axe", 20)));
+    m_tiles.at(1).at(0)->setChest(new Chest(new Armor("Light armor", 30)));
+    m_tiles.at(0).at(0)->setChest(new Chest(new Potion("Medium heal potion", "Heal potion", 15)));
 }

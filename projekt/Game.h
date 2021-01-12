@@ -21,11 +21,9 @@ class Game {
     void itemChangeMenu();
     void searchTile();
     void printChestItem(Chest* chest);
-    void addItem(Chest* chest);
     void attack(Enemy* enemy);
     void battle(Enemy* enemy);
     bool battleMenu(Enemy* enemy);
-    void weaponChangeMenu();
     void printBattleStats();
 
 public:
