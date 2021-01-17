@@ -14,6 +14,52 @@ Inventory::Inventory(){
     for(auto &m_potion:m_potions){
         m_potion = nullptr;
     }
+    m_weapons.at(0) = new Weapon("Weapon", "Light weapon", 20);
+    m_weapons.at(1) = new Weapon("Weapon2", "Light weapon", 20);
+    m_armors.at(0) = new Armor("Light armor", 20);
+    m_armors.at(1) = new Armor("Heavy armor2", 20);
+    m_potions.at(0) = new Potion("Potion", "Medium potion", 30);
+    m_potions.at(1) = new Potion("Potion2", "Medium potion", 30);
+}
+
+char Inventory::convertCharToSmall(char letter){
+    int difference = int('a') - int('A');
+    if(letter >= 'A' and letter <= 'Z'){
+        letter += difference;
+    }
+    return letter;
+}
+
+int Inventory::getInput(){
+    int action;
+    std::cin >> action;
+    return action;
+}
+
+void Inventory::dropItemMenu(){
+    std::cout << "Choose category by first char and index of item that you want to drop: \n";
+    printInventory();
+    char category;
+    std::cin >> category;
+    category = convertCharToSmall(category);
+    int index  = getInput();
+
+    if(category == 'w'){
+        if(getWeapon(index) != nullptr){
+            discardItem<>(m_weapons, index);
+        }
+    } else if(category == 'a'){
+        if(getArmor(index) != nullptr){
+            discardItem<>(m_armors, index);
+        }
+    } else if(category == 'p'){
+        if(getPotion(index) != nullptr){
+            discardItem<>(m_potions, index);
+        }
+    } else {
+        std::cout << "You have entered wrong category, try again.\n";
+        dropItemMenu();
+    }
 }
 
 Weapon* Inventory::getWeapon(int index){
@@ -90,9 +136,4 @@ void Inventory::suspendWeapon(int index){
 
 void Inventory::suspendArmor(int index){
     suspendItem<>(m_armors, index);
-}
-
-void Inventory::removePotion(int index){
-    suspendItem(m_potions, index);
-    m_potions.at(index) = nullptr;
 }

@@ -109,7 +109,8 @@ void Game::inventoryMenu() {
             itemChangeMenu();
             break;
         case 3:
-            //    swapArmor();//
+            m_hero->dropItemMenu();
+            inventoryMenu();
             break;
         case 4:
             gameMenu();

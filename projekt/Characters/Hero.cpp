@@ -144,7 +144,7 @@ int Hero::drinkPotion(int index){
     Potion* selectedPotion = m_inventory->getPotion(index);
     if(selectedPotion != nullptr){
         heal(selectedPotion->getHealAmount());
-        m_inventory->removePotion(index);
+//        m_inventory->discardItem<>(m_inventory->getPotions(), index);
         endNum = 0;
     } else {
         endNum = 1;
@@ -211,4 +211,8 @@ void Hero::levelUp(){
     m_maxHealth += 2*m_level;
     m_currentHealth += 2*m_level;
     m_maxXp += m_level * 5;
+}
+
+void Hero::dropItemMenu(){
+    m_inventory->dropItemMenu();
 }

@@ -7,6 +7,7 @@
 #include "Character.h"
 
 class Enemy:public Character{
+    static unsigned int enemyNum;
     int m_level;
     std::string m_race;
     int m_Xp;

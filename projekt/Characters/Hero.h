@@ -28,6 +28,7 @@ class Hero:public Character{
             std::cout << " -No equipped item";
         }
     }
+
     int drinkPotion(int index);
     void heal(int amount);
 
@@ -50,9 +51,9 @@ public:
     void drinkPotionMenu();
     void weaponChangeMenu();
     void armorChangeMenu();
+    void dropItemMenu();
     //provizorne
     int getInput();
-
 };
 
 

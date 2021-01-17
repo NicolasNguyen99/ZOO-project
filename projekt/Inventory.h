@@ -63,9 +63,13 @@ private:
     template <class Items>
     void suspendItem(Items &items, int index){
         if(index > 0 and index <= items.size()){
-            items.at(index-1) = nullptr;
+            items.at(index-1)= nullptr;
+        } else {
+            std::cout << "Mimo rozsah\n";
         }
     }
+    char convertCharToSmall(char letter);
+    int getInput();
 
 public:
     Inventory();
@@ -81,7 +85,17 @@ public:
     void printPotions();
     void suspendWeapon(int index);
     void suspendArmor(int index);
-    void removePotion(int index);
+    void dropItemMenu();
+
+    template <class Items>
+    void discardItem(Items &items, int index){
+        if(index > 0 and index <= items.size()){
+            delete items.at(index-1);
+            items.at(index-1) = nullptr;
+        } else {
+            std::cout << "Mimo rozsah\n";
+        }
+    }
 };
 
 #endif //PROJEKT_INVENTORY_H
