@@ -7,8 +7,8 @@
 #include "Character.h"
 
 class Enemy:public Character{
-    static unsigned int enemyNum;
-    int m_level;
+    static unsigned int s_enemyNum;
+    unsigned int m_level;
     std::string m_race;
     int m_Xp;
 
@@ -16,6 +16,8 @@ public:
     Enemy(int level);
     void printEnemyStats();
     int getXpReward();
+    unsigned int getEnemyNum();
+    ~Enemy();
 };
 
 

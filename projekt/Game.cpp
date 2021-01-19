@@ -29,6 +29,10 @@ void Game::battle(Enemy* enemy){
         std::cout << "You have killed " << enemy->getName() <<"\n";
         m_hero->addXp(enemy->getXpReward());
         m_map->killEnemy();
+        if(enemy->getEnemyNum() == 0){
+            std::cout << "You have won the game!\n";
+            //win menu
+        }
     }
 }
 

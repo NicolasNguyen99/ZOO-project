@@ -4,7 +4,10 @@
 
 #include "Enemy.h"
 
+unsigned int Enemy::s_enemyNum = 0;
+
 Enemy::Enemy(int level):Character("Enemacek", 100, 20){
+    s_enemyNum++;
     m_level = level;
     m_Xp = 30+(m_level*5);
 };
@@ -18,4 +21,12 @@ void Enemy::printEnemyStats(){
 
 int Enemy::getXpReward(){
     return m_Xp;
+}
+
+unsigned int Enemy::getEnemyNum(){
+    return s_enemyNum;
+}
+
+Enemy::~Enemy(){
+    s_enemyNum--;
 }
