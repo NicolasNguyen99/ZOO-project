@@ -28,40 +28,52 @@ int Hero::getAbilityPower(){
 }
 
 void Hero::weaponChangeMenu(){
-    printEquipedWeapon();
-    printWeapons();
-    std::cout << "Choose index of weapon, that you want to equip: \n";
-    int index = getInput();
-    if(equipWeapon(index) == 0){
-        std::cout << "Weapon is equipped\n";
+    if(!m_inventory->checkEmptyInv(m_inventory->getWeapons())){
+        printEquipedWeapon();
+        printWeapons();
+        std::cout << "Choose index of weapon, that you want to equip: \n";
+        int index = getInput();
+        if (equipWeapon(index) == 0) {
+            std::cout << "Weapon is equipped\n";
+        } else {
+            std::cout << "Weapon on " << index << ". index wasnt found\n";
+            weaponChangeMenu();
+        }
     } else {
-        std::cout << "Weapon on " << index << ". index wasnt found\n";
-        weaponChangeMenu();
+        std::cout << "You do not have any weapons in your inventory\n";
     }
 }
 
 void Hero::armorChangeMenu(){
-    printEquipedArmor();
-    printArmors();
-    std::cout << "Choose index of armor, that you want to equip: \n";
-    int index = getInput();
-    if(equipArmor(index) == 0){
-        std::cout << "Armor is equipped\n";
+    if(!m_inventory->checkEmptyInv(m_inventory->getArmors())) {
+        printEquipedArmor();
+        printArmors();
+        std::cout << "Choose index of armor, that you want to equip: \n";
+        int index = getInput();
+        if (equipArmor(index) == 0) {
+            std::cout << "Armor is equipped\n";
+        } else {
+            std::cout << "Armor on " << index << ". index wasnt found\n";
+            armorChangeMenu();
+        }
     } else {
-        std::cout << "Armor on " << index << ". index wasnt found\n";
-        armorChangeMenu();
+        std::cout << "You do not have any armors in your inventory\n";
     }
 }
 
 void Hero::drinkPotionMenu(){
-    std::cout << "Choose index of potion that you want to drink: \n";
-    m_inventory->printPotions();
-    int index = getInput();
-    if(drinkPotion(index) == 0){
-        std::cout << "You drank a potion\n";
+    if(!m_inventory->checkEmptyInv(m_inventory->getPotions())){
+        std::cout << "Choose index of potion that you want to drink: \n";
+        m_inventory->printPotions();
+        int index = getInput();
+        if (drinkPotion(index) == 0) {
+            std::cout << "You drank a potion\n";
+        } else {
+            std::cout << "Potion on " << index << ". index wasnt found\n";
+            drinkPotionMenu();
+        }
     } else {
-        std::cout << "Potion on " << index << ". index wasnt found\n";
-        drinkPotionMenu();
+        std::cout << "You do not have any potions in your inventory\n";
     }
 }
 
@@ -144,7 +156,7 @@ int Hero::drinkPotion(int index){
     Potion* selectedPotion = m_inventory->getPotion(index);
     if(selectedPotion != nullptr){
         heal(selectedPotion->getHealAmount());
-//        m_inventory->discardItem<>(m_inventory->getPotions(), index);
+        m_inventory->discardPotion(index);
         endNum = 0;
     } else {
         endNum = 1;

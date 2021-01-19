@@ -14,8 +14,9 @@ Inventory::Inventory(){
     for(auto &m_potion:m_potions){
         m_potion = nullptr;
     }
-    m_weapons.at(0) = new Weapon("Weapon", "Light weapon", 20);
+    m_weapons.at(0) = new Weapon("Weapon1", "Light weapon", 20);
     m_weapons.at(1) = new Weapon("Weapon2", "Light weapon", 20);
+    m_weapons.at(2) = new Weapon("Weapon3", "Light weapon", 20);
     m_armors.at(0) = new Armor("Light armor", 20);
     m_armors.at(1) = new Armor("Heavy armor2", 20);
     m_potions.at(0) = new Potion("Potion", "Medium potion", 30);
@@ -60,6 +61,10 @@ void Inventory::dropItemMenu(){
         std::cout << "You have entered wrong category, try again.\n";
         dropItemMenu();
     }
+}
+
+void Inventory::discardPotion(int index){
+    discardItem(m_potions, index);
 }
 
 Weapon* Inventory::getWeapon(int index){
@@ -136,4 +141,16 @@ void Inventory::suspendWeapon(int index){
 
 void Inventory::suspendArmor(int index){
     suspendItem<>(m_armors, index);
+}
+
+ArrayOfPotions Inventory::getPotions(){
+    return m_potions;
+}
+
+ArrayOfWeapons Inventory::getWeapons(){
+    return m_weapons;
+}
+
+ArrayOfArmors Inventory::getArmors(){
+    return m_armors;
 }

@@ -19,17 +19,6 @@ private:
     ArrayOfArmors m_armors;
     ArrayOfPotions m_potions;
 
-    template <class Items>
-    bool checkEmptyInv(Items items){
-        bool isEmpty = true;
-        for(auto item:items){
-            if(item != nullptr){
-                isEmpty = false;
-            }
-        }
-        return isEmpty;
-    }
-
     template <class ArrayItems, class Item>
     void addItem(ArrayItems &arrayItems, Item item){
         int num = 0;
@@ -68,6 +57,34 @@ private:
             std::cout << "Mimo rozsah\n";
         }
     }
+
+    template <class Items>
+    void rearangeItems(Items &items){
+        Items tem;
+        for(auto &item:tem){
+            item = nullptr;
+        }
+        int index = 0;
+        for(auto item:items){
+            if(item != nullptr){
+                tem.at(index) = item;
+                index++;
+            }
+        }
+        items = tem;
+    }
+
+    template <class Items>
+    void discardItem(Items &items, int index){
+        if(index > 0 and index <= items.size()){
+            delete items.at(index-1);
+            items.at(index-1) = nullptr;
+            rearangeItems<>(items);
+        } else {
+            std::cout << "Mimo rozsah\n";
+        }
+    }
+
     char convertCharToSmall(char letter);
     int getInput();
 
@@ -86,15 +103,20 @@ public:
     void suspendWeapon(int index);
     void suspendArmor(int index);
     void dropItemMenu();
+    void discardPotion(int index);
+    ArrayOfPotions getPotions();
+    ArrayOfWeapons getWeapons();
+    ArrayOfArmors getArmors();
 
     template <class Items>
-    void discardItem(Items &items, int index){
-        if(index > 0 and index <= items.size()){
-            delete items.at(index-1);
-            items.at(index-1) = nullptr;
-        } else {
-            std::cout << "Mimo rozsah\n";
+    bool checkEmptyInv(Items items){
+        bool isEmpty = true;
+        for(auto item:items){
+            if(item != nullptr){
+                isEmpty = false;
+            }
         }
+        return isEmpty;
     }
 };
 
