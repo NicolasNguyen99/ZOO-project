@@ -11,9 +11,8 @@ Hero::Hero(std::string name, std::string profession):Character(name, 100, 20){
     m_abilityPower = 0;
     m_strength = 25;
     m_inventory = new Inventory();
-    m_weapon = nullptr;
-    m_armor = nullptr;
-//    m_armor = new Armor("Light armor", 10);
+    m_weapon = new Weapon("Wooden sword", "Sword", 20);
+    m_armor = new Armor("Leather Armor", 15);
     m_haveKey = false;
 }
 

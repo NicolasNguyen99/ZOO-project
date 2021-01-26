@@ -31,6 +31,7 @@ void Game::battle(Enemy* enemy){
         m_map->killEnemy();
         if(enemy->getEnemyNum() == 0){
             std::cout << "You have won the game!\n";
+            exit(0);
             //win menu
         }
     }

@@ -23,21 +23,23 @@ void Map::createMap(){
     std::vector<Location*> row2;
     std::vector<Location*> row3;
 
-    LocationDirector* director = new LocationDirector(new ForestLocationBuilder());
+    LocationDirector* director = new LocationDirector(new DesertLocationBuilder());
     row1.push_back(director->createLocation());
+    director->setBuilder(new CaveLocationBuilder());
+    row1.push_back(director->createLocation());
+    director->setBuilder(new HellLocationBuilder());
+    row1.push_back(director->createLocation());
+
     director->setBuilder(new MountainLocationBuilder());
-    row1.push_back(director->createLocation());
+    row2.push_back(director->createLocation());
     director->setBuilder(new SwampLocationBuilder());
-    row1.push_back(director->createLocation());
+    row2.push_back(director->createLocation());
     director->setBuilder(new CastleLocationBuilder());
     row2.push_back(director->createLocation());
-    director->setBuilder(new DesertLocationBuilder());
-    row2.push_back(director->createLocation());
-    director->setBuilder(new HellLocationBuilder());
-    row2.push_back(director->createLocation());
+
     director->setBuilder(new HeavenLocationBuilder());
     row3.push_back(director->createLocation());
-    director->setBuilder(new CaveLocationBuilder());
+    director->setBuilder(new ForestLocationBuilder());
     row3.push_back(director->createLocation());
     director->setBuilder(new PlainLocationBuilder());
     row3.push_back(director->createLocation());

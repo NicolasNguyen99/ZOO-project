@@ -6,7 +6,7 @@
 
 unsigned int Enemy::s_enemyNum = 0;
 
-Enemy::Enemy(int level):Character("Enemacek", 100, 20){
+Enemy::Enemy(int level):Character("Enemacek", level*50, level*15){
     s_enemyNum++;
     m_level = level;
     m_Xp = 30+(m_level*5);

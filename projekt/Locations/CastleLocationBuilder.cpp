@@ -33,7 +33,7 @@ void CastleLocationBuilder::createTiles(){
 }
 
 void CastleLocationBuilder::spawnEnemies(){
-    m_tiles.at(2).at(0)->setEnemy(new Enemy(m_location->getLocationLevel()));
+//    m_tiles.at(2).at(0)->setEnemy(new Enemy(m_location->getLocationLevel()));
 }
 
 void CastleLocationBuilder::spawnChests(){
